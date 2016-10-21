@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView android:layout_width="fill_parent" android:text="Regione"
+        android:layout_height="wrap_content" android:id="@+id/regione"
+        android:textSize="22sp" />
+    <TextView android:layout_width="fill_parent" android:text="Provincia"
+        android:layout_height="wrap_content" android:id="@+id/provincia"
+        android:textSize="14sp" android:layout_below="@id/regione"
+        android:layout_alignParentBottom="true" />
+    <TextView android:layout_width="wrap_content" android:text="Data"
+        android:layout_height="wrap_content" android:id="@+id/data"
+        android:textSize="16sp" android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+</RelativeLayout>

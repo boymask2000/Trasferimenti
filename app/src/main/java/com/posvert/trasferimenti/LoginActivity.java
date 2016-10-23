@@ -231,7 +231,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 1;
     }
 
     /**
@@ -387,7 +387,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 }
 
 
-                                Intent openPage1 = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent openPage1 = new Intent(LoginActivity.this, PaginaAnnunciActivity.class);
 
 
                                 startActivity(openPage1);

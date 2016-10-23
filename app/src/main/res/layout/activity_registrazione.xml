@@ -234,7 +234,8 @@
             >
             <Button
                 android:id="@+id/registra"
-                style="?metaButtonBarButtonStyle"
+                style="?android:textAppearanceSmall"
+                android:layout_marginTop="20dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

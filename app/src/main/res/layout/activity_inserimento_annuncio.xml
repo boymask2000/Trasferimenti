@@ -37,12 +37,11 @@
                 android:text="Regione"
                 android:textColor="#33b5e5" />
 
-            <EditText
-                android:id="@+id/regione"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
+            <Spinner
+                android:id="@+id/spinnerRegioni"
+                android:layout_width="match_parent"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -63,12 +62,11 @@
                 android:text="Provincia"
                 android:textColor="#33b5e5" />
 
-            <EditText
-                android:id="@+id/provincia"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
+            <Spinner
+                android:id="@+id/spinnerProvince"
+                android:layout_width="match_parent"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -89,12 +87,11 @@
                 android:text="Comune"
                 android:textColor="#33b5e5" />
 
-            <EditText
-                android:id="@+id/comune"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
+            <Spinner
+                android:id="@+id/spinnerComuni"
+                android:layout_width="match_parent"
+                android:textColor="#ffffff"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

@@ -123,7 +123,7 @@ public class RegistrazioneActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context=this;
+        context = this;
 
         setContentView(R.layout.activity_registrazione);
 
@@ -132,8 +132,8 @@ public class RegistrazioneActivity extends Activity {
         spinnerProvince = (Spinner) findViewById(R.id.spinnerProvince);
         spinnerComuni = (Spinner) findViewById(R.id.spinnerComuni);
 
-      spinnerInitializer=  new SpinnerInitializer(spinnerRegioni,spinnerProvince,spinnerComuni, this);
-      //  initSpinnerRegioni(spinnerRegioni);
+        spinnerInitializer = new SpinnerInitializer(spinnerRegioni, spinnerProvince, spinnerComuni, this);
+        //  initSpinnerRegioni(spinnerRegioni);
 
 
         Button bottone1 = (Button) findViewById(R.id.registra);
@@ -143,7 +143,7 @@ public class RegistrazioneActivity extends Activity {
 
                 RequestQueue queue = Volley.newRequestQueue(getBaseContext());
                 String url = buildUrl();
-Log.e("QQQQQQQQQQ", url);
+                Log.e("QQQQQQQQQQ", url);
 // Request a string response from the provided URL.5.95.234.131
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
@@ -151,11 +151,13 @@ Log.e("QQQQQQQQQQ", url);
                             public void onResponse(String response) {
                                 System.out.println(response);
                                 Log.e("QQQQQQQQQQ", response);
-                                if( response.equalsIgnoreCase("duplicated"))
+                                if (response.equalsIgnoreCase("duplicated"))
                                     Snackbar.make(findViewById(R.id.registra), "Utente già registrato",
                                             Snackbar.LENGTH_SHORT)
                                             .show();
-                                 //   Toast.makeText(context, "Utente già registrato", Toast.LENGTH_LONG);
+                                if (response.equalsIgnoreCase("ok"))
+                                finish();
+                                //   Toast.makeText(context, "Utente già registrato", Toast.LENGTH_LONG);
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -175,8 +177,6 @@ Log.e("QQQQQQQQQQ", url);
         String server = Config.getServerAddress(this);
         System.out.println(server);
     }
-
-
 
 
 //http://localhost:8080/Trasferimenti/trasferimenti/createUser?name=giovanni&password=zaq12wsx&regione=Campania&comune=Napoli&ente=Comune&livello=3

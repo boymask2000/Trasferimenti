@@ -21,6 +21,8 @@ import com.posvert.trasferimenti.common.SpinnerInitializer;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import beans.Utente;
+
 public class InserimentoAnnuncioActivity extends Activity {
     private Spinner spinnerProvince;
     private Spinner spinnerRegioni;
@@ -78,7 +80,7 @@ public class InserimentoAnnuncioActivity extends Activity {
     //http://localhost:8080/Trasferimenti/trasferimenti/createAnnuncio?regione=Campania&username=giovanni&tipo=A
     private String buildUrl() {
         String server = Config.getServerAddress(this);
-
+Utente user=Heap.getUserCorrente();
         String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/createAnnuncio?";
         try {
             url += "username=" + Heap.getUserCorrente().getUsername();
@@ -92,6 +94,12 @@ public class InserimentoAnnuncioActivity extends Activity {
 
             url += "&livello=" + ((EditText) findViewById(R.id.livello)).getText().toString();
             url += "&tipo=A";
+
+            url += "&regione_s=" + user.getRegione();
+            url += "&provincia_s=" + user.getProvincia();
+            url += "&comune_s=" + URLEncoder.encode(user.getComune(), "UTF-8");
+            url += "&ente_s=" + URLEncoder.encode(user.getEnte(), "UTF-8");
+            url += "&livello_s=" + user.getLivello();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

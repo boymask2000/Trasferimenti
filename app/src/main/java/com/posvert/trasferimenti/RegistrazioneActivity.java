@@ -2,7 +2,10 @@ package com.posvert.trasferimenti;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +13,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +27,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.posvert.trasferimenti.common.Config;
+import com.posvert.trasferimenti.common.SpinnerInitializer;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import database.DBComuniAdapter;
+import database.DBProvinceAdapter;
+import database.DBRegioniAdapter;
+
+import static com.posvert.trasferimenti.R.id.lista;
+import static com.posvert.trasferimenti.R.id.spinnerProvince;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -95,14 +113,28 @@ public class RegistrazioneActivity extends Activity {
             return false;
         }
     };
+    private Spinner spinnerProvince;
+    private Spinner spinnerRegioni;
+    private Spinner spinnerComuni;
+
+    private SpinnerInitializer spinnerInitializer;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context=this;
 
         setContentView(R.layout.activity_registrazione);
 
         mVisible = true;
+        spinnerRegioni = (Spinner) findViewById(R.id.spinnerRegioni);
+        spinnerProvince = (Spinner) findViewById(R.id.spinnerProvince);
+        spinnerComuni = (Spinner) findViewById(R.id.spinnerComuni);
+
+      spinnerInitializer=  new SpinnerInitializer(spinnerRegioni,spinnerProvince,spinnerComuni, this);
+      //  initSpinnerRegioni(spinnerRegioni);
+
 
         Button bottone1 = (Button) findViewById(R.id.registra);
 
@@ -111,23 +143,26 @@ public class RegistrazioneActivity extends Activity {
 
                 RequestQueue queue = Volley.newRequestQueue(getBaseContext());
                 String url = buildUrl();
-
+Log.e("QQQQQQQQQQ", url);
 // Request a string response from the provided URL.5.95.234.131
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 System.out.println(response);
-                                Log.e("QQQQQQQQQQ",response);
-                                // Display the first 500 characters of the response string.
-                                //         mTextView.setText("Response is: "+ response.substring(0,500));
+                                Log.e("QQQQQQQQQQ", response);
+                                if( response.equalsIgnoreCase("duplicated"))
+                                    Snackbar.make(findViewById(R.id.registra), "Utente già registrato",
+                                            Snackbar.LENGTH_SHORT)
+                                            .show();
+                                 //   Toast.makeText(context, "Utente già registrato", Toast.LENGTH_LONG);
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //        mTextView.setText("That didn't work!");
                         System.out.println(error);
-                        Log.e("EEEEEEE",error.toString());
+                        Log.e("EEEEEEE", error.toString());
                     }
                 });
 // Add the request to the RequestQueue.
@@ -140,6 +175,10 @@ public class RegistrazioneActivity extends Activity {
         String server = Config.getServerAddress(this);
         System.out.println(server);
     }
+
+
+
+
 //http://localhost:8080/Trasferimenti/trasferimenti/createUser?name=giovanni&password=zaq12wsx&regione=Campania&comune=Napoli&ente=Comune&livello=3
 
     private String buildUrl() {
@@ -148,9 +187,9 @@ public class RegistrazioneActivity extends Activity {
         String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/createUser?";
         url += "name=" + ((EditText) findViewById(R.id.username)).getText().toString();
         url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
-        url += "&regione=" + ((EditText) findViewById(R.id.regione)).getText().toString();
-        url += "&provincia=" + ((EditText) findViewById(R.id.provincia)).getText().toString();
-        url += "&comune=" + ((EditText) findViewById(R.id.comune)).getText().toString();
+        url += "&regione=" + spinnerInitializer.getRegione();
+        url += "&provincia=" + spinnerInitializer.getProvincia();
+        url += "&comune=" + spinnerInitializer.getComune();
         url += "&ente=" + ((EditText) findViewById(R.id.ente)).getText().toString();
         url += "&email=" + ((EditText) findViewById(R.id.email)).getText().toString();
         url += "&livello=" + ((EditText) findViewById(R.id.livello)).getText().toString();

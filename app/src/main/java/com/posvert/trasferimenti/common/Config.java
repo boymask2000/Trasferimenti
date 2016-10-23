@@ -14,18 +14,17 @@ import java.util.Properties;
  */
 
 public class Config {
-    private static Properties props=null;
-    private static Context context;
-    private static boolean inited=false;
+    private static Properties props = null;
+    private static boolean inited = false;
 
 
-    public static String getServerAddress(Activity act) {
-        if( !inited) init(act);
+    public static String getServerAddress(Context context) {
+        if (!inited) init(context);
         return props.getProperty("server_address");
     }
 
-    public static void init(Activity act) {
-        context = act.getBaseContext();
+    public static void init(Context context) {
+        //   context = act.getBaseContext();
         props = new Properties();
         try {
             InputStream inputStream = context.getAssets().open("config.properties");
@@ -34,7 +33,7 @@ public class Config {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        inited=true;
+        inited = true;
     }
 
 

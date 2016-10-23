@@ -47,6 +47,7 @@ import java.util.List;
 
 import beans.Utente;
 import beans.JSONHandler;
+import database.LoaderDB;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -82,6 +83,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        LoaderDB loader = new LoaderDB(this);
+        //   loader.caricaDati();
+        loader.installaDB();
+
+
+
         // Set up the login form.
         mEmailView = (TextView) findViewById(R.id.username);
         populateAutoComplete();
@@ -108,6 +116,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        Button bottone1 = (Button) findViewById(R.id.bottone1);
+        bottone1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent openPage1 = new Intent(LoginActivity.this, RegistrazioneActivity.class);
+
+
+                startActivity(openPage1);
+
+            }
+        });
+
+
     }
 
     private void populateAutoComplete() {
@@ -326,7 +348,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+       //         finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

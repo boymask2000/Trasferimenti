@@ -37,6 +37,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.trasferimenti.common.Config;
 import com.posvert.trasferimenti.common.Heap;
 
@@ -83,6 +84,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Intent intent1 = new Intent(this, MyFirebaseMessagingService.class);
+        startService(intent1);
+        Intent intent2 = new Intent(this, MyFirebaseInstanceIDService.class);
+        startService(intent2);
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
 
         LoaderDB loader = new LoaderDB(this);
         //   loader.caricaDati();

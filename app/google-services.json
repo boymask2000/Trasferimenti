@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "621572989065",
+    "firebase_url": "https://trasferimentipa.firebaseio.com",
+    "project_id": "trasferimentipa",
+    "storage_bucket": "trasferimentipa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621572989065:android:cf295f78fb5a6b79",
+        "android_client_info": {
+          "package_name": "com.posvert.trasferimenti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621572989065-kr3e5nqqdrq6vml69pt1voat4nrir9ah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeZgIbVzijUDB6OQCzfSjcss_LD-bZXSo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,6 +22,10 @@ public class Config {
         if (!inited) init(context);
         return props.getProperty("server_address");
     }
+    public static String getVal(Context context, String key) {
+        if (!inited) init(context);
+        return props.getProperty(key);
+    }
 
     public static void init(Context context) {
         //   context = act.getBaseContext();

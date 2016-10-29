@@ -1,20 +1,13 @@
 package com.posvert.trasferimenti;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
@@ -28,43 +21,31 @@ import beans.Annuncio;
 import beans.JSONHandler;
 import liste.ListaAnnunciAdapter;
 
-public class PaginaAnnunciActivity extends Activity {
+public class PaginaMatchActivity extends AppCompatActivity {
     private ListView mylist;
-    private Button cercamatch = null;
+
     private List<Annuncio> lista = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pagina_annunci);
+        setContentView(R.layout.activity_pagina_match);
         mylist = (ListView) findViewById(R.id.lista);
-        Button creaannuncio = (Button) findViewById(R.id.creaannuncio);
-        cercamatch = (Button) findViewById(R.id.cercamatch);
+        Button esci = (Button) findViewById(R.id.esci);
 
-
-        cercamatch.setOnClickListener(new View.OnClickListener() {
+        esci.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                Intent act = new Intent(PaginaAnnunciActivity.this, PaginaMatchActivity.class);
-
-                startActivity(act);
+                finish();
 
             }
         });
-        creaannuncio.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
 
-                Intent openPage1 = new Intent(PaginaAnnunciActivity.this, InserimentoAnnuncioActivity.class);
-
-                startActivity(openPage1);
-
-            }
-        });
         mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adattatore, final View componente, int pos, long id) {
 
-                Intent act = new Intent(PaginaAnnunciActivity.this, VisualizzaAnnuncioActivity.class);
+                Intent act = new Intent(PaginaMatchActivity.this, VisualizzaMatchActivity.class);
                 Annuncio an = lista.get(pos);
                 String pkg = getPackageName();
                 act.putExtra(pkg + "ID", "" + an.getId());
@@ -84,10 +65,7 @@ public class PaginaAnnunciActivity extends Activity {
                         lista.add(u);
                     }
 
-                    mylist.setAdapter(new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista));
-
-
-                    if (lista.size() == 0) cercamatch.setEnabled(false);
+                    mylist.setAdapter(new ListaAnnunciAdapter(PaginaMatchActivity.this, lista));
 
 
                 } catch (Exception e) {
@@ -95,12 +73,11 @@ public class PaginaAnnunciActivity extends Activity {
                 }
             }
         });
-
     }
 
 
     private String buildUrl() {
-        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");
+        String url = URLHelper.build(this, "cercaMatchAnnunciPerUtente");
 
         url += "username=" + Heap.getUserCorrente().getUsername();
 

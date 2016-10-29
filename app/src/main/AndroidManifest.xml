@@ -3,10 +3,8 @@
     package="com.posvert.trasferimenti">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-
 
     <application
         android:allowBackup="true"
@@ -27,7 +25,7 @@
         <activity
             android:name=".LoginActivity"
             android:label="TrasferimentiPA">
-           <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -35,17 +33,29 @@
         </activity>
         <activity android:name=".PaginaAnnunciActivity" />
         <activity android:name=".DBInitActivity">
-           <!-- <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
 
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        </activity>
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".MyFirebaseInstanceIDService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".VisualizzaAnnuncioActivity" />
+        <activity android:name=".PaginaMatchActivity" />
+        <activity android:name=".VisualizzaMatchActivity"></activity>
     </application>
 
 </manifest>

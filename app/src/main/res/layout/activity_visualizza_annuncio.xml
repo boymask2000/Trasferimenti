@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_visualizza_annuncio"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.posvert.trasferimenti.VisualizzaAnnuncioActivity">
+
+    <LinearLayout
+        style="?metaButtonBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:background="@color/black_overlay"
+        android:orientation="horizontal">
+
+        <LinearLayout
+
+            style="?metaButtonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@color/black_overlay"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Regione"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/regione"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:gravity="center"
+
+                    android:keepScreenOn="true"
+                    android:textColor="#FFFFFF" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Provincia"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/provincia"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:gravity="center"
+
+                    android:keepScreenOn="true"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Comune"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/comune"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:gravity="center"
+
+                    android:keepScreenOn="true"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Ente"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/ente"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:gravity="center"
+
+                    android:keepScreenOn="true"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Livello"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/livello"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:gravity="center"
+
+                    android:keepScreenOn="true"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Note"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/note"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:gravity="top|left"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                style="?metaButtonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@color/black_overlay"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:keepScreenOn="true"
+                    android:text="Inserito il"
+                    android:textColor="#33b5e5" />
+
+                <EditText
+                    android:id="@+id/data"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:editable="false"
+                    android:gravity="center"
+
+                    android:keepScreenOn="true"
+                    android:textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            style="?metaButtonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@color/black_overlay"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/elimina"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Elimina" />
+
+            <Button
+                android:id="@+id/esci"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Esci" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

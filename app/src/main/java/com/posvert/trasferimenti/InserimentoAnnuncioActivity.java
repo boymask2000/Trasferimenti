@@ -80,7 +80,7 @@ public class InserimentoAnnuncioActivity extends Activity {
     //http://localhost:8080/Trasferimenti/trasferimenti/createAnnuncio?regione=Campania&username=giovanni&tipo=A
     private String buildUrl() {
         String server = Config.getServerAddress(this);
-Utente user=Heap.getUserCorrente();
+        Utente user = Heap.getUserCorrente();
         String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/createAnnuncio?";
         try {
             url += "username=" + Heap.getUserCorrente().getUsername();

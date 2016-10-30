@@ -191,6 +191,7 @@ public class RegistrazioneActivity extends Activity {
         url += "&provincia=" + spinnerInitializer.getProvincia();
         url += "&comune=" + spinnerInitializer.getComune();
         url += "&ente=" + ((EditText) findViewById(R.id.ente)).getText().toString();
+        url += "&telefono=" + ((EditText) findViewById(R.id.telefono)).getText().toString();
         url += "&email=" + ((EditText) findViewById(R.id.email)).getText().toString();
         url += "&livello=" + ((EditText) findViewById(R.id.livello)).getText().toString();
         return url;

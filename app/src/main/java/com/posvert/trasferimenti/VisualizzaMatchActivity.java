@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
 
@@ -21,6 +22,8 @@ import beans.Utente;
 public class VisualizzaMatchActivity extends AppCompatActivity {
 
     private String id;
+    private Annuncio annuncio;
+    private Utente utente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,40 +42,40 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
             public void parseResponse(String response) {
                 try {
                     JSONObject a = new JSONObject(response);
-                    Annuncio u = JSONHandler.parseAnnuncioJSON(a);
+                    annuncio = JSONHandler.parseAnnuncioJSON(a);
 
-                    setVal(R.id.regione, u.getRegione());
-                    setVal(R.id.provincia, u.getProvincia());
-                    setVal(R.id.comune, u.getComune());
-                    setVal(R.id.ente, u.getEnte());
-                    setVal(R.id.livello, u.getLivello());
-                    setVal(R.id.note, u.getNote());
-                    setVal(R.id.data, u.getData());
+                    setVal(R.id.regione, annuncio.getRegione());
+                    setVal(R.id.provincia, annuncio.getProvincia());
+                    setVal(R.id.comune, annuncio.getComune());
+                    setVal(R.id.ente, annuncio.getEnte());
+                    setVal(R.id.livello, annuncio.getLivello());
+                    setVal(R.id.note, annuncio.getNote());
+                    setVal(R.id.data, annuncio.getData());
 
-                    fillSecondary(u.getUsername());
+                    fillSecondary(annuncio.getUsername());
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-       
+
     }
 
 
-    private void fillSecondary(String username){
+    private void fillSecondary(String username) {
         URLHelper.invokeURL(this, buildUrlUser(username), new ResponseHandler() {
             @Override
             public void parseResponse(String response) {
                 try {
                     JSONObject a = new JSONObject(response);
-                    Utente u = JSONHandler.parseUtenteJSON(a);
+                    utente = JSONHandler.parseUtenteJSON(a);
 
-                    setVal(R.id.sregione, u.getRegione());
-                    setVal(R.id.sprovincia, u.getProvincia());
-                    setVal(R.id.scomune, u.getComune());
-                    setVal(R.id.sente, u.getEnte());
-                    setVal(R.id.slivello, u.getLivello());
+                    setVal(R.id.sregione, utente.getRegione());
+                    setVal(R.id.sprovincia, utente.getProvincia());
+                    setVal(R.id.scomune, utente.getComune());
+                    setVal(R.id.sente, utente.getEnte());
+                    setVal(R.id.slivello, utente.getLivello());
 
 
                 } catch (Exception e) {
@@ -84,22 +87,29 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
 
 
     private String buildUrlUser(String username) {
-        String url =    URLHelper.build(this, "getUtenteByUsername");
+        String url = URLHelper.build(this, "getUtenteByUsername");
         url += "username=" + username;
         return url;
     }
 
     private void setVal(int id, Object val) {
-        EditText text = (EditText) findViewById(id);
-
         if (val == null) return;
-
+        EditText text = (EditText) findViewById(id);
         text.setText(val.toString(), TextView.BufferType.EDITABLE);
 
     }
+
     private String buildUrl(String id) {
         String url = URLHelper.build(this, "getAnnuncioById");
         url += "id=" + id;
+        return url;
+    }
+
+    private String buildUrlContatto(String from, String to, int id) {
+        String url = URLHelper.build(this, "creaContatto");
+        url += "idannuncio=" + id;
+        url += "&mittente=" + from;
+        url += "&destinatario=" + to;
         return url;
     }
 
@@ -111,5 +121,24 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button contatta = (Button) findViewById(R.id.contatta);
+
+        contatta.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                URLHelper.invokeURL(VisualizzaMatchActivity.this, buildUrlContatto(Heap.getUserCorrente().getUsername(),utente.getUsername(), annuncio.getId()), new ResponseHandler() {
+                    @Override
+                    public void parseResponse(String response) {
+                        try {
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+            }
+        });
+
     }
 }

@@ -111,6 +111,32 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:keepScreenOn="true"
+                android:text="Telefomo"
+                android:textColor="#33b5e5"
+                />
+            <EditText
+                android:id="@+id/telefono"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:keepScreenOn="true"
                 android:text="Regione"
                 android:textColor="#33b5e5"
                 />

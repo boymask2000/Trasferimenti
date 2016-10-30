@@ -28,26 +28,23 @@ public class URLHelper {
 
     public static void invokeURL(Context ctx, String url, final ResponseHandler handler) {
         RequestQueue queue = Volley.newRequestQueue(ctx);
-        //  String url = buildUrl();
         Log.e("URL", url);
-// Request a string response from the provided URL.5.95.234.131
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         System.out.println(response);
-                        Log.e("QQQQQQQQQQ", response);
+                        Log.e("RESPONSE", response);
 
                         handler.parseResponse(response);
-
-
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //        mTextView.setText("That didn't work!");
 
-                Log.e("EEEEEEE", error.toString());
+                Log.e("ERRORE", error.toString());
             }
         });
 // Add the request to the RequestQueue.

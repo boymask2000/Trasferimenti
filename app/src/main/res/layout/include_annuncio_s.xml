@@ -22,7 +22,7 @@
             android:editable="false"
             android:hint="Regione"
             android:maxLines="1"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -37,7 +37,7 @@
             android:editable="false"
             android:hint="Provincia"
             android:maxLines="1"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -52,7 +52,7 @@
             android:editable="false"
             android:hint="Comune"
             android:maxLines="1"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -67,7 +67,7 @@
             android:editable="false"
             android:hint="Ente"
             android:maxLines="1"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -82,7 +82,7 @@
             android:editable="false"
             android:hint="Livello"
             android:maxLines="1"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
     </android.support.design.widget.TextInputLayout>
 

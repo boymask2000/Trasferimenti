@@ -40,6 +40,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.trasferimenti.common.Config;
 import com.posvert.trasferimenti.common.Heap;
+import com.posvert.trasferimenti.common.URLHelper;
 
 import org.json.JSONObject;
 
@@ -414,9 +415,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         private String buildUrl() {
-            String server = Config.getServerAddress(activity);
+            String url =    URLHelper.build(activity, "checkLoginUtente");
+          /*  String server = Config.getServerAddress(activity);
 
-            String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/checkLoginUtente?";
+            String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/checkLoginUtente?";*/
             url += "username=" + mEmail;
 
             url += "&password=" + mPassword;

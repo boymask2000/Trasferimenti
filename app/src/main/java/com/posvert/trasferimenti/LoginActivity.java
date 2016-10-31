@@ -31,15 +31,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
 import com.posvert.trasferimenti.common.Config;
 import com.posvert.trasferimenti.common.Heap;
+import com.posvert.trasferimenti.common.ResponseHandler;
+import com.posvert.trasferimenti.common.ResponseHandlerPOST;
 import com.posvert.trasferimenti.common.URLHelper;
 
 import org.json.JSONObject;
@@ -86,16 +95,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Intent intent1 = new Intent(this, MyFirebaseMessagingService.class);
+    /*    Intent intent1 = new Intent(this, MyFirebaseMessagingService.class);
         startService(intent1);
         Intent intent2 = new Intent(this, MyFirebaseInstanceIDService.class);
         startService(intent2);
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-
+*/
         LoaderDB loader = new LoaderDB(this);
         //   loader.caricaDati();
         loader.installaDB();
-
 
 
         // Set up the login form.
@@ -136,8 +144,50 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             }
         });
+        getNumUtenti();
+
+    }
+
+    private int getNumUtenti() {
+        URLHelper.invokeURL(LoginActivity.this, buildUrlCount(), new ResponseHandler() {
+            @Override
+            public void parseResponse(String response) {
+                Log.e("TTTT", response);
+                TextView ur = (TextView) findViewById(R.id.utenti_registrati);
+                ur.setText(response, TextView.BufferType.EDITABLE);
+            }
+        });
+
+       /* URLHelper.invokeURLPOST(LoginActivity.this, buildUrlTestPOST(), new ResponseHandlerPOST() {
+            @Override
+            public void parseResponse(String response) {
+Log.e("JSON", response);
+            }
+
+            @Override
+            public String getJSONMessage() {
+                Utente u = new Utente();
+                u.setUsername("mioutente");
+                Gson gson = new Gson();
+                String s=gson.toJson(u);
+                Log.e("JS", s);
+                return s;
+            }
+        });*/
+        return 0;
+    }
+    private String buildUrlTestPOST() {
+        String url = URLHelper.build(this, "send");
+    int len = url.length();
+        url=url.substring(0,len-1);
+        return url;
+    }
 
 
+    private String buildUrlCount() {
+        String url = URLHelper.build(this, "getCountUtenti");
+        url = url + "dummy=0";
+        return url;
     }
 
     private void populateAutoComplete() {
@@ -356,7 +406,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-       //         finish();
+                //         finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
@@ -373,7 +423,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private void eseguiControllo() {
             RequestQueue queue = Volley.newRequestQueue(getBaseContext());
             String url = buildUrl();
-            Log.e("URL",url);
+            Log.e("URL", url);
 // Request a string response from the provided URL.5.95.234.131
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                     new Response.Listener<String>() {
@@ -401,12 +451,33 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 startActivity(openPage1);
                             }
                             if (response == null || !response.equalsIgnoreCase("1")) {
-                                Toast.makeText(activity, "Username o passowrd errata", Toast.LENGTH_LONG);
+
+
+                                Snackbar.make(findViewById(R.id.bottone1), "Username o passowrd errata",
+                                        Snackbar.LENGTH_SHORT)
+                                        .show();
                             }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    String message = null;
+                    if (error instanceof NetworkError) {
+                        message = "Cannot connect to Internet...Please check your connection!";
+                    } else if (error instanceof ServerError) {
+                        message = "The server could not be found. Please try again after some time!!";
+                    } else if (error instanceof AuthFailureError) {
+                        message = "Cannot connect to Internet...Please check your connection!";
+                    } else if (error instanceof ParseError) {
+                        message = "Parsing error! Please try again after some time!!";
+                    } else if (error instanceof NoConnectionError) {
+                        message = "Cannot connect to Internet...Please check your connection!";
+                    } else if (error instanceof TimeoutError) {
+                        message = "Connection TimeOut! Please check your internet connection.";
+                    }
+                    Snackbar.make(findViewById(R.id.bottone1), message,
+                            Snackbar.LENGTH_LONG)
+                            .show();
                 }
             });
 // Add the request to the RequestQueue.
@@ -415,16 +486,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         private String buildUrl() {
-            String url =    URLHelper.build(activity, "checkLoginUtente");
-          /*  String server = Config.getServerAddress(activity);
+            String url = URLHelper.build(activity, "checkLoginUtente");
 
-            String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/checkLoginUtente?";*/
             url += "username=" + mEmail;
-
             url += "&password=" + mPassword;
 
             return url;
         }
     }
+
+
 }
 

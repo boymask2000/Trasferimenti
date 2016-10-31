@@ -30,16 +30,22 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Utente" />
+                android:gravity="center_horizontal"
+                android:text="Utente"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <include layout="@layout/include_annuncio_s" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cerca" />
+                android:gravity="center_horizontal"
+
+                android:text="Cerca"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
 
             <include layout="@layout/include_annuncio_p" />
         </LinearLayout>

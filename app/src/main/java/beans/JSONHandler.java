@@ -43,7 +43,6 @@ public class JSONHandler {
         u.setId(obj.getInt("id"));
 
 
-
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date parsed = null;
         try {

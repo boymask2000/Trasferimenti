@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.posvert.trasferimenti.common.Config;
 import com.posvert.trasferimenti.common.SpinnerInitializer;
+import com.posvert.trasferimenti.common.URLHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,17 +68,7 @@ public class RegistrazioneActivity extends Activity {
         @SuppressLint("InlinedApi")
         @Override
         public void run() {
-            // Delayed removal of status and navigation bar
 
-            // Note that some of these constants are new as of API 16 (Jelly Bean)
-            // and API 19 (KitKat). It is safe to use them, as they are inlined
-            // at compile-time and do nothing on earlier devices.
-/*            mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);*/
         }
     };
     private View mControlsView;
@@ -140,6 +131,7 @@ public class RegistrazioneActivity extends Activity {
 
         bottone1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (!campiObbligatoriOK()) return;
 
                 RequestQueue queue = Volley.newRequestQueue(getBaseContext());
                 String url = buildUrl();
@@ -155,8 +147,9 @@ public class RegistrazioneActivity extends Activity {
                                     Snackbar.make(findViewById(R.id.registra), "Utente già registrato",
                                             Snackbar.LENGTH_SHORT)
                                             .show();
-                                if (response.equalsIgnoreCase("ok"))
-                                finish();
+                                if (response.equalsIgnoreCase("ok")) {
+                                    finish();
+                                }
                                 //   Toast.makeText(context, "Utente già registrato", Toast.LENGTH_LONG);
                             }
                         }, new Response.ErrorListener() {
@@ -178,13 +171,52 @@ public class RegistrazioneActivity extends Activity {
         System.out.println(server);
     }
 
+    private boolean campiObbligatoriOK() {
+        if (isEmpty(getVal(R.id.username))) {
+            Snackbar.make(findViewById(R.id.registra), "Username è obbligatorio",
+                    Snackbar.LENGTH_LONG)
+                    .show();
+            return false;
+        }
+        if (isEmpty(getVal(R.id.password))) {
+            Snackbar.make(findViewById(R.id.registra), "Password è obbligatorio",
+                    Snackbar.LENGTH_LONG)
+                    .show();
+            return false;
+        }
+        if (isEmpty(getVal(R.id.email))) {
+            Snackbar.make(findViewById(R.id.registra), "Email è obbligatorio",
+                    Snackbar.LENGTH_LONG)
+                    .show();
+            return false;
+        }
+        if (isEmpty(getVal(R.id.telefono))) {
+            Snackbar.make(findViewById(R.id.registra), "Telefono è obbligatorio",
+                    Snackbar.LENGTH_LONG)
+                    .show();
+            return false;
+        }
+        return true;
+    }
+
+    private String getVal(int id) {
+        return ((EditText) findViewById(id)).getText().toString();
+    }
+
+    private boolean isEmpty(String s) {
+        if (s == null) return true;
+        if (s.trim().length() == 0) return true;
+        return false;
+    }
+
 
 //http://localhost:8080/Trasferimenti/trasferimenti/createUser?name=giovanni&password=zaq12wsx&regione=Campania&comune=Napoli&ente=Comune&livello=3
 
     private String buildUrl() {
-        String server = Config.getServerAddress(this);
 
-        String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/createUser?";
+        String url = URLHelper.build(this, "createUser");
+
+
         url += "name=" + ((EditText) findViewById(R.id.username)).getText().toString();
         url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
         url += "&regione=" + spinnerInitializer.getRegione();

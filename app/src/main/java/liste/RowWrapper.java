@@ -1,6 +1,7 @@
 package liste;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.posvert.trasferimenti.R;
@@ -32,8 +33,9 @@ public class RowWrapper {
     public void populate(Annuncio annuncio)
     {
         codiceTextView.setText(""+annuncio.getData());
-        provinciaTextView.setText(""+annuncio.getProvincia());
+        provinciaTextView.setText(""+(annuncio.getProvincia()==null?"":annuncio.getProvincia()));
         regioneTextView.setText(""+annuncio.getRegione());
 
     }
+
 }

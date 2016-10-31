@@ -5,10 +5,6 @@
     android:background="#0099cc"
     tools:context="com.posvert.trasferimenti.RegistrazioneActivity">
 
-    <!-- The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc. -->
-
 
     <LinearLayout
 
@@ -16,238 +12,173 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:background="@color/black_overlay"
-        android:orientation="vertical"
-      >
-        <LinearLayout
+        android:background="@android:color/darker_gray"
+        android:orientation="vertical">
 
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-          >
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Username"
-                android:textColor="#33b5e5"
-           />
+            android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/username"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff"
-         />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
-        <LinearLayout
+        </android.support.design.widget.TextInputLayout>
 
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Password"
-                android:textColor="#33b5e5"
-                />
+            android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/password"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
-        <LinearLayout
+        </android.support.design.widget.TextInputLayout>
 
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Email"
-                android:textColor="#33b5e5"
-                />
+            android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/email"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
-        <LinearLayout
+        </android.support.design.widget.TextInputLayout>
 
-            style="?metaButtonBarStyle"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Telefomo"
-                android:textColor="#33b5e5"
-                />
+            android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/telefono"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefono"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
+
+
+
+
         <LinearLayout
 
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
+
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:keepScreenOn="true"
                 android:text="Regione"
-                android:textColor="#33b5e5"
-                />
+                android:textColor="#000000" />
+
             <Spinner
                 android:id="@+id/spinnerRegioni"
                 android:layout_width="match_parent"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff" />
 
 
         </LinearLayout>
+
         <LinearLayout
 
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
+
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:keepScreenOn="true"
                 android:text="Provincia"
-                android:textColor="#33b5e5"
-                />
-             <Spinner
-            android:id="@+id/spinnerProvince"
-            android:layout_width="match_parent"
-            android:textColor="#ffffff"
-            android:layout_height="wrap_content" />
+                android:textColor="#000000" />
+
+            <Spinner
+                android:id="@+id/spinnerProvince"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
+
         <LinearLayout
 
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
+
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:keepScreenOn="true"
                 android:text="Comune"
-                android:textColor="#33b5e5"
-                />
+                android:textColor="#000000" />
+
             <Spinner
                 android:id="@+id/spinnerComuni"
                 android:layout_width="match_parent"
-                android:textColor="#ffffff"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
-        <LinearLayout
 
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Ente"
-                android:textColor="#33b5e5"
-                />
+            android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/ente"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ente"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
-        <LinearLayout
+        </android.support.design.widget.TextInputLayout>
 
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Livello"
-                android:textColor="#33b5e5"
-                />
+            android:layout_height="wrap_content">
+
             <EditText
                 android:id="@+id/livello"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Livello"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
 
@@ -255,22 +186,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal"
-            >
+
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/registra"
                 style="?android:textAppearanceSmall"
-                android:layout_marginTop="20dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="Registrami" />
 
         </LinearLayout>
 
-        </LinearLayout>
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
+    </LinearLayout>
 
 </FrameLayout>

@@ -19,7 +19,12 @@
         android:background="@color/black_overlay"
         android:orientation="vertical">
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Nuovo Annuncio"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
         <LinearLayout
 
             style="?metaButtonBarStyle"
@@ -95,87 +100,54 @@
 
         </LinearLayout>
 
-        <LinearLayout
-
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Ente"
-                android:textColor="#33b5e5" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/ente"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ente"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-
-            style="?metaButtonBarStyle"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Livello"
-                android:textColor="#33b5e5" />
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/livello"
-                android:layout_width="160dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textColor="#ffffff" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Livello"
+                android:maxLines="1"
+                android:textColor="#FFFFFF" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
 
-            style="?metaButtonBarStyle"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:background="@color/black_overlay"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:keepScreenOn="true"
-                android:text="Note"
-                android:textColor="#33b5e5" />
+            android:layout_height="wrap_content">
 
             <EditText
+                android:hint="Note"
                 android:id="@+id/note"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|left"
                 android:inputType="textMultiLine"
                 android:lines="8"
-                android:maxLines="10"
-                android:minLines="6"
+                android:maxLines="5"
+                android:minLines="3"
                 android:scrollbars="vertical" />
 
-        </LinearLayout>
+        </android.support.design.widget.TextInputLayout>
+
 
         <LinearLayout
 

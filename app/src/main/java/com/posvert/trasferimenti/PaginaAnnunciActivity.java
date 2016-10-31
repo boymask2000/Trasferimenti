@@ -32,6 +32,7 @@ public class PaginaAnnunciActivity extends Activity {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
+    private ListaAnnunciAdapter listaAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class PaginaAnnunciActivity extends Activity {
 
                 Intent openPage1 = new Intent(PaginaAnnunciActivity.this, InserimentoAnnuncioActivity.class);
 
-                startActivity(openPage1);
+                startActivityForResult(openPage1, 2);
 
             }
         });
@@ -68,13 +69,19 @@ public class PaginaAnnunciActivity extends Activity {
                 Annuncio an = lista.get(pos);
                 String pkg = getPackageName();
                 act.putExtra(pkg + "ID", "" + an.getId());
-                startActivity(act);
+                startActivityForResult(act, 2);
             }
         });
+        loadData();
 
+
+    }
+
+    private void loadData() {
         URLHelper.invokeURL(this, buildUrl(), new ResponseHandler() {
             @Override
             public void parseResponse(String response) {
+                lista.clear();
                 try {
                     JSONArray array = new JSONArray(response);
 
@@ -83,8 +90,8 @@ public class PaginaAnnunciActivity extends Activity {
                         Annuncio u = JSONHandler.parseAnnuncioJSON(array.getJSONObject(i));
                         lista.add(u);
                     }
-
-                    mylist.setAdapter(new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista));
+                    listaAdapter = new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista);
+                    mylist.setAdapter(listaAdapter);
 
 
                     if (lista.size() == 0) cercamatch.setEnabled(false);
@@ -95,9 +102,17 @@ public class PaginaAnnunciActivity extends Activity {
                 }
             }
         });
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if (requestCode == 2) {
+            loadData();
+            listaAdapter.notifyDataSetChanged();
+        }
+    }
 
     private String buildUrl() {
         String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");

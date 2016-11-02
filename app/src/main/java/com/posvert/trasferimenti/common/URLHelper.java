@@ -29,6 +29,12 @@ public class URLHelper {
         if (pref == null) pref = Config.getVal(context, "url_prefix");
         return "http://" + server + pref + restKey + "?";
     }
+    public static String buildPOST(Context context, String restKey) {
+        if (server == null) server = Config.getServerAddress(context);
+
+        if (pref == null) pref = Config.getVal(context, "url_prefix");
+        return "http://" + server + pref + restKey ;
+    }
 
     public static void invokeURL(Context ctx, String url, final ResponseHandler handler) {
         RequestQueue queue = Volley.newRequestQueue(ctx);

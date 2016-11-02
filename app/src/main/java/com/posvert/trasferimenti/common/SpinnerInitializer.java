@@ -43,6 +43,19 @@ public class SpinnerInitializer {
         fillSpinnerRegioni(spinnerRegioni);
 
     }
+    public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
+
+                              Spinner spinnerComuni, Context context, boolean setListner) {
+        this.spinnerRegioni = spinnerRegioni;
+        this.spinnerProvince = spinnerProvince;
+        this.spinnerComuni = spinnerComuni;
+        this.context = context;
+
+        setListeners();
+
+        fillSpinnerRegioni(spinnerRegioni);
+
+    }
 
     private void setListeners() {
         spinnerRegioni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,7 +102,7 @@ public class SpinnerInitializer {
         });
     }
 
-    private void fillSpinnerRegioni(Spinner spinner) {
+    public void fillSpinnerRegioni(Spinner spinner) {
 
         DBRegioniAdapter dbHelper;
         dbHelper = new DBRegioniAdapter(context);
@@ -113,7 +126,7 @@ public class SpinnerInitializer {
         spinner.setAdapter(dataAdapter);
     }
 
-    private void fillSpinnerComuni(Spinner spinner, String provincia) {
+    public void fillSpinnerComuni(Spinner spinner, String provincia) {
 
         DBComuniAdapter dbHelper;
         dbHelper = new DBComuniAdapter(context);
@@ -137,7 +150,7 @@ public class SpinnerInitializer {
         spinner.setAdapter(dataAdapter);
     }
 
-    private void fillSpinnerProvince(Spinner spinner, String regione) {
+    public void fillSpinnerProvince(Spinner spinner, String regione) {
 
         DBProvinceAdapter dbHelper;
         dbHelper = new DBProvinceAdapter(context);

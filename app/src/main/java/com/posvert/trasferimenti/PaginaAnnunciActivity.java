@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -75,6 +78,31 @@ public class PaginaAnnunciActivity extends Activity {
         loadData();
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id=item.getItemId();
+        switch(id)
+        {
+            case R.id.profilo:
+                Intent act = new Intent(PaginaAnnunciActivity.this, GestioneProfiloActivity.class);
+
+                startActivity(act);
+
+                break;
+            case R.id.MENU_2:
+            /*
+                Codice di gestione della voce MENU_2
+             */
+        }
+        return false;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inf = new MenuInflater(this);
+        inf.inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     private void loadData() {

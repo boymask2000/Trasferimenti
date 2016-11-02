@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/profilo"
+        android:title="Mio profilo"/>
+    <item
+        android:id="@+id/MENU_2"
+        android:title="Elenco note"/>
+</menu>

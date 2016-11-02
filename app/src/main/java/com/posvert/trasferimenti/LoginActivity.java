@@ -289,7 +289,7 @@ Log.e("JSON", response);
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 1;
+        return password.length() > 0;
     }
 
     /**

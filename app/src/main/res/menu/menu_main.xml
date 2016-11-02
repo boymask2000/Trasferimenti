@@ -3,6 +3,6 @@
         android:id="@+id/profilo"
         android:title="Mio profilo"/>
     <item
-        android:id="@+id/MENU_2"
-        android:title="Elenco note"/>
+        android:id="@+id/invia_commento"
+        android:title="Invia commento"/>
 </menu>

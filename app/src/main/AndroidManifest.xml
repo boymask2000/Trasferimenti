@@ -56,7 +56,8 @@
         <activity android:name=".VisualizzaAnnuncioActivity" />
         <activity android:name=".PaginaMatchActivity" />
         <activity android:name=".VisualizzaMatchActivity" />
-        <activity android:name=".GestioneProfiloActivity"></activity>
+        <activity android:name=".GestioneProfiloActivity" />
+        <activity android:name=".InviaCommentoActivity"></activity>
     </application>
 
 </manifest>

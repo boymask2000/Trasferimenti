@@ -91,10 +91,10 @@ public class PaginaAnnunciActivity extends Activity {
                 startActivity(act);
 
                 break;
-            case R.id.MENU_2:
-            /*
-                Codice di gestione della voce MENU_2
-             */
+            case R.id.invia_commento:
+                Intent act1 = new Intent(PaginaAnnunciActivity.this, InviaCommentoActivity.class);
+
+                startActivity(act1);
         }
         return false;
     }

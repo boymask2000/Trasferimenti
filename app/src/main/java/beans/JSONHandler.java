@@ -2,6 +2,8 @@ package beans;
 
 import android.util.Log;
 
+import com.posvert.trasferimenti.chat.Messaggio;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,6 +16,13 @@ import java.text.SimpleDateFormat;
  */
 
 public class JSONHandler {
+    public static Messaggio parseMessaggioJSON(JSONObject obj) throws JSONException {
+        Messaggio u = new Messaggio();
+        u.setMittente(obj.getString("mittente"));
+        u.setDestinatario(obj.getString("destinatario"));
+        u.setTesto(obj.getString("testo"));
+        u.setAzione(obj.getInt("azione"));
+        return u;}
     public static Utente parseUtenteJSON(JSONObject obj) throws JSONException {
         Utente u = new Utente();
         u.setEmail(obj.getString("email"));

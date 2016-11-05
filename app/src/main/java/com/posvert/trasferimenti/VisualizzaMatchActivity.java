@@ -1,5 +1,6 @@
 package com.posvert.trasferimenti;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,8 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String pkg = getPackageName();
         id = bundle.getString(pkg + "ID");
+
+
 
 
         URLHelper.invokeURL(this, buildUrl(id), new ResponseHandler() {
@@ -121,7 +124,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+//---------------------
         Button contatta = (Button) findViewById(R.id.contatta);
 
         contatta.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +142,15 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
 
             }
         });
+//---------------------
+        Button chat = (Button) findViewById(R.id.chat);
+        chat.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent act = new Intent(VisualizzaMatchActivity.this, ChatActivity.class);
 
+                startActivity(act);
+            }
+        });
+//---------------------
     }
 }

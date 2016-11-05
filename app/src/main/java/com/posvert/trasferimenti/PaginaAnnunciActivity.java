@@ -21,9 +21,12 @@ import com.android.volley.toolbox.Volley;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
+import com.posvert.trasferimenti.net.NetUtil;
 
 import org.json.JSONArray;
 
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +44,12 @@ public class PaginaAnnunciActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_annunci);
+
+      //  startService(new Intent(this, ChatService.class));
+
         mylist = (ListView) findViewById(R.id.lista);
         Button creaannuncio = (Button) findViewById(R.id.creaannuncio);
+
         cercamatch = (Button) findViewById(R.id.cercamatch);
 
 

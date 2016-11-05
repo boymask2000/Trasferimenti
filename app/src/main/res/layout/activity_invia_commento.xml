@@ -33,7 +33,7 @@
             android:ems="10"
             android:minLines="5"
             android:id="@+id/commento"
-            />
+            style="@android:style/Widget.Material.EditText" />
 
         <LinearLayout
             android:orientation="horizontal"

@@ -1,5 +1,6 @@
 package com.posvert.trasferimenti;
 
+import android.app.AlertDialog;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,10 +47,18 @@ public class InviaCommentoActivity extends AppCompatActivity {
                 URLHelper.invokeURLPOST(InviaCommentoActivity.this, buildUrlPOST(), new ResponseHandlerPOST() {
                     @Override
                     public void parseResponse(String response) {
+                        AlertDialog.Builder builder = new
+                                AlertDialog.Builder(InviaCommentoActivity.this);
+
+                        builder.setTitle("Avviso");
+                        builder.setMessage("Attenzione! Questo è un avviso!");
+                        builder.setCancelable(true);
+                        AlertDialog alert = builder.create();
                         Log.e("QQQ", response);
                         Snackbar.make(findViewById(R.id.esci), "ok",
                                 Snackbar.LENGTH_LONG)
                                 .show();
+
                         finish();
                     }
 
@@ -67,6 +76,7 @@ public class InviaCommentoActivity extends AppCompatActivity {
 
         });
     }
+
     private Commento getValori() {
         Commento u = new Commento();
 
@@ -76,6 +86,7 @@ public class InviaCommentoActivity extends AppCompatActivity {
 
         return u;
     }
+
     private String buildUrlPOST() {
         return URLHelper.buildPOST(this, "inserisciCommento");
 

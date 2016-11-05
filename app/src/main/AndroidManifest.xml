@@ -17,10 +17,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".InserimentoAnnuncioActivity" />
         <activity
             android:name=".LoginActivity"
@@ -44,20 +40,17 @@
 
         </activity>
 
-        <service
-            android:name=".MyFirebaseMessagingService"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".MyFirebaseInstanceIDService"
-            android:enabled="true"
-            android:exported="true" />
+  >
 
         <activity android:name=".VisualizzaAnnuncioActivity" />
         <activity android:name=".PaginaMatchActivity" />
         <activity android:name=".VisualizzaMatchActivity" />
         <activity android:name=".GestioneProfiloActivity" />
-        <activity android:name=".InviaCommentoActivity"></activity>
+        <activity android:name=".InviaCommentoActivity" />
+
+
+
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

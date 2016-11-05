@@ -21,6 +21,7 @@ import java.util.Map;
 public class URLHelper {
     private static String server = null;
     private static String pref = null;
+    private static String prefWS = null;
 
 
     public static String build(Context context, String restKey) {
@@ -34,6 +35,15 @@ public class URLHelper {
 
         if (pref == null) pref = Config.getVal(context, "url_prefix");
         return "http://" + server + pref + restKey ;
+    }
+
+    public static String buildWSCall( Context context){
+        if (server == null) server = Config.getServerAddress(context);
+        if (prefWS == null) prefWS = Config.getVal(context, "webSocket_prefix");
+
+        String url = "ws://" + server + prefWS + Heap.getUserCorrente().getUsername() ;
+        Log.e("WS", url);
+        return url;
     }
 
     public static void invokeURL(Context ctx, String url, final ResponseHandler handler) {

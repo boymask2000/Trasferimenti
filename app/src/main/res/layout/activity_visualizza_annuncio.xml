@@ -13,21 +13,19 @@
     <GridLayout
 
 
-        android:columnCount="2"
-
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
 
-        android:background="@color/black_overlay"
-        android:orientation="horizontal"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/title_gray"
+        android:columnCount="2"
+        android:orientation="horizontal">
 
 
-        <include layout="@layout/include_annuncio_p"
-
-            />
+        <include layout="@layout/include_annuncio_p"/>
 
 
         <LinearLayout
@@ -36,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="@color/black_overlay"
+            android:background="@color/title_gray"
             android:orientation="vertical">
 
             <Button

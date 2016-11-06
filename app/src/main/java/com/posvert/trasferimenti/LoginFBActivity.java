@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -66,8 +67,6 @@ public class LoginFBActivity extends AppCompatActivity {
 
     private TextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +79,8 @@ public class LoginFBActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this);
 
         setContentView(R.layout.activity_login_fb);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -184,8 +185,8 @@ Heap.setLoginFB(true);
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+/*        mLoginFormView = findViewById(R.id.login_form);
+        mProgressView = findViewById(R.id.login_progress);*/
 
         Button bottone1 = (Button) findViewById(R.id.bottone1);
         bottone1.setOnClickListener(new View.OnClickListener() {

@@ -36,6 +36,9 @@ dependencies {
     compile 'com.github.codebutler:android-websockets:6c7c60d'
     testCompile 'junit:junit:4.12'
 
+    compile "com.android.support:support-core-utils:24.0.0"
+
+
     compile 'com.google.firebase:firebase-messaging:9.8.0'
 
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'

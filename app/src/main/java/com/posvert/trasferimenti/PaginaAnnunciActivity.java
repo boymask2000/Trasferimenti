@@ -2,9 +2,12 @@ package com.posvert.trasferimenti;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,7 +44,7 @@ import beans.Annuncio;
 import beans.JSONHandler;
 import liste.ListaAnnunciAdapter;
 
-public class PaginaAnnunciActivity extends Activity {
+public class PaginaAnnunciActivity extends AppCompatActivity {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
@@ -51,11 +54,15 @@ public class PaginaAnnunciActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_annunci);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
-     //   ImageView fotoView = (ImageView) findViewById(R.id.foto);
+
+        //   ImageView fotoView = (ImageView) findViewById(R.id.foto);
         TextView userText = (TextView) findViewById(R.id.username);
-        setImage();
-       userText.setText(Heap.getUserCorrente().getUsername());
+        if (Heap.isLoginFB())
+            setImage();
+        userText.setText(Heap.getUserCorrente().getUsername());
         /*
         try {
             Drawable icon = new BitmapDrawable(LoginFBActivity.getFacebookProfilePicture(LoginFBActivity.getFBUserId()));
@@ -64,9 +71,10 @@ public class PaginaAnnunciActivity extends Activity {
         }catch( Exception e){
             e.printStackTrace();
         }*/
-      //  startService(new Intent(this, ChatService.class));
+        //  startService(new Intent(this, ChatService.class));
 
         mylist = (ListView) findViewById(R.id.lista);
+        mylist.setBackgroundColor(Color.CYAN);
         Button creaannuncio = (Button) findViewById(R.id.creaannuncio);
 
         cercamatch = (Button) findViewById(R.id.cercamatch);
@@ -105,7 +113,8 @@ public class PaginaAnnunciActivity extends Activity {
 
 
     }
-    private void setImage(){
+
+    private void setImage() {
         ProfilePictureView profilePictureView = (ProfilePictureView) findViewById(R.id.foto);
         profilePictureView.setProfileId(LoginFBActivity.getFBUserId());
 
@@ -118,12 +127,11 @@ public class PaginaAnnunciActivity extends Activity {
             e.printStackTrace();
         }*/
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        int id=item.getItemId();
-        switch(id)
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
             case R.id.profilo:
                 Intent act = new Intent(PaginaAnnunciActivity.this, GestioneProfiloActivity.class);
 
@@ -137,6 +145,7 @@ public class PaginaAnnunciActivity extends Activity {
         }
         return false;
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inf = new MenuInflater(this);

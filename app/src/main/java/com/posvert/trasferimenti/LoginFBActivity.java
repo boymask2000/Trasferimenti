@@ -72,6 +72,7 @@ public class LoginFBActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Heap.setLoginFB(false);
 
 
         //    FacebookSdk.sdkInitialize(getApplicationContext());
@@ -97,7 +98,7 @@ public class LoginFBActivity extends AppCompatActivity {
                 Collection<String> c = Arrays.asList("public_profile");
                 // App code Arrays.asList("public_profile")
                 //     LoginManager.getInstance().logInWithReadPermissions(LoginFBActivity.this,c);
-
+Heap.setLoginFB(true);
                 tok = AccessToken.getCurrentAccessToken();
                 Log.e("FACEB", tok.getUserId());
 

@@ -1,5 +1,7 @@
 package com.posvert.trasferimenti;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -23,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -180,5 +183,10 @@ public class ChatActivity extends AppCompatActivity {
         super.onDestroy();
         client.disconnect();
     }
+    public static Bitmap getFacebookProfilePicture(String userID)  throws Exception {
+        URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
+        Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
 
+        return bitmap;
+    }
 }

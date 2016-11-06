@@ -34,6 +34,7 @@ public class JSONHandler {
         u.setUsername(obj.getString("username"));
         u.setPassword(obj.getString("password"));
         u.setUserid(obj.getInt("userid"));
+        u.setFbUserid(obj.getString("fbUserid"));
 
         return u;
 

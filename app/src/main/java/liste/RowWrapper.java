@@ -20,6 +20,8 @@ public class RowWrapper {
 
     private TextView regioneTextView;
 
+    private TextView usernameTextView;
+
     public RowWrapper(View convertView)
     {
         provinciaTextView = (TextView)
@@ -28,6 +30,8 @@ public class RowWrapper {
                 convertView.findViewById(R.id.data);
         regioneTextView = (TextView)
                 convertView.findViewById(R.id.regione);
+        usernameTextView = (TextView)
+                convertView.findViewById(R.id.username);
     }
 
     public void populate(Annuncio annuncio)
@@ -35,6 +39,7 @@ public class RowWrapper {
         codiceTextView.setText(""+annuncio.getData());
         provinciaTextView.setText(""+(annuncio.getProvincia()==null?"":annuncio.getProvincia()));
         regioneTextView.setText(""+annuncio.getRegione());
+        usernameTextView.setText(""+annuncio.getUsername());
 
     }
 

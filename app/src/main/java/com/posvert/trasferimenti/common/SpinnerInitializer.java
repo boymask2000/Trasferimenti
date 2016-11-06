@@ -26,12 +26,11 @@ public class SpinnerInitializer {
 
     private String regione;
 
-
+    private boolean addBlank = false;
     private String provincia;
     private String comune;
 
     public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
-
                               Spinner spinnerComuni, Context context) {
         this.spinnerRegioni = spinnerRegioni;
         this.spinnerProvince = spinnerProvince;
@@ -43,8 +42,21 @@ public class SpinnerInitializer {
         fillSpinnerRegioni(spinnerRegioni);
 
     }
-    public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
 
+    public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
+                              Spinner spinnerComuni, Context context, boolean addBlank) {
+        this.spinnerRegioni = spinnerRegioni;
+        this.spinnerProvince = spinnerProvince;
+        this.spinnerComuni = spinnerComuni;
+        this.context = context;
+        this.addBlank = addBlank;
+        setListeners();
+
+        fillSpinnerRegioni(spinnerRegioni);
+
+    }
+
+/*    public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
                               Spinner spinnerComuni, Context context, boolean setListner) {
         this.spinnerRegioni = spinnerRegioni;
         this.spinnerProvince = spinnerProvince;
@@ -55,7 +67,7 @@ public class SpinnerInitializer {
 
         fillSpinnerRegioni(spinnerRegioni);
 
-    }
+    }*/
 
     private void setListeners() {
         spinnerRegioni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,6 +122,7 @@ public class SpinnerInitializer {
         Cursor cursor = dbHelper.fetchAllRegioni();
 
         List<String> lista = new ArrayList<>();
+
         while (cursor.moveToNext()) {
 
             String val = cursor.getString(cursor.getColumnIndex(DBRegioniAdapter.KEY_NAME));
@@ -134,6 +147,7 @@ public class SpinnerInitializer {
         Cursor cursor = dbHelper.getAllComuni(provincia);
 
         List<String> lista = new ArrayList<>();
+        if (addBlank) lista.add("");
         while (cursor.moveToNext()) {
 
             String val = cursor.getString(cursor.getColumnIndex(DBRegioniAdapter.KEY_NAME));
@@ -158,6 +172,7 @@ public class SpinnerInitializer {
         Cursor cursor = dbHelper.getAllProvince(regione);
 
         List<String> lista = new ArrayList<>();
+        if (addBlank) lista.add("");
         while (cursor.moveToNext()) {
 
             String val = cursor.getString(cursor.getColumnIndex(DBRegioniAdapter.KEY_NAME));

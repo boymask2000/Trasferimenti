@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.posvert.trasferimenti.common.Config;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.SpinnerInitializer;
+import com.posvert.trasferimenti.common.URLHelper;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -39,7 +40,7 @@ public class InserimentoAnnuncioActivity extends Activity {
         spinnerProvince = (Spinner) findViewById(R.id.spinnerProvince);
         spinnerComuni = (Spinner) findViewById(R.id.spinnerComuni);
 
-        spinnerInitializer = new SpinnerInitializer(spinnerRegioni, spinnerProvince, spinnerComuni, this);
+        spinnerInitializer = new SpinnerInitializer(spinnerRegioni, spinnerProvince, spinnerComuni, this, true);
 
         Button bottone1 = (Button) findViewById(R.id.inserisci);
 
@@ -79,11 +80,12 @@ public class InserimentoAnnuncioActivity extends Activity {
 
     //http://localhost:8080/Trasferimenti/trasferimenti/createAnnuncio?regione=Campania&username=giovanni&tipo=A
     private String buildUrl() {
-        String server = Config.getServerAddress(this);
+        String url = URLHelper.build(this, "createAnnuncio");
+
         Utente user = Heap.getUserCorrente();
-        String url = "http://" + server + ":8080/Trasferimenti/trasferimenti/createAnnuncio?";
+
         try {
-            url += "username=" + Heap.getUserCorrente().getUsername();
+            url += "username=" + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
 
             url += "&regione=" + spinnerInitializer.getRegione();
             url += "&provincia=" + spinnerInitializer.getProvincia();

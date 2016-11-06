@@ -2,6 +2,8 @@ package com.posvert.trasferimenti;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.login.widget.ProfilePictureView;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
@@ -25,8 +30,10 @@ import com.posvert.trasferimenti.net.NetUtil;
 
 import org.json.JSONArray;
 
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +52,18 @@ public class PaginaAnnunciActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_annunci);
 
+     //   ImageView fotoView = (ImageView) findViewById(R.id.foto);
+        TextView userText = (TextView) findViewById(R.id.username);
+        setImage();
+       userText.setText(Heap.getUserCorrente().getUsername());
+        /*
+        try {
+            Drawable icon = new BitmapDrawable(LoginFBActivity.getFacebookProfilePicture(LoginFBActivity.getFBUserId()));
+
+            fotoView.setImageDrawable(icon);
+        }catch( Exception e){
+            e.printStackTrace();
+        }*/
       //  startService(new Intent(this, ChatService.class));
 
         mylist = (ListView) findViewById(R.id.lista);
@@ -85,6 +104,19 @@ public class PaginaAnnunciActivity extends Activity {
         loadData();
 
 
+    }
+    private void setImage(){
+        ProfilePictureView profilePictureView = (ProfilePictureView) findViewById(R.id.foto);
+        profilePictureView.setProfileId(LoginFBActivity.getFBUserId());
+
+       /* ImageView fotoView = (ImageView) findViewById(R.id.foto);
+        try {
+            Drawable icon = new BitmapDrawable(LoginFBActivity.getFacebookProfilePicture(LoginFBActivity.getFBUserId()));
+
+            fotoView.setImageDrawable(icon);
+        }catch( Exception e){
+            e.printStackTrace();
+        }*/
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -152,7 +184,12 @@ public class PaginaAnnunciActivity extends Activity {
     private String buildUrl() {
         String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");
 
-        url += "username=" + Heap.getUserCorrente().getUsername();
+
+        try {
+            url += "username=" + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 
         return url;

@@ -1,17 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
 
-    <TextView android:layout_width="fill_parent" android:text="Regione"
-        android:layout_height="wrap_content" android:id="@+id/regione"
-        android:textSize="22sp" />
-    <TextView android:layout_width="fill_parent" android:text="Provincia"
-        android:layout_height="wrap_content" android:id="@+id/provincia"
-        android:textSize="14sp" android:layout_below="@id/regione"
-        android:layout_alignParentBottom="true" />
-    <TextView android:layout_width="wrap_content" android:text="Data"
-        android:layout_height="wrap_content" android:id="@+id/data"
-        android:textSize="16sp" android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+    <GridLayout
+
+        style="?metaButtonBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:useDefaultMargins="true"
+        android:columnCount="3"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_gravity="fill_horizontal"
+            style="?metaButtonBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/regione"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Regione"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/provincia"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Provincia"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_gravity="fill"
+            android:id="@+id/username"
+            android:text="uuuu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp" />
+
+
+
+        <TextView
+            android:layout_gravity="fill"
+            android:id="@+id/data"
+            android:text="uuuu"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+
+            android:textSize="16sp" />
+    </GridLayout>
+
+
 </RelativeLayout>

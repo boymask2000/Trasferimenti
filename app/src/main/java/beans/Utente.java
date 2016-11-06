@@ -12,6 +12,16 @@ public class Utente {
     private String livello;
     private String username;
     private String password;
+    private String fbUserid;
+
+
+    public String getFbUserid() {
+        return fbUserid;
+    }
+
+    public void setFbUserid(String fbUserid) {
+        this.fbUserid = fbUserid;
+    }
 
     public int getUserid() {
         return userid;

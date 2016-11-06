@@ -147,7 +147,8 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent act = new Intent(VisualizzaMatchActivity.this, ChatActivity.class);
-
+                String pkg = getPackageName();
+                act.putExtra(pkg + "USERNAME", utente.getUsername());
                 startActivity(act);
             }
         });

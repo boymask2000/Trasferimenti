@@ -441,7 +441,7 @@ Log.e("JSON", response);
 
                                     Heap.setUserCorrente(u);
 
-
+                                    setUserOnline();
                                 } catch (Exception e) {
                                 }
 
@@ -496,6 +496,32 @@ Log.e("JSON", response);
         }
     }
 
+    private void setUserOnline() {
+        String url = URLHelper.build(this, "setUserOnline");
+        url += "username=" + Heap.getUserCorrente().getUsername();
+        URLHelper.invokeURL(this,url, new ResponseHandler() {
+            @Override
+            public void parseResponse(String response) {
+
+            }
+        });
+    }
+    private void setUserOffline() {
+        String url = URLHelper.build(this, "setUserOffline");
+        url += "username=" + Heap.getUserCorrente().getUsername();
+        URLHelper.invokeURL(this,url, new ResponseHandler() {
+            @Override
+            public void parseResponse(String response) {
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onDestroy(){
+        setUserOffline();
+    }
 
 }
 

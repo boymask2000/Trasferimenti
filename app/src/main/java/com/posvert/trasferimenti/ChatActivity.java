@@ -38,12 +38,17 @@ public class ChatActivity extends AppCompatActivity {
     private List<Messaggio> listMessages;
     private MessagesListAdapter adapter;
     private EditText inputMsg;
+    private String utenteAnnuncio;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        Bundle bundle = getIntent().getExtras();
+        String pkg = getPackageName();
+        utenteAnnuncio = bundle.getString(pkg + "USERNAME");
 
         listViewMessages = (ListView) findViewById(R.id.list_view_messages);
         listMessages = new ArrayList<>();
@@ -59,7 +64,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Sending message to web socket server
-                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), "joe");
+                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), utenteAnnuncio);
                 Gson gson = new Gson();
                 u.setTesto(inputMsg.getText().toString());
                 u.setOperation(Messaggio.SEND_MSG, inputMsg.getText().toString());
@@ -83,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onConnect() {
                 Log.e("WS", "Connected!");
                 Gson gson = new Gson();
-                Messaggio u = new Messaggio("joe", "joe");
+                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), utenteAnnuncio);
                 currOP = Messaggio.ASK_FOR_CHAT;
                 u.setOperation(Messaggio.ASK_FOR_CHAT);
 
@@ -97,13 +102,21 @@ public class ChatActivity extends AppCompatActivity {
             public void onMessage(String message) {
                 Log.e("WS", String.format("Got string message! %s", message));
 
+
                 try {
                     JSONObject obj = new JSONObject(message);
                     String msg = obj.getString("message");
+                    int dp = msg.indexOf(":");
+                    Log.e("MSG", msg);
+                    String code = msg.substring(0, dp);
+                    String testo = msg.substring(dp + 1);
 
-                    Messaggio m = new Messaggio();
-                    m.setTesto(msg);
-                    appendMessage(m);
+                    if (code.equals("MSG")) {
+
+                        Messaggio m = new Messaggio();
+                        m.setTesto(testo);
+                        appendMessage(m);
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();

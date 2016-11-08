@@ -40,6 +40,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
@@ -83,6 +84,10 @@ public class LoginFBActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         callbackManager = CallbackManager.Factory.create();
+
+
+/*        startService(new Intent(this, MyFirebaseInstanceIDService.class));
+        startService(new Intent(this, MyFirebaseMessagingService.class));*/
 
         //    View view = inflater.inflate(R.layout.splash, container, false);
 
@@ -355,8 +360,14 @@ Log.e("JSON", response);
 
                                 Heap.setUserCorrente(u);
 
+
+                            //      FirebaseInstanceId.getInstance().deleteInstanceId();
+                                String vv = FirebaseInstanceId.getInstance().getToken();
+                                MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);
+
                                 setUserOnline();
                             } catch (Exception e) {
+                                e.printStackTrace();
                             }
 
 

@@ -120,7 +120,7 @@
                 android:layout_marginBottom="30dp" />
 
             <TextView
-                android:id="@+id/utenti_registrati"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 android:text="Questa App non contiene olio di palma"

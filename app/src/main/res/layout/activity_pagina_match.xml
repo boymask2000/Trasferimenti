@@ -9,7 +9,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.posvert.trasferimenti.PaginaMatchActivity">
+    <TextView
+        android:text="Annunci per te"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
+        android:gravity="center"
+        tools:textSize="18sp" />
 
     <ListView
         android:id="@+id/lista"

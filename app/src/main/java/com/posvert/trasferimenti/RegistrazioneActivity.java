@@ -30,6 +30,8 @@ import com.posvert.trasferimenti.common.Config;
 import com.posvert.trasferimenti.common.SpinnerInitializer;
 import com.posvert.trasferimenti.common.URLHelper;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -216,16 +218,19 @@ public class RegistrazioneActivity extends Activity {
 
         String url = URLHelper.build(this, "createUser");
 
-
-        url += "name=" + ((EditText) findViewById(R.id.username)).getText().toString();
-        url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
-        url += "&regione=" + spinnerInitializer.getRegione();
-        url += "&provincia=" + spinnerInitializer.getProvincia();
-        url += "&comune=" + spinnerInitializer.getComune();
-        url += "&ente=" + ((EditText) findViewById(R.id.ente)).getText().toString();
-        url += "&telefono=" + ((EditText) findViewById(R.id.telefono)).getText().toString();
-        url += "&email=" + ((EditText) findViewById(R.id.email)).getText().toString();
-        url += "&livello=" + ((EditText) findViewById(R.id.livello)).getText().toString();
+        try {
+            url += "name=" + ((EditText) findViewById(R.id.username)).getText().toString();
+            url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
+            url += "&regione=" + spinnerInitializer.getRegione();
+            url += "&provincia=" + spinnerInitializer.getProvincia();
+            url += "&comune=" + URLEncoder.encode(spinnerInitializer.getComune(), "UTF-8");
+            url += "&ente=" + URLEncoder.encode(((EditText) findViewById(R.id.ente)).getText().toString(), "UTF-8");
+            url += "&telefono=" + ((EditText) findViewById(R.id.telefono)).getText().toString();
+            url += "&email=" + ((EditText) findViewById(R.id.email)).getText().toString();
+            url += "&livello=" + ((EditText) findViewById(R.id.livello)).getText().toString();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return url;
     }
 

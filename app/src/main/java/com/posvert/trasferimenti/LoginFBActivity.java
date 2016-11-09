@@ -84,7 +84,7 @@ public class LoginFBActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_fb);
 
 
-        if (1 < 2 || !UtentiHelper.isUserOnline(this)) {
+        if (!UtentiHelper.isUserOnline(this)) {
             // 1. Instantiate an AlertDialog.Builder with its constructor
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -105,7 +105,7 @@ public class LoginFBActivity extends AppCompatActivity {
 // 3. Get the AlertDialog from create()
             AlertDialog dialog = builder.create();
             dialog.show();
-            return;
+
         }
 
 
@@ -134,8 +134,11 @@ public class LoginFBActivity extends AppCompatActivity {
                 // App code Arrays.asList("public_profile")
                 //     LoginManager.getInstance().logInWithReadPermissions(LoginFBActivity.this,c);
                 Heap.setLoginFB(true);
+
                 tok = AccessToken.getCurrentAccessToken();
                 Log.e("FACEB", tok.getUserId());
+                getToken();
+
 
             }
 
@@ -178,6 +181,8 @@ public class LoginFBActivity extends AppCompatActivity {
                                 Utente u = JSONHandler.parseUtenteJSON(obj);
 
                                 Heap.setUserCorrente(u);
+                                getToken();
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -238,6 +243,15 @@ public class LoginFBActivity extends AppCompatActivity {
 
     }
 
+    private void getToken() {
+
+
+        String vv = FirebaseInstanceId.getInstance().getToken();
+        Log.e("FACEB1", vv);
+        MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);
+
+    }
+
     private String buildUrlCount() {
         String url = URLHelper.build(this, "getCountUtenti");
         url = url + "dummy=0";
@@ -274,6 +288,7 @@ public class LoginFBActivity extends AppCompatActivity {
             }
         });
     }
+
     private String buildregistrUrl() {
 
         String url = URLHelper.build(this, "createUser");
@@ -363,11 +378,10 @@ public class LoginFBActivity extends AppCompatActivity {
                                 Utente u = JSONHandler.parseUtenteJSON(obj);
 
                                 Heap.setUserCorrente(u);
-
+                                getToken();
 
                                 //      FirebaseInstanceId.getInstance().deleteInstanceId();
-                                String vv = FirebaseInstanceId.getInstance().getToken();
-                                MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);
+
 
                                 setUserOnline();
                             } catch (Exception e) {

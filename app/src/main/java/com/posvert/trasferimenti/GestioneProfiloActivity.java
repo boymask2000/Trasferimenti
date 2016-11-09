@@ -41,12 +41,28 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         spinner_Province = (Spinner) findViewById(R.id.spinnerProvince);
         spinner_Comuni = (Spinner) findViewById(R.id.spinnerComuni);
 
-        spinnerInitializer = new SpinnerInitializer(spinner_Regioni, spinner_Province, spinner_Comuni, this);
+
+        spinner_Regioni.setEnabled(false);
+        spinner_Province.setEnabled(false);
+        spinner_Comuni.setEnabled(false);
+
+        spinnerInitializer = new SpinnerInitializer(spinner_Regioni, spinner_Province, spinner_Comuni, this, false, false);
 
         setValori();
     }
 
     private void setBottoni() {
+        Button sblocca = (Button) findViewById(R.id.sblocca);
+        sblocca.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                spinnerInitializer.setListeners();
+                spinner_Regioni.setEnabled(true);
+                spinner_Province.setEnabled(true);
+                spinner_Comuni.setEnabled(true);
+            }
+
+        });
+
         Button esci = (Button) findViewById(R.id.esci);
 
         esci.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +107,9 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         Utente u = Heap.getUserCorrente();
 
         u.setPassword(((EditText) findViewById(R.id.password)).getText().toString());
-        u.setRegione(spinnerInitializer.getRegione());
-        u.setProvincia(spinnerInitializer.getProvincia());
-        u.setComune(spinnerInitializer.getComune());
+        u.setRegione(spinner_Regioni.getSelectedItem().toString());
+        u.setProvincia(spinner_Province.getSelectedItem().toString());
+        u.setComune(spinner_Comuni.getSelectedItem().toString());
         u.setEnte(((EditText) findViewById(R.id.ente)).getText().toString());
         u.setTelefono(((EditText) findViewById(R.id.telefono)).getText().toString());
         u.setEmail(((EditText) findViewById(R.id.email)).getText().toString());
@@ -110,6 +126,7 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.username)).setText(Heap.getUserCorrente().getUsername());
         ((EditText) findViewById(R.id.password)).setText(Heap.getUserCorrente().getPassword());
         ((EditText) findViewById(R.id.email)).setText(Heap.getUserCorrente().getEmail());
+        ((EditText) findViewById(R.id.telefono)).setText(Heap.getUserCorrente().getTelefono());
         ((EditText) findViewById(R.id.ente)).setText(Heap.getUserCorrente().getEnte());
         ((EditText) findViewById(R.id.livello)).setText(Heap.getUserCorrente().getLivello());
 
@@ -121,17 +138,20 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         spinnerInitializer.fillSpinnerComuni(spinner_Comuni, Heap.getUserCorrente().getProvincia());
         spinner_Comuni.setSelection(getIndex(spinner_Comuni, Heap.getUserCorrente().getComune()));
 
+
+  //      spinnerInitializer.setListeners();
     }
 
     private int getIndex(Spinner spinner, String myString) {
         int index = 0;
-
+Log.e("AAA", ""+myString);
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
-                index = i;
+                index = i;Log.e("AAA1", ""+index);
                 break;
             }
         }
+        Log.e("AAA2", ""+index);
         return index;
     }
 

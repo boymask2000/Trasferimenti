@@ -63,6 +63,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
                 UtentePushKey u = new UtentePushKey();
                 u.setUsername(Heap.getUserCorrente().getUsername());
                 u.setKey(token);
+                Log.e("len",""+token.length());
                 Gson gson = new Gson();
                 gson.toJson(u, sw);
                 String val = sw.toString();
@@ -72,8 +73,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     }
 
     private static String buildUrl(Context ctx) {
-        String url = URLHelper.build(ctx, "setUserPushKey");
-
+        String url = URLHelper.buildPOST(ctx, "createUserKey", "push");
+Log.e("URL", url);
         return url;
     }
 }

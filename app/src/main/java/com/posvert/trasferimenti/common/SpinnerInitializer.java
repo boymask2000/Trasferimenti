@@ -44,12 +44,27 @@ public class SpinnerInitializer {
     }
 
     public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
+                              Spinner spinnerComuni, Context context, boolean addBlank, boolean setlistener) {
+        this.spinnerRegioni = spinnerRegioni;
+        this.spinnerProvince = spinnerProvince;
+        this.spinnerComuni = spinnerComuni;
+        this.context = context;
+        this.addBlank = addBlank;
+        if (setlistener)
+            setListeners();
+
+        fillSpinnerRegioni(spinnerRegioni);
+
+    }
+
+    public SpinnerInitializer(Spinner spinnerRegioni, Spinner spinnerProvince,
                               Spinner spinnerComuni, Context context, boolean addBlank) {
         this.spinnerRegioni = spinnerRegioni;
         this.spinnerProvince = spinnerProvince;
         this.spinnerComuni = spinnerComuni;
         this.context = context;
         this.addBlank = addBlank;
+
         setListeners();
 
         fillSpinnerRegioni(spinnerRegioni);
@@ -69,7 +84,7 @@ public class SpinnerInitializer {
 
     }*/
 
-    private void setListeners() {
+    public void setListeners() {
         spinnerRegioni.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -88,6 +103,7 @@ public class SpinnerInitializer {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+
                 provincia = parent.getItemAtPosition(pos).toString();
                 fillSpinnerComuni(spinnerComuni, provincia);
             }

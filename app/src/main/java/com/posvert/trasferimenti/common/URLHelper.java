@@ -30,10 +30,22 @@ public class URLHelper {
         if (pref == null) pref = Config.getVal(context, "url_prefix");
         return "http://" + server + pref + restKey + "?";
     }
+    public static String build(Context context, String restKey, String prefix) {
+        if (server == null) server = Config.getServerAddress(context);
+
+        String pref = Config.getVal(context, "url_prefix_"+prefix);
+        return "http://" + server + pref + restKey + "?";
+    }
     public static String buildPOST(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
 
         if (pref == null) pref = Config.getVal(context, "url_prefix");
+        return "http://" + server + pref + restKey ;
+    }
+    public static String buildPOST(Context context, String restKey, String prefix) {
+        if (server == null) server = Config.getServerAddress(context);
+
+        String pref = Config.getVal(context, "url_prefix_"+prefix);
         return "http://" + server + pref + restKey ;
     }
 

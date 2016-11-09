@@ -14,6 +14,8 @@ import com.posvert.trasferimenti.common.URLHelper;
 
 import org.json.JSONArray;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +81,11 @@ public class PaginaMatchActivity extends AppCompatActivity {
     private String buildUrl() {
         String url = URLHelper.build(this, "cercaMatchAnnunciPerUtente");
 
-        url += "username=" + Heap.getUserCorrente().getUsername();
+        try {
+            url += "username=" + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 
         return url;

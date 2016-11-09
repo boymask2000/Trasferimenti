@@ -219,7 +219,7 @@ public class RegistrazioneActivity extends Activity {
         String url = URLHelper.build(this, "createUser");
 
         try {
-            url += "name=" + ((EditText) findViewById(R.id.username)).getText().toString();
+            url += "name=" + URLEncoder.encode(((EditText) findViewById(R.id.username)).getText().toString(),"UTF-8");
             url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
             url += "&regione=" + spinnerInitializer.getRegione();
             url += "&provincia=" + spinnerInitializer.getProvincia();

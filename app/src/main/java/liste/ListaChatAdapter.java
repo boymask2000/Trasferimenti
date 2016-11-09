@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.posvert.trasferimenti.R;
+import com.posvert.trasferimenti.chat.ChatRequest;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ import beans.Annuncio;
  * Created by giovanni on 21/10/16.
  */
 
-public class ListaAnnunciAdapter extends BaseAdapter {
+public class ListaChatAdapter extends BaseAdapter {
     private final Activity act;
-    private final List<Annuncio> lista;
+    private final List<ChatRequest> lista;
 
-    public ListaAnnunciAdapter(Activity act, List<Annuncio> ll ){
+    public ListaChatAdapter(Activity act, List<ChatRequest> ll ){
         this.act=act;
         this.lista=ll;
     }
@@ -40,19 +41,19 @@ public class ListaAnnunciAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        AnnunciRowWrapper wrapper;
+        ChatRowWrapper wrapper;
         if (convertView == null)
         {
             convertView = act.getLayoutInflater().inflate(
-                    R.layout.row, null);
-            wrapper = new AnnunciRowWrapper(convertView);
+                    R.layout.listachatrow, null);
+            wrapper = new ChatRowWrapper(convertView);
             convertView.setTag(wrapper);
         }
         else
         {
-            wrapper = (AnnunciRowWrapper) convertView.getTag();
+            wrapper = (ChatRowWrapper) convertView.getTag();
         }
-        Annuncio annuncio = (Annuncio) getItem(position);
+        ChatRequest annuncio = (ChatRequest) getItem(position);
         wrapper.populate(annuncio);
 
         return convertView;

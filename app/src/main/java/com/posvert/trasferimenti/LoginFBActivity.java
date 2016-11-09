@@ -248,28 +248,11 @@ public class LoginFBActivity extends AppCompatActivity {
         URLHelper.invokeURL(LoginFBActivity.this, buildUrlCount(), new ResponseHandler() {
             @Override
             public void parseResponse(String response) {
-                Log.e("TTTT", response);
                 TextView ur = (TextView) findViewById(R.id.utenti_registrati);
                 ur.setText(response, TextView.BufferType.EDITABLE);
             }
         });
 
-       /* URLHelper.invokeURLPOST(LoginActivity.this, buildUrlTestPOST(), new ResponseHandlerPOST() {
-            @Override
-            public void parseResponse(String response) {
-Log.e("JSON", response);
-            }
-
-            @Override
-            public String getJSONMessage() {
-                Utente u = new Utente();
-                u.setUsername("mioutente");
-                Gson gson = new Gson();
-                String s=gson.toJson(u);
-                Log.e("JS", s);
-                return s;
-            }
-        });*/
         return 0;
     }
 
@@ -291,15 +274,6 @@ Log.e("JSON", response);
             }
         });
     }
-
- /*   @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
-        if (requestCode == 44) {
-
-        }
-    }*/
-
     private String buildregistrUrl() {
 
         String url = URLHelper.build(this, "createUser");

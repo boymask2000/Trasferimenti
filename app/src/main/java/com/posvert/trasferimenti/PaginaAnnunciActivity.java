@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.login.widget.ProfilePictureView;
+import com.posvert.trasferimenti.chat.ChatRequest;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
@@ -43,12 +44,15 @@ import java.util.List;
 import beans.Annuncio;
 import beans.JSONHandler;
 import liste.ListaAnnunciAdapter;
+import liste.ListaChatAdapter;
 
 public class PaginaAnnunciActivity extends AppCompatActivity {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
-    private ListaAnnunciAdapter listaAdapter = null;
+    private List<ChatRequest> listaChat = new ArrayList<>();
+    private ListaAnnunciAdapter listaAnnunciAdapter = null;
+    private ListaChatAdapter listaChatAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,8 +170,8 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                         Annuncio u = JSONHandler.parseAnnuncioJSON(array.getJSONObject(i));
                         lista.add(u);
                     }
-                    listaAdapter = new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista);
-                    mylist.setAdapter(listaAdapter);
+                    listaAnnunciAdapter = new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista);
+                    mylist.setAdapter(listaAnnunciAdapter);
 
 
                     if (lista.size() == 0) cercamatch.setEnabled(false);
@@ -178,6 +182,10 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                 }
             }
         });
+        listaChatAdapter = new ListaChatAdapter(PaginaAnnunciActivity.this, listaChat);
+        ChatRequest req = new ChatRequest("pippo");
+        listaChat.add(req);
+        listaChatAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -186,7 +194,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             loadData();
-            listaAdapter.notifyDataSetChanged();
+            listaAnnunciAdapter.notifyDataSetChanged();
         }
     }
 

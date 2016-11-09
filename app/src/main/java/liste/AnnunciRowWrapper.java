@@ -12,7 +12,7 @@ import beans.Annuncio;
  * Created by giovanni on 21/10/16.
  */
 
-public class RowWrapper {
+public class AnnunciRowWrapper {
 
     private TextView provinciaTextView;
 
@@ -22,7 +22,7 @@ public class RowWrapper {
 
     private TextView usernameTextView;
 
-    public RowWrapper(View convertView)
+    public AnnunciRowWrapper(View convertView)
     {
         provinciaTextView = (TextView)
                 convertView.findViewById(R.id.provincia);

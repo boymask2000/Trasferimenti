@@ -1,9 +1,11 @@
 package com.posvert.trasferimenti;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -80,6 +82,33 @@ public class LoginFBActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this);
 
         setContentView(R.layout.activity_login_fb);
+
+
+        if (1 < 2 || !UtentiHelper.isUserOnline(this)) {
+            // 1. Instantiate an AlertDialog.Builder with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+// 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("Non sei in rete")
+                    .setTitle("Attenzione!");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Log.e("WWW", "RIPROVA");
+                }
+            });
+            builder.setNegativeButton("Esci", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            });
+
+// 3. Get the AlertDialog from create()
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            return;
+        }
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -104,7 +133,7 @@ public class LoginFBActivity extends AppCompatActivity {
                 Collection<String> c = Arrays.asList("public_profile");
                 // App code Arrays.asList("public_profile")
                 //     LoginManager.getInstance().logInWithReadPermissions(LoginFBActivity.this,c);
-Heap.setLoginFB(true);
+                Heap.setLoginFB(true);
                 tok = AccessToken.getCurrentAccessToken();
                 Log.e("FACEB", tok.getUserId());
 
@@ -336,7 +365,8 @@ Log.e("JSON", response);
     public void onDestroy() {
         super.onDestroy();
         setUserOffline();
-        profileTracker.stopTracking();
+        if (profileTracker != null)
+            profileTracker.stopTracking();
     }
 
     private void eseguiControllo() {
@@ -361,7 +391,7 @@ Log.e("JSON", response);
                                 Heap.setUserCorrente(u);
 
 
-                            //      FirebaseInstanceId.getInstance().deleteInstanceId();
+                                //      FirebaseInstanceId.getInstance().deleteInstanceId();
                                 String vv = FirebaseInstanceId.getInstance().getToken();
                                 MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);
 
@@ -410,6 +440,7 @@ Log.e("JSON", response);
         queue.add(stringRequest);
         queue.start();
     }
+
     private String buildUrl() {
         String url = URLHelper.build(this, "checkLoginUtente");
 
@@ -418,7 +449,9 @@ Log.e("JSON", response);
 
         return url;
     }
+
     private void setUserOnline() {
+        if (Heap.getUserCorrente() == null) return;
         String url = URLHelper.build(this, "setUserOnline");
         url += "username=" + Heap.getUserCorrente().getUsername();
         URLHelper.invokeURL(this, url, new ResponseHandler() {
@@ -430,6 +463,7 @@ Log.e("JSON", response);
     }
 
     private void setUserOffline() {
+        if (Heap.getUserCorrente() == null) return;
         String url = URLHelper.build(this, "setUserOffline");
         url += "username=" + Heap.getUserCorrente().getUsername();
         URLHelper.invokeURL(this, url, new ResponseHandler() {
@@ -439,7 +473,6 @@ Log.e("JSON", response);
             }
         });
     }
-
 
 
 }

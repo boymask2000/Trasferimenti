@@ -1,6 +1,8 @@
 package com.posvert.trasferimenti.net;
 
 import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
 
 import com.posvert.trasferimenti.LoginFBActivity;
 import com.posvert.trasferimenti.common.ResponseHandler;
@@ -37,5 +39,17 @@ public class UtentiHelper {
         String url = URLHelper.build(act, "getUtenteByUsername");
         url += "username=" + username;
         return url;
+    }
+    public static boolean isUserOnline(Context ctx)
+    {
+        try
+        {
+            ConnectivityManager cm = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+            return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 }

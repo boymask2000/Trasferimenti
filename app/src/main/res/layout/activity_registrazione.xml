@@ -21,7 +21,13 @@
 
         android:background="@android:color/darker_gray"
         android:orientation="vertical">
+        <TextView
+            android:text="Registrazione nuovo utente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:gravity="center"
+            tools:textSize="18sp" />
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

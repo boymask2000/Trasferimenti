@@ -45,6 +45,15 @@
 
 
     </LinearLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
     <TextView
         android:text="I miei annunci"
         android:layout_width="match_parent"
@@ -83,6 +92,18 @@
         android:text="Cerca proposte"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/vedimessaggi"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lista"
+        android:layout_marginTop="16dp"
+        android:text="Messaggi"
+        android:textStyle="bold" />
+
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -99,6 +120,6 @@
 
 
     </LinearLayout>
-
-
+</LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

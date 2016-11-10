@@ -153,5 +153,14 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
             }
         });
 //---------------------
+        Button messaggio = (Button) findViewById(R.id.messaggio);
+        messaggio.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent act = new Intent(VisualizzaMatchActivity.this, InviaMessaggioOffineActivity.class);
+                String pkg = getPackageName();
+                act.putExtra(pkg + "USERNAME", utente.getUsername());
+                startActivity(act);
+            }
+        });
     }
 }

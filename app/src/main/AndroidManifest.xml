@@ -56,7 +56,8 @@
         <activity android:name=".GestioneProfiloActivity" />
         <activity android:name=".InviaCommentoActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".LoginFBActivity"
+        <activity
+            android:name=".LoginFBActivity"
             android:label="TrasferimentiPA">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,6 +86,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".InviaMessaggioOffineActivity" />
+        <activity android:name=".GestioneMessaggiOfflineActivity"></activity>
     </application>
 
 </manifest>

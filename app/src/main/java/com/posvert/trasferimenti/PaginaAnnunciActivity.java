@@ -113,6 +113,23 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                 startActivityForResult(act, 2);
             }
         });
+
+
+        Button gestioneMessaggi = (Button) findViewById(R.id.vedimessaggi);
+        gestioneMessaggi.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent act = new Intent(PaginaAnnunciActivity.this, GestioneMessaggiOfflineActivity.class);
+
+                startActivity(act);
+
+            }
+        });
+
+
+
+
+
         loadData();
 
 

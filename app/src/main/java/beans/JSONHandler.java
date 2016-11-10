@@ -65,6 +65,27 @@ public class JSONHandler {
         return u;
 
     }
+    public static MessaggioOffline parseMessaggioOffline(JSONObject obj) throws JSONException {
+        MessaggioOffline u = new MessaggioOffline();
+        u.setTesto(obj.getString("testo"));
+        u.setMittente(clean(obj.getString("mittente")));
+        u.setDestinatario(clean(obj.getString("destinatario")));
+
+        u.setId(obj.getInt("id"));
+
+
+   /*     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsed = null;
+        try {
+            parsed = format.parse(obj.getString("data"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
+        u.setData(sqlDate);*/
+        return u;
+
+    }
 
     private static String clean(String s) {
         if (s == null || s.equals("null")){

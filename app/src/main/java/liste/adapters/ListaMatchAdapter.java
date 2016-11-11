@@ -1,4 +1,4 @@
-package liste;
+package liste.adapters;
 
 import android.app.Activity;
 import android.view.View;
@@ -6,21 +6,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.posvert.trasferimenti.R;
-import com.posvert.trasferimenti.chat.ChatRequest;
 
 import java.util.List;
 
 import beans.Annuncio;
+import liste.wrappers.AnnunciRowWrapper;
+import liste.wrappers.MatchRowWrapper;
 
 /**
  * Created by giovanni on 21/10/16.
  */
 
-public class ListaChatAdapter extends BaseAdapter {
+public class ListaMatchAdapter extends BaseAdapter {
     private final Activity act;
-    private final List<ChatRequest> lista;
+    private final List<Annuncio> lista;
 
-    public ListaChatAdapter(Activity act, List<ChatRequest> ll ){
+    public ListaMatchAdapter(Activity act, List<Annuncio> ll ){
         this.act=act;
         this.lista=ll;
     }
@@ -41,19 +42,19 @@ public class ListaChatAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ChatRowWrapper wrapper;
+        MatchRowWrapper wrapper;
         if (convertView == null)
         {
             convertView = act.getLayoutInflater().inflate(
-                    R.layout.listachatrow, null);
-            wrapper = new ChatRowWrapper(convertView);
+                    R.layout.row_listamatch, null);
+            wrapper = new MatchRowWrapper(convertView);
             convertView.setTag(wrapper);
         }
         else
         {
-            wrapper = (ChatRowWrapper) convertView.getTag();
+            wrapper = (MatchRowWrapper) convertView.getTag();
         }
-        ChatRequest annuncio = (ChatRequest) getItem(position);
+        Annuncio annuncio = (Annuncio) getItem(position);
         wrapper.populate(annuncio);
 
         return convertView;

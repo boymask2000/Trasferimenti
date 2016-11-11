@@ -82,10 +82,10 @@ public class GestioneProfiloActivity extends AppCompatActivity {
                     @Override
                     public void parseResponse(String response) {
                         Log.e("QQQ", response);
-                        Snackbar.make(findViewById(R.id.esci), "ok",
+                        Snackbar.make(findViewById(R.id.esci), "Modifica eseguita",
                                 Snackbar.LENGTH_LONG)
                                 .show();
-                        finish();
+
                     }
 
                     @Override

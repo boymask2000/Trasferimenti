@@ -46,7 +46,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
 import com.posvert.trasferimenti.common.URLHelper;
-import com.posvert.trasferimenti.net.UtentiHelper;
+import com.posvert.trasferimenti.helper.UtentiHelper;
+
 
 import org.json.JSONObject;
 
@@ -245,7 +246,7 @@ public class LoginFBActivity extends AppCompatActivity {
 
     private void getToken() {
 
-
+    //    tok = AccessToken.getCurrentAccessToken();
         String vv = FirebaseInstanceId.getInstance().getToken();
         Log.e("FACEB1", vv);
         MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);

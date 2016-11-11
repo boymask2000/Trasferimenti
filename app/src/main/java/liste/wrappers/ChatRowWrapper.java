@@ -1,4 +1,4 @@
-package liste;
+package liste.wrappers;
 
 import android.view.View;
 import android.widget.TextView;

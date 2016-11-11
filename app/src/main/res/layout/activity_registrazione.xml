@@ -36,7 +36,7 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="* Username"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
 
@@ -50,7 +50,7 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:hint="* Password"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
 
@@ -64,7 +64,7 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="* Email"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
 
@@ -79,7 +79,7 @@
                 android:id="@+id/telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Telefono"
+                android:hint="* Telefono"
                 android:maxLines="1"
                 android:textColor="#FFFFFF" />
 

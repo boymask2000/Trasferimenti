@@ -21,7 +21,7 @@ import java.util.List;
 
 import beans.Annuncio;
 import beans.JSONHandler;
-import liste.ListaAnnunciAdapter;
+import liste.adapters.ListaMatchAdapter;
 
 public class PaginaMatchActivity extends AppCompatActivity {
     private ListView mylist;
@@ -67,7 +67,7 @@ public class PaginaMatchActivity extends AppCompatActivity {
                         lista.add(u);
                     }
 
-                    mylist.setAdapter(new ListaAnnunciAdapter(PaginaMatchActivity.this, lista));
+                    mylist.setAdapter(new ListaMatchAdapter(PaginaMatchActivity.this, lista));
 
 
                 } catch (Exception e) {

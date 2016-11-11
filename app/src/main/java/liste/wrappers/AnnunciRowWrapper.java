@@ -1,4 +1,4 @@
-package liste;
+package liste.wrappers;
 
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +20,7 @@ public class AnnunciRowWrapper {
 
     private TextView regioneTextView;
 
-    private TextView usernameTextView;
+    private TextView comuneTextView;
 
     public AnnunciRowWrapper(View convertView)
     {
@@ -30,8 +30,8 @@ public class AnnunciRowWrapper {
                 convertView.findViewById(R.id.data);
         regioneTextView = (TextView)
                 convertView.findViewById(R.id.regione);
-        usernameTextView = (TextView)
-                convertView.findViewById(R.id.username);
+        comuneTextView = (TextView)
+                convertView.findViewById(R.id.comune);
     }
 
     public void populate(Annuncio annuncio)
@@ -39,7 +39,7 @@ public class AnnunciRowWrapper {
         codiceTextView.setText(""+annuncio.getData());
         provinciaTextView.setText(""+(annuncio.getProvincia()==null?"":annuncio.getProvincia()));
         regioneTextView.setText(""+annuncio.getRegione());
-        usernameTextView.setText(""+annuncio.getUsername());
+        comuneTextView.setText(""+annuncio.getComune());
 
     }
 

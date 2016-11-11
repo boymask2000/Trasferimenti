@@ -1,11 +1,10 @@
 package com.posvert.trasferimenti;
 
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,41 +14,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 import com.posvert.trasferimenti.chat.ChatRequest;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
+import com.posvert.trasferimenti.common.URLBuilder;
 import com.posvert.trasferimenti.common.URLHelper;
-import com.posvert.trasferimenti.net.NetUtil;
 
 import org.json.JSONArray;
 
 import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.SocketException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import beans.Annuncio;
 import beans.JSONHandler;
-import liste.ListaAnnunciAdapter;
-import liste.ListaChatAdapter;
+import liste.adapters.ListaAnnunciAdapter;
+import liste.adapters.ListaChatAdapter;
 
 public class PaginaAnnunciActivity extends AppCompatActivity {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
+
+
     private List<ChatRequest> listaChat = new ArrayList<>();
     private ListaAnnunciAdapter listaAnnunciAdapter = null;
     private ListaChatAdapter listaChatAdapter = null;
@@ -125,9 +118,6 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
         loadData();
@@ -216,16 +206,70 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     }
 
     private String buildUrl() {
-        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");
+
+/*        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");
 
 
         try {
             url += "username=" + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }
+        }*/
+
+        URLBuilder builder = new URLBuilder(this, "cercaAnnunciCreatiDaUtente", null);
+        builder.addParameter("username", Heap.getUserCorrente().getUsername());
+        String url = builder.getUrl();
 
 
         return url;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.e("WW", "onDestroy");
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        Log.e("WW", "onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        LoginManager.getInstance().logOut();
+/*        new AlertDialog.Builder(this)
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();*/
+        Log.e("WW", "onStop");
+        super.onStop();
+    }
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Vuoi uscire ?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PaginaAnnunciActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+
+
     }
 }

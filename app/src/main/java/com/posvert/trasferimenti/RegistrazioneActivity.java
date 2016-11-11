@@ -143,21 +143,22 @@ public class RegistrazioneActivity extends Activity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                System.out.println(response);
-                                Log.e("QQQQQQQQQQ", response);
+
                                 if (response.equalsIgnoreCase("duplicated"))
                                     Snackbar.make(findViewById(R.id.registra), "Utente già registrato",
                                             Snackbar.LENGTH_SHORT)
                                             .show();
                                 if (response.equalsIgnoreCase("ok")) {
-                                    finish();
+                                    Snackbar.make(findViewById(R.id.registra), "Registrazione eseguita",
+                                            Snackbar.LENGTH_SHORT)
+                                            .show();
                                 }
                                 //   Toast.makeText(context, "Utente già registrato", Toast.LENGTH_LONG);
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //        mTextView.setText("That didn't work!");
+
                         System.out.println(error);
                         Log.e("EEEEEEE", error.toString());
                     }

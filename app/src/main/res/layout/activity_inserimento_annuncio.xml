@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:keepScreenOn="true"
                 android:text="Regione"
-                android:textColor="#33b5e5" />
+                />
 
             <Spinner
                 android:id="@+id/spinnerRegioni"
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:keepScreenOn="true"
                 android:text="Provincia"
-                android:textColor="#33b5e5" />
+               />
 
             <Spinner
                 android:id="@+id/spinnerProvince"
@@ -90,7 +90,7 @@
                 android:gravity="center"
                 android:keepScreenOn="true"
                 android:text="Comune"
-                android:textColor="#33b5e5" />
+               />
 
             <Spinner
                 android:id="@+id/spinnerComuni"
@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Ente"
                 android:maxLines="1"
-                android:textColor="#FFFFFF" />
+                 />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Livello"
                 android:maxLines="1"
-                android:textColor="#FFFFFF" />
+             />
 
         </android.support.design.widget.TextInputLayout>
 

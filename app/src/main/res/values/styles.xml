@@ -6,10 +6,10 @@
         <color name="pitch_black">#FF000000</color>
 
         <style name="TrasTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-            <item name="android:background">@color/white_opaque</item>
+            <item name="android:background">#ccffff</item>
             <item name="android:windowBackground">@color/white_opaque</item>
-            <item name="android:colorBackground">#FAAFFc</item>
-            <item name="android:colorForeground">#0099cc</item>
+            <item name="android:colorBackground">#b3ffb3</item>
+            <item name="android:colorForeground">#000000</item>
 
         </style>
 

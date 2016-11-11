@@ -16,6 +16,9 @@ import com.posvert.trasferimenti.common.URLHelper;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import beans.Annuncio;
 import beans.JSONHandler;
 import beans.Utente;
@@ -66,7 +69,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
     }
 
 
-    private void fillSecondary(String username) {
+    private void fillSecondary(final String username) {
         URLHelper.invokeURL(this, buildUrlUser(username), new ResponseHandler() {
             @Override
             public void parseResponse(String response) {
@@ -79,6 +82,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                     setVal(R.id.scomune, utente.getComune());
                     setVal(R.id.sente, utente.getEnte());
                     setVal(R.id.slivello, utente.getLivello());
+                    setVal(R.id.autoreannuncio, username);
 
 
                 } catch (Exception e) {
@@ -91,7 +95,11 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
 
     private String buildUrlUser(String username) {
         String url = URLHelper.build(this, "getUtenteByUsername");
-        url += "username=" + username;
+        try {
+            url += "username="+ URLEncoder.encode(username, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         return url;
     }
 
@@ -125,7 +133,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
             }
         });
 //---------------------
-        Button contatta = (Button) findViewById(R.id.contatta);
+        /*Button contatta = (Button) findViewById(R.id.contatta);
 
         contatta.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -141,7 +149,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                 });
 
             }
-        });
+        });*/
 //---------------------
         Button chat = (Button) findViewById(R.id.chat);
         chat.setOnClickListener(new View.OnClickListener() {

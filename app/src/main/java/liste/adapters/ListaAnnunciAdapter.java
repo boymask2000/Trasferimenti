@@ -1,4 +1,4 @@
-package liste;
+package liste.adapters;
 
 import android.app.Activity;
 import android.view.View;
@@ -10,6 +10,7 @@ import com.posvert.trasferimenti.R;
 import java.util.List;
 
 import beans.Annuncio;
+import liste.wrappers.AnnunciRowWrapper;
 
 /**
  * Created by giovanni on 21/10/16.
@@ -44,7 +45,7 @@ public class ListaAnnunciAdapter extends BaseAdapter {
         if (convertView == null)
         {
             convertView = act.getLayoutInflater().inflate(
-                    R.layout.row, null);
+                    R.layout.row_annunci, null);
             wrapper = new AnnunciRowWrapper(convertView);
             convertView.setTag(wrapper);
         }

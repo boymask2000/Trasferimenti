@@ -1,5 +1,6 @@
 package beans;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class MessaggioOffline {
@@ -7,7 +8,7 @@ public class MessaggioOffline {
 	private String destinatario;
 	private String mittente;
 	private String testo;
-	private Timestamp data;
+	private Date data;
 	public int getId() {
 		return id;
 	}
@@ -32,10 +33,10 @@ public class MessaggioOffline {
 	public void setTesto(String testo) {
 		this.testo = testo;
 	}
-	public Timestamp getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(Timestamp data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 }

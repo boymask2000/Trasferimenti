@@ -4,19 +4,20 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <GridLayout
+    <LinearLayout
 
         style="?metaButtonBarStyle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:useDefaultMargins="true"
-        android:columnCount="3"
+
         android:orientation="horizontal">
 
         <LinearLayout
+            android:layout_weight="1"
             android:layout_gravity="fill_horizontal"
             style="?metaButtonBarStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -44,15 +45,16 @@
         </LinearLayout>
 
         <TextView
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:id="@+id/data"
             android:text="uuuu"
-            android:layout_width="fill_parent"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
 
 
             android:textSize="16sp" />
-    </GridLayout>
+    </LinearLayout>
 
 
 </RelativeLayout>

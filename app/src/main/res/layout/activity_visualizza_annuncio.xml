@@ -10,52 +10,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.posvert.trasferimenti.VisualizzaAnnuncioActivity">
 
-    <GridLayout
-
+    <LinearLayout
 
         android:layout_width="fill_parent"
-
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
 
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@android:color/holo_blue_dark"
-        android:columnCount="2"
+
         android:orientation="horizontal">
 
 
-        <include layout="@layout/include_annuncio_p"/>
-
+        <include layout="@layout/include_annuncio_p"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            />
 
         <LinearLayout
-
-
-            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-
             android:background="@android:color/holo_blue_dark"
             android:orientation="vertical">
 
             <Button
                 android:id="@+id/elimina"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="Elimina" />
 
             <Button
                 android:id="@+id/esci"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="Esci" />
-
 
         </LinearLayout>
 
-    </GridLayout>
+    </LinearLayout>
 
 </RelativeLayout>

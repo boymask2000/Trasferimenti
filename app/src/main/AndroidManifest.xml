@@ -89,6 +89,14 @@
 
         <activity android:name=".InviaMessaggioOffineActivity" />
         <activity android:name=".GestioneMessaggiOfflineActivity"></activity>
+
+        <receiver android:name=".MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="CUSTOM_INTENT">
+                </action>
+            </intent-filter>
+
+        </receiver>
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package com.posvert.trasferimenti;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.design.widget.Snackbar;
@@ -83,6 +85,8 @@ public class LoginFBActivity extends AppCompatActivity {
         AppEventsLogger.activateApp(this);
 
         setContentView(R.layout.activity_login_fb);
+
+        showVersion();
 
 
         if (!UtentiHelper.isUserOnline(this)) {
@@ -242,6 +246,18 @@ public class LoginFBActivity extends AppCompatActivity {
         getNumUtenti();
 
 
+    }
+
+    private void showVersion(){
+        try {
+            PackageInfo packageinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String ss =packageinfo.versionName.toString();
+
+            TextView ver = (TextView) findViewById(R.id.versione);
+            ver.setText("Ver "+ss);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getToken() {

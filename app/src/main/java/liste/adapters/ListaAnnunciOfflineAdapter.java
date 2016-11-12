@@ -36,8 +36,10 @@ public class ListaAnnunciOfflineAdapter extends ArrayAdapter<MessaggioOffline> {
         this.context = context;
         this.modelItems = resource;
     }
-   static  Map<String, Utente> map = new HashMap<>();
-    static  Set<String> prenota = new HashSet<>();
+
+    static Map<String, Utente> map = new HashMap<>();
+    static Set<String> prenota = new HashSet<>();
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -46,15 +48,17 @@ public class ListaAnnunciOfflineAdapter extends ArrayAdapter<MessaggioOffline> {
 
         convertView = inflater.inflate(R.layout.row_annuncioffline, parent, false);
         TextView name = (TextView) convertView.findViewById(R.id.textView1);
+        TextView data = (TextView) convertView.findViewById(R.id.data);
         //   final  CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
         final String mittente = modelItems.get(position).getMittente();
         name.setText(mittente);
+        data.setText(""+modelItems.get(position).getData());
 
 
         Utente u = map.get(mittente);
-        if( u==null) {
-            if( prenota.contains(mittente))return convertView ;
-prenota.add(mittente);
+        if (u == null) {
+            if (prenota.contains(mittente)) return convertView;
+            prenota.add(mittente);
       /*      try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
@@ -64,14 +68,15 @@ prenota.add(mittente);
             UtentiHelper.getUtenteByUsername(context, mittente, new IExecutor() {
                 @Override
                 public void exec(Object obj) {
-                    Utente u = (Utente) obj;map.put(mittente, u);
+                    Utente u = (Utente) obj;
+                    map.put(mittente, u);
                     if (u.getFbUserid() != null) {
                         ProfilePictureView profilePictureView = (ProfilePictureView) finalConvertView.findViewById(R.id.foto);
                         profilePictureView.setProfileId(u.getFbUserid());
                     }
                 }
             });
-        }else{
+        } else {
             if (u.getFbUserid() != null) {
                 ProfilePictureView profilePictureView = (ProfilePictureView) convertView.findViewById(R.id.foto);
                 profilePictureView.setProfileId(u.getFbUserid());

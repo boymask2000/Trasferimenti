@@ -109,7 +109,7 @@ public class ChatActivity extends AppCompatActivity {
                 try {
                     JSONObject obj = new JSONObject(message);
                     String msg = obj.getString("message");
-                    int dp = msg.indexOf(":");
+                    int dp = msg.indexOf(":"); if(dp==-1)return;
                     Log.e("MSG", msg);
                     String code = msg.substring(0, dp);
                     String testo = msg.substring(dp + 1);
@@ -178,6 +178,11 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        client.disconnect();
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

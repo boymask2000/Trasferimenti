@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +54,12 @@ public class URLHelper {
         if (server == null) server = Config.getServerAddress(context);
         if (prefWS == null) prefWS = Config.getVal(context, "webSocket_prefix");
 
-        String url = "ws://" + server + prefWS + Heap.getUserCorrente().getUsername() ;
+        String url =null;
+        try {
+             url = "ws://" + server + prefWS + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
+        }catch(Exception e ){
+            e.printStackTrace();
+        }
         Log.e("WS", url);
         return url;
     }

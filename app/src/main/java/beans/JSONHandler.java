@@ -22,7 +22,8 @@ public class JSONHandler {
         u.setDestinatario(obj.getString("destinatario"));
         u.setTesto(obj.getString("testo"));
         u.setAzione(obj.getInt("azione"));
-        return u;}
+        return u;
+    }
     public static Utente parseUtenteJSON(JSONObject obj) throws JSONException {
         Utente u = new Utente();
         u.setEmail(obj.getString("email"));
@@ -74,15 +75,18 @@ public class JSONHandler {
         u.setId(obj.getInt("id"));
 
 
-   /*     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date parsed = null;
         try {
-            parsed = format.parse(obj.getString("data"));
-        } catch (ParseException e) {
+            Long ld = Long.parseLong(obj.getString("data"));
+            java.sql.Date sqlDate = new java.sql.Date(ld);
+            u.setData(sqlDate);
+        //    parsed = format.parse(obj.getString("data"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
-        u.setData(sqlDate);*/
+      //  java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
+       // u.setData(sqlDate);
         return u;
 
     }

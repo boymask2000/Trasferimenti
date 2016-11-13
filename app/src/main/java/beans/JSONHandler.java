@@ -16,6 +16,24 @@ import java.text.SimpleDateFormat;
  */
 
 public class JSONHandler {
+    public static Messaggio jsonToMessaggioChat(JSONObject obj) throws JSONException {
+        Messaggio u = new Messaggio();
+        u.setMittente(obj.getString("mittente"));
+        u.setDestinatario(obj.getString("destinatario"));
+        u.setTesto(obj.getString("testo"));
+        u.setAzione(obj.getInt("azione"));
+        return u;
+    }
+
+    public static String messaggioChatToJson(Messaggio m) throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("mittente", m.getMittente());
+        json.put("destinatario", m.getDestinatario());
+        json.put("testo", m.getTesto());
+        json.put("azione", m.getAzione());
+
+        return json.toString();
+    }
     public static Messaggio parseMessaggioJSON(JSONObject obj) throws JSONException {
         Messaggio u = new Messaggio();
         u.setMittente(obj.getString("mittente"));

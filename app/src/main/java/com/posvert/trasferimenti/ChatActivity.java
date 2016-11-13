@@ -62,6 +62,8 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new MessagesListAdapter(this, listMessages);
         listViewMessages.setAdapter(adapter);
 
+        gretingd();
+
         btnSend.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -86,7 +88,7 @@ public class ChatActivity extends AppCompatActivity {
             new intBasicNameValuePair("Cookie", "session=abcd")
     );*/
 
-        client = new WebSocketClient(URI.create(URLHelper.buildWSCall(this)), new WebSocketClient.Listener() {
+        client = new WebSocketClient(URI.create(URLHelper.buildWSCall(this,utenteAnnuncio)), new WebSocketClient.Listener() {
             @Override
             public void onConnect() {
                 Log.e("WS", "Connected!");
@@ -102,23 +104,22 @@ public class ChatActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onMessage(String message) {
-                Log.e("WS", String.format("Got string message! %s", message));
+            public void onMessage(String jsonMessage) {
+                Log.e("WS", String.format("Got string message! %s", jsonMessage));
 
 
                 try {
-                    JSONObject obj = new JSONObject(message);
-                    String msg = obj.getString("message");
-                    int dp = msg.indexOf(":"); if(dp==-1)return;
-                    Log.e("MSG", msg);
-                    String code = msg.substring(0, dp);
-                    String testo = msg.substring(dp + 1);
+                    JSONObject jo = new JSONObject(jsonMessage);
+                    Messaggio msg = JSONHandler.jsonToMessaggioChat(jo);
 
-                    if (code.equals("MSG")) {
 
-                        Messaggio m = new Messaggio();
-                        m.setTesto(testo);
-                        appendMessage(m);
+                    int azione = msg.getAzione();
+                    String testo = msg.getTesto();
+
+                    if (azione == Messaggio.SEND_MSG) {
+
+
+                        appendMessage(msg);
                     }
 
                 } catch (JSONException e) {
@@ -148,6 +149,12 @@ public class ChatActivity extends AppCompatActivity {
 
 
         // client.send(new byte[] { 0xDE, 0xAD, 0xBE, 0xEF });
+    }
+    private void gretingd(){
+        Messaggio m = new Messaggio();
+        m.setMittente("TrasferimentiPA");
+        m.setTesto("Stai chattando con "+utenteAnnuncio);
+        appendMessage(m);
     }
 
     private void appendMessage(final Messaggio m) {
@@ -181,14 +188,16 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        client.disconnect();
+    //    client.disconnect();
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        client.disconnect();
+  //      client.disconnect();
     }
-    public static Bitmap getFacebookProfilePicture(String userID)  throws Exception {
+
+    public static Bitmap getFacebookProfilePicture(String userID) throws Exception {
         URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
         Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
 

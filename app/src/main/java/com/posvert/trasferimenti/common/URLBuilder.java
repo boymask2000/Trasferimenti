@@ -17,7 +17,7 @@ public class URLBuilder {
     private int numParams = 0;
 
 
-    public URLBuilder(Context context, String restKey, String prefix) {
+    public URLBuilder(Context context, String restKey, String prefix, String protocol) {
         if (server == null) server = Config.getServerAddress(context);
         String pref;
 
@@ -26,7 +26,10 @@ public class URLBuilder {
         else
             pref = Config.getVal(context, "url_prefix_" + prefix);
 
-        url= "http://" + server + pref + restKey ;
+        url= protocol+"://" + server + pref + restKey ;
+    }
+    public URLBuilder(Context context, String restKey, String prefix) {
+        this(context, restKey, prefix, "http");
     }
 
     public URLBuilder(String url) {

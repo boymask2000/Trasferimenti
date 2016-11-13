@@ -1,6 +1,8 @@
 package com.posvert.trasferimenti;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
+import com.posvert.trasferimenti.common.URLBuilder;
 import com.posvert.trasferimenti.common.URLHelper;
 
 import org.json.JSONObject;
@@ -132,29 +135,14 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                 finish();
             }
         });
-//---------------------
-        /*Button contatta = (Button) findViewById(R.id.contatta);
 
-        contatta.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                URLHelper.invokeURL(VisualizzaMatchActivity.this, buildUrlContatto(Heap.getUserCorrente().getUsername(),utente.getUsername(), annuncio.getId()), new ResponseHandler() {
-                    @Override
-                    public void parseResponse(String response) {
-                        try {
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-            }
-        });*/
 //---------------------
         Button chat = (Button) findViewById(R.id.chat);
         chat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent act = new Intent(VisualizzaMatchActivity.this, ChatActivity.class);
+             //   startActivity(new Intent(VisualizzaMatchActivity.this, ChatTabActivity.class));
+              Intent act = new Intent(VisualizzaMatchActivity.this, ChatActivity.class);
+
                 String pkg = getPackageName();
                 act.putExtra(pkg + "USERNAME", utente.getUsername());
                 startActivity(act);
@@ -170,5 +158,43 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                 startActivity(act);
             }
         });
+
+        Button nascondi = (Button) findViewById(R.id.nascondi);
+
+        nascondi.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaMatchActivity.this);
+
+// 2. Chain together various setter methods to set the dialog characteristics
+                builder.setMessage("Se procedi non vedrai più questo annuncio. Sei sicuro ?")
+                        .setTitle("Attenzione!");
+                builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                       URLHelper.invokeURL(VisualizzaMatchActivity.this, buildUrlNascondi(), new ResponseHandler() {
+                           @Override
+                           public void parseResponse(String response) {
+
+                           }
+                       });
+                    }
+
+
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+    }
+    private String buildUrlNascondi() {
+        URLBuilder builder = new URLBuilder(VisualizzaMatchActivity.this, "inserisci","nonvedo");
+        builder.addParameter("idannuncio", ""+id);
+        builder.addParameter("username", Heap.getUserCorrente().getUsername());
+        return builder.getUrl();
     }
 }

@@ -26,8 +26,7 @@
         <include layout="@layout/include_annuncio_p"
             android:layout_weight="1"
             android:layout_width="0px"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_weight="1"

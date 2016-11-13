@@ -31,33 +31,42 @@ public class URLHelper {
         if (pref == null) pref = Config.getVal(context, "url_prefix");
         return "http://" + server + pref + restKey + "?";
     }
+
     public static String build(Context context, String restKey, String prefix) {
         if (server == null) server = Config.getServerAddress(context);
 
-        String pref = Config.getVal(context, "url_prefix_"+prefix);
+        String pref = Config.getVal(context, "url_prefix_" + prefix);
         return "http://" + server + pref + restKey + "?";
     }
+
     public static String buildPOST(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
 
         if (pref == null) pref = Config.getVal(context, "url_prefix");
-        return "http://" + server + pref + restKey ;
+        return "http://" + server + pref + restKey;
     }
+
     public static String buildPOST(Context context, String restKey, String prefix) {
         if (server == null) server = Config.getServerAddress(context);
 
-        String pref = Config.getVal(context, "url_prefix_"+prefix);
-        return "http://" + server + pref + restKey ;
+        String pref = Config.getVal(context, "url_prefix_" + prefix);
+        return "http://" + server + pref + restKey;
     }
 
-    public static String buildWSCall( Context context){
+    public static String buildWSCall(Context context, String utenteAnnuncio) {
         if (server == null) server = Config.getServerAddress(context);
         if (prefWS == null) prefWS = Config.getVal(context, "webSocket_prefix");
 
-        String url =null;
+
+        String url = null;
         try {
-             url = "ws://" + server + prefWS + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
-        }catch(Exception e ){
+            url = "ws://" + server + prefWS;
+            URLBuilder builder = new URLBuilder(url);
+            builder.addParameter("name", Heap.getUserCorrente().getUsername());
+            builder.addParameter("dest", utenteAnnuncio);
+            url=builder.getUrl();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
         Log.e("WS", url);

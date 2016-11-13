@@ -88,25 +88,24 @@
 
         <Button
             android:id="@+id/chat"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="16dp"
-
             android:text="Chat"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/messaggio"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="16dp"
-
-            android:text="Messaggio"
-        />
+            android:text="Messaggio"/>
+        <Button
+            android:id="@+id/nascondi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nascondi"/>
 
         <Button
             android:id="@+id/esci_vismatch"

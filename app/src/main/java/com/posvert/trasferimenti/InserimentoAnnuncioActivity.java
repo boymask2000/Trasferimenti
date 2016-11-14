@@ -55,7 +55,7 @@ public class InserimentoAnnuncioActivity extends Activity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                System.out.println(response);
+
                                 Log.e("QQQQQQQQQQ", response);
                                 finish();
                                 // Display the first 500 characters of the response string.
@@ -65,7 +65,7 @@ public class InserimentoAnnuncioActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //        mTextView.setText("That didn't work!");
-                        System.out.println(error);
+
                         Log.e("EEEEEEE", error.toString());
                     }
                 });

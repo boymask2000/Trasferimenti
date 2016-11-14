@@ -59,7 +59,7 @@ public class VisualizzaAnnuncioActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //        mTextView.setText("That didn't work!");
-                System.out.println(error);
+
                 Log.e("EEEEEEE", error.toString());
             }
         });
@@ -102,7 +102,7 @@ public class VisualizzaAnnuncioActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //        mTextView.setText("That didn't work!");
-                        System.out.println(error);
+
                         Log.e("EEEEEEE", error.toString());
                     }
                 });

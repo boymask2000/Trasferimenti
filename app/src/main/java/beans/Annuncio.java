@@ -8,6 +8,7 @@ public class Annuncio {
 	private String tipo;
 	private String note;
 
+
 	private String email;
 	private String regione;
 	private String provincia;
@@ -28,6 +29,9 @@ public class Annuncio {
 	}
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public String getEmail() {
+		return email;
 	}
 
 	public void setEmail(String email) {

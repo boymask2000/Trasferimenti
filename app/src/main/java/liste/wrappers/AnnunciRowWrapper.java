@@ -1,7 +1,6 @@
 package liste.wrappers;
 
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.posvert.trasferimenti.R;

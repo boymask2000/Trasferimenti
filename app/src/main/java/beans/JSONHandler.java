@@ -1,13 +1,10 @@
 package beans;
 
-import android.util.Log;
-
 import com.posvert.trasferimenti.chat.Messaggio;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -93,8 +90,8 @@ public class JSONHandler {
         u.setId(obj.getInt("id"));
 
 
-       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date parsed = null;
+      // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+      //  java.util.Date parsed = null;
         try {
             Long ld = Long.parseLong(obj.getString("data"));
             java.sql.Date sqlDate = new java.sql.Date(ld);

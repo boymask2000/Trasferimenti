@@ -36,7 +36,7 @@ import beans.Utente;
 
 public class ChatActivity extends AppCompatActivity {
     private WebSocketClient client = null;
-    private int currOP = 0;
+
     private ListView listViewMessages;
     private List<Messaggio> listMessages;
     private MessagesListAdapter adapter;
@@ -94,7 +94,7 @@ public class ChatActivity extends AppCompatActivity {
                 Log.e("WS", "Connected!");
                 Gson gson = new Gson();
                 Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), utenteAnnuncio);
-                currOP = Messaggio.ASK_FOR_CHAT;
+             //   currOP = Messaggio.ASK_FOR_CHAT;
                 u.setOperation(Messaggio.ASK_FOR_CHAT);
 
                 String msg = gson.toJson(u);
@@ -114,7 +114,7 @@ public class ChatActivity extends AppCompatActivity {
 
 
                     int azione = msg.getAzione();
-                    String testo = msg.getTesto();
+                //    String testo = msg.getTesto();
 
                     if (azione == Messaggio.SEND_MSG) {
 

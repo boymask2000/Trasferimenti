@@ -6,8 +6,6 @@ import android.widget.TextView;
 import com.posvert.trasferimenti.R;
 import com.posvert.trasferimenti.chat.ChatRequest;
 
-import beans.Annuncio;
-
 /**
  * Created by giovanni on 21/10/16.
  */

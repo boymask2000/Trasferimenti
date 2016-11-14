@@ -158,7 +158,7 @@ public class RegistrazioneActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        System.out.println(error);
+
                         Log.e("EEEEEEE", error.toString());
                     }
                 });

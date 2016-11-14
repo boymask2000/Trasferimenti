@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ import com.facebook.login.widget.LoginButton;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandler;
+import com.posvert.trasferimenti.common.SnackMsg;
 import com.posvert.trasferimenti.common.URLHelper;
 import com.posvert.trasferimenti.helper.UtentiHelper;
 
@@ -414,9 +416,11 @@ public class LoginFBActivity extends AppCompatActivity {
                         if (response == null || !response.equalsIgnoreCase("1")) {
 
 
-                            Snackbar.make(findViewById(R.id.bottone1), "Username o passowrd errata",
+                        /*    Snackbar.make(findViewById(R.id.bottone1), "Username o passowrd errata",
                                     Snackbar.LENGTH_SHORT)
-                                    .show();
+                                    .show()*/;
+                            SnackMsg.showErrMsg(findViewById(R.id.bottone1), "Username o password errata");
+
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -436,9 +440,11 @@ public class LoginFBActivity extends AppCompatActivity {
                 } else if (error instanceof TimeoutError) {
                     message = "Connection TimeOut! Please check your internet connection.";
                 }
-                Snackbar.make(findViewById(R.id.bottone1), message,
+   /*             Snackbar.make(findViewById(R.id.bottone1), message,
                         Snackbar.LENGTH_LONG)
-                        .show();
+                        .show();*/
+                SnackMsg.showErrMsg(findViewById(R.id.bottone1), message);
+
             }
         });
 // Add the request to the RequestQueue.

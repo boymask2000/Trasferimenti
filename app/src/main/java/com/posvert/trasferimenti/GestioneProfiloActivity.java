@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.posvert.trasferimenti.common.Heap;
 import com.posvert.trasferimenti.common.ResponseHandlerPOST;
+import com.posvert.trasferimenti.common.SnackMsg;
 import com.posvert.trasferimenti.common.SpinnerInitializer;
 import com.posvert.trasferimenti.common.URLHelper;
 
@@ -82,9 +83,10 @@ public class GestioneProfiloActivity extends AppCompatActivity {
                     @Override
                     public void parseResponse(String response) {
                         Log.e("QQQ", response);
-                        Snackbar.make(findViewById(R.id.esci), "Modifica eseguita",
+                        SnackMsg.showInfoMsg(findViewById(R.id.esci), "Modifica eseguita");
+                     /*   Snackbar.make(findViewById(R.id.esci), "Modifica eseguita",
                                 Snackbar.LENGTH_LONG)
-                                .show();
+                                .show();*/
 
                     }
 
@@ -144,35 +146,32 @@ public class GestioneProfiloActivity extends AppCompatActivity {
 
     private int getIndex(Spinner spinner, String myString) {
         int index = 0;
-Log.e("AAA", ""+myString);
+
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
                 index = i;Log.e("AAA1", ""+index);
                 break;
             }
         }
-        Log.e("AAA2", ""+index);
+
         return index;
     }
 
     private boolean campiObbligatoriOK() {
 
         if (isEmpty(getVal(R.id.password))) {
-            Snackbar.make(findViewById(R.id.esci), "Password è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.esci), "Password è obbligatorio");
+
             return false;
         }
         if (isEmpty(getVal(R.id.email))) {
-            Snackbar.make(findViewById(R.id.esci), "Email è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.esci), "Email è obbligatorio");
+
             return false;
         }
         if (isEmpty(getVal(R.id.telefono))) {
-            Snackbar.make(findViewById(R.id.esci), "Telefono è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.esci), "Telefono è obbligatorio");
+
             return false;
         }
         return true;

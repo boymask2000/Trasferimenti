@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.posvert.trasferimenti.common.Config;
+import com.posvert.trasferimenti.common.SnackMsg;
 import com.posvert.trasferimenti.common.SpinnerInitializer;
 import com.posvert.trasferimenti.common.URLHelper;
 
@@ -145,13 +146,11 @@ public class RegistrazioneActivity extends Activity {
                             public void onResponse(String response) {
 
                                 if (response.equalsIgnoreCase("duplicated"))
-                                    Snackbar.make(findViewById(R.id.registra), "Utente già registrato",
-                                            Snackbar.LENGTH_SHORT)
-                                            .show();
+                                    SnackMsg.showErrMsg(findViewById(R.id.registra), "Utente già registrato");
+
                                 if (response.equalsIgnoreCase("ok")) {
-                                    Snackbar.make(findViewById(R.id.registra), "Registrazione eseguita",
-                                            Snackbar.LENGTH_SHORT)
-                                            .show();
+                                    SnackMsg.showInfoMsg(findViewById(R.id.registra), "Registrazione eseguita");
+
                                 }
                                 //   Toast.makeText(context, "Utente già registrato", Toast.LENGTH_LONG);
                             }
@@ -176,27 +175,23 @@ public class RegistrazioneActivity extends Activity {
 
     private boolean campiObbligatoriOK() {
         if (isEmpty(getVal(R.id.username))) {
-            Snackbar.make(findViewById(R.id.registra), "Username è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.registra), "Username è obbligatorio");
+
             return false;
         }
         if (isEmpty(getVal(R.id.password))) {
-            Snackbar.make(findViewById(R.id.registra), "Password è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.registra), "Password è obbligatorio");
+
             return false;
         }
         if (isEmpty(getVal(R.id.email))) {
-            Snackbar.make(findViewById(R.id.registra), "Email è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.registra), "Email è obbligatorio");
+
             return false;
         }
         if (isEmpty(getVal(R.id.telefono))) {
-            Snackbar.make(findViewById(R.id.registra), "Telefono è obbligatorio",
-                    Snackbar.LENGTH_LONG)
-                    .show();
+            SnackMsg.showErrMsg(findViewById(R.id.registra), "Telefono è obbligatorio");
+
             return false;
         }
         return true;

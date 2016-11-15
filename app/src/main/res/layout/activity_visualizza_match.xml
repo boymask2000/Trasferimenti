@@ -14,7 +14,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_scrollFlags="scroll"
-    tools:context="com.posvert.trasferimenti.VisualizzaMatchActivity">
+    tools:context="com.posvert.mobility.VisualizzaMatchActivity">
 
     <ScrollView
         android:layout_width="wrap_content"

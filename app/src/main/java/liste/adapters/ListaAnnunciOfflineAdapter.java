@@ -18,9 +18,9 @@ import beans.MessaggioOffline;
 import beans.Utente;
 
 import com.facebook.login.widget.ProfilePictureView;
-import com.posvert.trasferimenti.R;
-import com.posvert.trasferimenti.helper.IExecutor;
-import com.posvert.trasferimenti.helper.UtentiHelper;
+import com.posvert.mobility.R;
+import com.posvert.mobility.helper.IExecutor;
+import com.posvert.mobility.helper.UtentiHelper;
 
 /**
  * Created by giovanni on 10/11/16.

@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.posvert.trasferimenti.R;
+import com.posvert.mobility.R;
 
 import java.util.List;
 

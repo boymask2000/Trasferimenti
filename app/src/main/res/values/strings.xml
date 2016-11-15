@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TrasferimentiPA</string>
+    <string name="app_name">Mobilità dipendenti pubblici</string>
 
     <string name="get_image">Scegli Immagine</string>
     <string name="start">Inizia</string>
@@ -25,5 +25,5 @@
     <string name="btn_send">Send</string>
 
 
-    <string name="facebook_app_id">1192994224120892</string>
+    <string name="facebook_app_id">1906024909621141</string>
 </resources>

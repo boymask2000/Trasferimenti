@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "621572989065",
-    "firebase_url": "https://trasferimentipa.firebaseio.com",
-    "project_id": "trasferimentipa",
-    "storage_bucket": "trasferimentipa.appspot.com"
+    "project_number": "406591455171",
+    "firebase_url": "https://mobility-d102c.firebaseio.com",
+    "project_id": "mobility-d102c",
+    "storage_bucket": "mobility-d102c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:621572989065:android:cf295f78fb5a6b79",
+        "mobilesdk_app_id": "1:406591455171:android:531d1b426a2afc70",
         "android_client_info": {
-          "package_name": "com.posvert.trasferimenti"
+          "package_name": "com.posvert.mobility"
         }
       },
       "oauth_client": [
         {
-          "client_id": "621572989065-kr3e5nqqdrq6vml69pt1voat4nrir9ah.apps.googleusercontent.com",
+          "client_id": "406591455171-logtd2erthjdil24cabqhfteb0kplt57.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCeZgIbVzijUDB6OQCzfSjcss_LD-bZXSo"
+          "current_key": "AIzaSyCheS4D8RzXDgGVZqV6NtjKaAVa7w4EOgI"
         }
       ],
       "services": {

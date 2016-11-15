@@ -3,7 +3,7 @@ package liste.wrappers;
 import android.view.View;
 import android.widget.TextView;
 
-import com.posvert.trasferimenti.R;
+import com.posvert.mobility.R;
 
 import beans.Annuncio;
 

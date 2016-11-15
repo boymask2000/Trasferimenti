@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.posvert.trasferimenti.common.Config;
+import com.posvert.mobility.common.Config;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

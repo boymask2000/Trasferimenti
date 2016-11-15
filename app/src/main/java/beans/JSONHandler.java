@@ -1,6 +1,6 @@
 package beans;
 
-import com.posvert.trasferimenti.chat.Messaggio;
+import com.posvert.mobility.chat.Messaggio;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -3,8 +3,8 @@ package liste.wrappers;
 import android.view.View;
 import android.widget.TextView;
 
-import com.posvert.trasferimenti.R;
-import com.posvert.trasferimenti.chat.ChatRequest;
+import com.posvert.mobility.R;
+import com.posvert.mobility.chat.ChatRequest;
 
 /**
  * Created by giovanni on 21/10/16.

@@ -20,7 +20,7 @@ import java.net.URL;
 
 
 public class LoaderDB {
-    private static final String DBPATH = "/data/data/com.posvert.trasferimenti/databases/";
+    private static final String DBPATH = "/data/data/com.posvert.mobility/databases/";
     private static final String DBNAME = DBOpenHelper.DATABASE_NAME;
 
     private final Context context;
@@ -58,7 +58,7 @@ public class LoaderDB {
 
     public void installaDB() {
 
-        if (checkDB()) return;
+    //    if (checkDB()) return;
         DBOpenHelper  dbHelper = new DBOpenHelper(context);
         dbHelper.init();
 
@@ -79,7 +79,7 @@ public class LoaderDB {
             e.printStackTrace();
 
         }
-        test();
+     //   test();
     }
 
     private void test() {

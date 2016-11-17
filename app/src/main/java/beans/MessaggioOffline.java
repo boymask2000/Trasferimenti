@@ -8,7 +8,9 @@ public class MessaggioOffline {
 	private String destinatario;
 	private String mittente;
 	private String testo;
+	private String stato;
 	private Date data;
+
 	public int getId() {
 		return id;
 	}
@@ -38,5 +40,12 @@ public class MessaggioOffline {
 	}
 	public void setData(Date data) {
 		this.data = data;
+	}
+	public String getStato() {
+		return stato;
+	}
+
+	public void setStato(String stato) {
+		this.stato = stato;
 	}
 }

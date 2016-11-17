@@ -24,8 +24,10 @@ import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
 import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
+import com.posvert.mobility.helper.UtentiHelper;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     private List<ChatRequest> listaChat = new ArrayList<>();
     private ListaAnnunciAdapter listaAnnunciAdapter = null;
     private ListaChatAdapter listaChatAdapter = null;
+    private Button gestioneMessaggi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +109,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
         });
 
 
-        Button gestioneMessaggi = (Button) findViewById(R.id.vedimessaggi);
+        gestioneMessaggi = (Button) findViewById(R.id.vedimessaggi);
         gestioneMessaggi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
@@ -179,7 +182,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                     mylist.setAdapter(listaAnnunciAdapter);
 
 
-                    if (lista.size() == 0) cercamatch.setEnabled(false);
+                    //     if (lista.size() == 0) cercamatch.setEnabled(false);
 
 
                 } catch (Exception e) {
@@ -229,6 +232,25 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("WW", "onResume");
+        UtentiHelper.hasUnreadMessages(this, Heap.getUserCorrente().getUsername(), new ResponseHandler() {
+            @Override
+            public void parseResponse(String response) {
+                try {
+                    JSONArray array = new JSONArray(response);
+                    if (array.length() > 0)
+                        gestioneMessaggi.setText("MESSAGGi (" + array.length() + ")");
+                    else gestioneMessaggi.setText("MESSAGGi");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    @Override
     protected void onStart() {
         Log.e("WW", "onStart");
         super.onStart();
@@ -255,6 +277,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
         Log.e("WW", "onStop");
         super.onStop();
     }
+
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)

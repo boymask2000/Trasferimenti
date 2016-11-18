@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+
+        style="?metaButtonBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:useDefaultMargins="true"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+          />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_gravity="fill_horizontal"
+            style="?metaButtonBarStyle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/regione"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Regione"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/provincia"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Provincia"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/comune"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Comune"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

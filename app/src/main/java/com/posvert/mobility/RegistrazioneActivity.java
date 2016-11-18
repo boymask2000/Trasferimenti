@@ -3,6 +3,7 @@ package com.posvert.mobility;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
@@ -113,6 +114,19 @@ public class RegistrazioneActivity extends Activity {
         spinnerInitializer = new SpinnerInitializer(spinnerRegioni, spinnerProvince, spinnerComuni, this);
         //  initSpinnerRegioni(spinnerRegioni);
 
+        Button cercaEnte = (Button) findViewById(R.id.cercaEnte);
+
+
+        cercaEnte.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent act = new Intent(RegistrazioneActivity.this, GestioneEntiActivity.class);
+
+                startActivityForResult(act,1);
+
+            }
+        });
+
 
         Button bottone1 = (Button) findViewById(R.id.registra);
 
@@ -156,7 +170,16 @@ public class RegistrazioneActivity extends Activity {
         String server = Config.getServerAddress(this);
         System.out.println(server);
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+            if (resultCode == RESULT_OK) {
+                String nome = data.getStringExtra("nome");
+                EditText t =(EditText)findViewById(R.id.ente);
+                t.setText(nome);
+
+            }
+
+    }
     private boolean campiObbligatoriOK() {
         if (isEmpty(getVal(R.id.username))) {
             SnackMsg.showErrMsg(findViewById(R.id.registra), "Username è obbligatorio");

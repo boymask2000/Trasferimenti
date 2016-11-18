@@ -227,6 +227,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Heap.setLoginFB(false);
         Log.e("WW", "onDestroy");
         super.onDestroy();
     }

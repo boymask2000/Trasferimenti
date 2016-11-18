@@ -33,13 +33,12 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name="com.posvert.mobility.RegistrazioneActivity"
+            android:name=".RegistrazioneActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-           />
-        <activity android:name="com.posvert.mobility.InserimentoAnnuncioActivity" />
-        <activity android:name="com.posvert.mobility.PaginaAnnunciActivity" />
-        <activity android:name="com.posvert.mobility.DBInitActivity">
+            android:label="@string/app_name" />
+        <activity android:name=".InserimentoAnnuncioActivity" />
+        <activity android:name=".PaginaAnnunciActivity" />
+        <activity android:name=".DBInitActivity">
 
             <!--
             <intent-filter>
@@ -50,14 +49,14 @@
             -->
 
         </activity>
-        <activity android:name="com.posvert.mobility.VisualizzaAnnuncioActivity" />
-        <activity android:name="com.posvert.mobility.PaginaMatchActivity" />
-        <activity android:name="com.posvert.mobility.VisualizzaMatchActivity" />
-        <activity android:name="com.posvert.mobility.GestioneProfiloActivity" />
-        <activity android:name="com.posvert.mobility.InviaCommentoActivity" />
-        <activity android:name="com.posvert.mobility.ChatActivity" />
+        <activity android:name=".VisualizzaAnnuncioActivity" />
+        <activity android:name=".PaginaMatchActivity" />
+        <activity android:name=".VisualizzaMatchActivity" />
+        <activity android:name=".GestioneProfiloActivity" />
+        <activity android:name=".InviaCommentoActivity" />
+        <activity android:name=".ChatActivity" />
         <activity
-            android:name="com.posvert.mobility.LoginFBActivity"
+            android:name=".LoginFBActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,7 +70,7 @@
             android:label="@string/app_name" />
 
         <service
-            android:name="com.posvert.mobility.MyFirebaseInstanceIDService"
+            android:name=".MyFirebaseInstanceIDService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -79,7 +78,7 @@
             </intent-filter>
         </service>
         <service
-            android:name="com.posvert.mobility.MyFirebaseMessagingService"
+            android:name=".MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -87,16 +86,17 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.posvert.mobility.InviaMessaggioOffineActivity" />
-        <activity android:name="com.posvert.mobility.GestioneMessaggiOfflineActivity" />
+        <activity android:name=".InviaMessaggioOffineActivity" />
+        <activity android:name=".GestioneMessaggiOfflineActivity" />
 
-        <receiver android:name="com.posvert.mobility.MyBroadcastReceiver">
+        <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>
-                <action android:name="CUSTOM_INTENT"></action>
+                <action android:name="CUSTOM_INTENT" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.posvert.mobility.ChatTabActivity"></activity>
+        <activity android:name=".ChatTabActivity" />
+        <activity android:name=".GestioneEntiActivity"></activity>
     </application>
 
 </manifest>

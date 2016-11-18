@@ -7,8 +7,8 @@ android {
         applicationId "com.posvert.mobility"
         minSdkVersion 17
         targetSdkVersion 24
-        versionCode 17
-        versionName "17.0"
+        versionCode 18
+        versionName "18.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -32,20 +32,20 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
+
+
+
+
     compile 'com.android.volley:volley:1.0.0'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:design:25.0.1'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.github.codebutler:android-websockets:6c7c60d'
-    testCompile 'junit:junit:4.12'
-
-    compile "com.android.support:support-core-utils:25.0.0"
-
-
+    compile 'com.android.support:support-core-utils:25.0.1'
     compile 'com.google.firebase:firebase-messaging:9.8.0'
-
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-
+    testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

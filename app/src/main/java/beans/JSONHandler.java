@@ -39,6 +39,15 @@ public class JSONHandler {
         u.setAzione(obj.getInt("azione"));
         return u;
     }
+
+    public static Ente parseEnteJSON(JSONObject obj) throws JSONException {
+        Ente u = new Ente();
+        u.setNome(obj.getString("nome"));
+        u.setRegione(obj.getString("regione"));
+        u.setProvincia(obj.getString("provincia"));
+        u.setComune(obj.getString("comune"));
+        return u;
+    }
     public static Utente parseUtenteJSON(JSONObject obj) throws JSONException {
         Utente u = new Utente();
         u.setEmail(obj.getString("email"));

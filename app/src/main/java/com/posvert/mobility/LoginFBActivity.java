@@ -326,6 +326,7 @@ public class LoginFBActivity extends AppCompatActivity {
     }
 
     public static String getFBUserId() {
+        if(! Heap.isLoginFB()) return null;
         String userId = tok.getUserId();
         return userId;
     }

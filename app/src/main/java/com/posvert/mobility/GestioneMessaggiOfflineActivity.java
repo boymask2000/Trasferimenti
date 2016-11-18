@@ -135,22 +135,12 @@ loadData();
                 }
             }
         });
-/*        listaChatAdapter = new ListaChatAdapter(PaginaAnnunciActivity.this, listaChat);
-        ChatRequest req = new ChatRequest("pippo");
-        listaChat.add(req);*/
-
     }
 
     private String buildUrlGetMessaggi() {
         URLBuilder builder = new URLBuilder(this, "getMessagesForUser", "messages");
         builder.addParameter("username", Heap.getUserCorrente().getUsername());
         return builder.getUrl();
-      /*  String url = URLHelper.build(this, "getMessagesForUser", "messages");
-        try {
-            url += "username="+ URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return url;*/
+
     }
 }

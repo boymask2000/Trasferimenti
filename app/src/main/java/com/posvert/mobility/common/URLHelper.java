@@ -22,7 +22,17 @@ public class URLHelper {
     private static String server = null;
     private static String pref = null;
     private static String prefWS = null;
+    private static final String URL_PREFIX = "url_prefix";
 
+    public static String buildWithPref(Context context,  String prefix,String restKey, boolean isGet) {
+        if (server == null) server = Config.getServerAddress(context);
+
+        String pref = Config.getVal(context, URL_PREFIX);
+        String url = "http://" + server + pref + prefix+"/" + restKey;
+     //   if (isGet) url += "?";
+
+        return url;
+    }
 
     public static String build(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
@@ -63,7 +73,7 @@ public class URLHelper {
             URLBuilder builder = new URLBuilder(url);
             builder.addParameter("name", Heap.getUserCorrente().getUsername());
             builder.addParameter("dest", utenteAnnuncio);
-            url=builder.getUrl();
+            url = builder.getUrl();
 
         } catch (Exception e) {
             e.printStackTrace();

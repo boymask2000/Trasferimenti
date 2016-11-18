@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.posvert.mobility.NuovoEnteFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Inserisci nuovo ente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/ente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ente"
+            android:maxLines="1"
+            android:textColor="#000000" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/ok"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:text="Ok" />
+
+</LinearLayout>

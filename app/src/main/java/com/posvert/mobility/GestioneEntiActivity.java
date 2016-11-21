@@ -2,6 +2,7 @@ package com.posvert.mobility;
 
 import android.app.Activity;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -117,12 +118,16 @@ public class GestioneEntiActivity extends AppCompatActivity {
     }
 
     private void buildFragment() {
-        FragmentManager fragmentManager = getFragmentManager();
+/*        FragmentManager fragmentManager = getFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         final Fragment fragment = new NuovoEnteFragment();
         fragmentTransaction.add(R.id.container, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
+        final Fragment fragment = new NuovoEnteFragment();
+        DialogFragment newFragment = (DialogFragment)fragment;
+
+        newFragment.show(getFragmentManager(), "dialog");
 
     }
 

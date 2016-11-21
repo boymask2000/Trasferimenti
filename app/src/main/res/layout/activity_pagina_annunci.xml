@@ -5,9 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pagina_annunci"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:scrollIndicators="top|bottom">
 
     <android.support.v7.widget.Toolbar
@@ -18,7 +18,7 @@
         android:background="@color/colorPrimaryDark"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,92 +34,89 @@
             android:layout_centerInParent="true" />
 
         <TextView
-            android:text="TextView"
+            android:id="@+id/username"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/username"
-
             android:layout_weight="1"
 
-            android:gravity="center" />
+            android:gravity="center"
+
+            android:text="TextView" />
 
 
     </LinearLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:background="@color/colorPrimary"
+
             android:orientation="vertical">
-    <TextView
-        android:text="I miei annunci"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:gravity="center"
-        tools:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
 
-    <ListView
-        android:id="@+id/lista"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
-        android:scrollbarStyle="outsideOverlay" />
+                android:text="I miei annunci"
+                tools:textSize="18sp" />
 
-    <Button
-        android:id="@+id/creaannuncio"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lista"
-        android:layout_marginTop="16dp"
-        android:text="Crea annuncio"
-        android:textStyle="bold" />
+            <ListView
+                android:id="@+id/lista"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:scrollbarStyle="outsideOverlay" />
 
-    <Button
-        android:id="@+id/cercamatch"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/creaannuncio"
-        android:layout_marginTop="16dp"
+            <Button
+                android:id="@+id/creaannuncio"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lista"
+                android:layout_marginTop="16dp"
+                android:text="Crea annuncio"
+                android:textStyle="bold" />
 
-        android:text="Cerca proposte"
-        android:textStyle="bold" />
+            <Button
+                android:id="@+id/cercamatch"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/creaannuncio"
+                android:layout_marginTop="16dp"
 
-    <Button
-        android:id="@+id/vedimessaggi"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lista"
-        android:layout_marginTop="16dp"
-        android:text="Messaggi"
-        android:textStyle="bold" />
+                android:text="Cerca proposte"
+                android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/vedimessaggi"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lista"
+                android:layout_marginTop="16dp"
+                android:text="Messaggi"
+                android:textStyle="bold" />
 
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/pendingchat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="15dp"
-            android:scrollbarStyle="outsideOverlay" />
+            <Button
+                android:id="@+id/map"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lista"
+                android:layout_marginTop="16dp"
+                android:text="Map"
+                android:textStyle="bold" />
 
 
-    </LinearLayout>
-</LinearLayout>
+
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

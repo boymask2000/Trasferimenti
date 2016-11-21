@@ -77,9 +77,14 @@ public class NuovoEnteFragment extends DialogFragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
+        setStyle(STYLE_NORMAL, 0);
     }
-
+    @Override
+    public void onActivityCreated(Bundle arg0) {
+        super.onActivityCreated(arg0);
+        getDialog().getWindow()
+                .getAttributes().windowAnimations = R.style.DialogAnimation;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -39,6 +39,14 @@ public class JSONHandler {
         u.setAzione(obj.getInt("azione"));
         return u;
     }
+    public static GeoLocation parseGeoLocationJSON(JSONObject obj) throws JSONException {
+        GeoLocation u = new GeoLocation();
+        u.setUsername(obj.getString("username"));
+        u.setLatitute(obj.getDouble("latitute"));
+        u.setLongitute(obj.getDouble("longitute"));
+
+        return u;
+    }
 
     public static Ente parseEnteJSON(JSONObject obj) throws JSONException {
         Ente u = new Ente();

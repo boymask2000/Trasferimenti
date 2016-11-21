@@ -6,7 +6,11 @@
     android:layout_height="match_parent"
     android:scrollIndicators="top|bottom">
 
-
+<TextView
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Gestione Enti"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +53,7 @@
             android:id="@+id/inserisci"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inserisci" />
+            android:text="Nuovo Ente" />
 <!--        <Button
             android:id="@+id/seleziona"
             android:layout_width="wrap_content"

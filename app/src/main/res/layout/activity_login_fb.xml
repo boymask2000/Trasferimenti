@@ -127,6 +127,13 @@
                 android:ems="10"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="Questa App non contiene olio di palma" />
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="ma solo olio di gomito" />
 
             <TextView
                 android:id="@+id/versione"

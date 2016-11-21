@@ -1,9 +1,14 @@
 package com.posvert.mobility;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +29,8 @@ import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
 import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
+import com.posvert.mobility.geo.GeoUtil;
+import com.posvert.mobility.geo.MyLocationListener;
 import com.posvert.mobility.helper.UtentiHelper;
 
 import org.json.JSONArray;
@@ -120,8 +127,32 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
             }
         });
 
+        Button    map = (Button) findViewById(R.id.map);
+        map.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent act = new Intent(PaginaAnnunciActivity.this, MapsActivity.class);
+
+                startActivity(act);
+
+            }
+        });
+
 
         loadData();
+
+        initGeo();
+
+    }
+    /*----Method to Check GPS is enable or disable ----- */
+
+    private void initGeo() {
+        boolean enabled = GeoUtil.isGpsEnabled(this);
+        Log.e("WW", ""+enabled);
+        if( !enabled) return;
+
+        GeoUtil gUtil = new GeoUtil(this);
+        gUtil.init();
 
 
     }

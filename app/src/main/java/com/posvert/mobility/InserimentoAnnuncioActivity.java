@@ -2,11 +2,14 @@ package com.posvert.mobility;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -74,11 +77,34 @@ public class InserimentoAnnuncioActivity extends Activity {
 
             }
         });
+        final TextView counter = (TextView) findViewById(R.id.counter);
+        EditText note = (EditText) findViewById(R.id.note);
+        note.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int len = charSequence.toString().length();
+
+                counter.setText(""+(50-len)+" caratteri disponibili");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                int len = editable.toString().length();
+                if( len>50)  editable.delete(50, len);
+            }
+        });
     }
 
     //http://localhost:8080/Trasferimenti/trasferimenti/createAnnuncio?regione=Campania&username=giovanni&tipo=A
     private String buildUrl() {
+        String nota = ((EditText) findViewById(R.id.note)).getText().toString() ;
+        if( nota.length()>50)nota=nota.substring(0,50);
+
         String url = URLHelper.build(this, "createAnnuncio");
 
         Utente user = Heap.getUserCorrente();
@@ -91,7 +117,7 @@ public class InserimentoAnnuncioActivity extends Activity {
             url += "&comune=" + URLEncoder.encode(spinnerInitializer.getComune(), "UTF-8");
             url += "&ente=" + URLEncoder.encode(((EditText) findViewById(R.id.ente)).getText().toString(), "UTF-8");
 
-            url += "&note=" + URLEncoder.encode(((EditText) findViewById(R.id.note)).getText().toString(), "UTF-8");
+            url += "&note=" + URLEncoder.encode(nota, "UTF-8");
 
             url += "&livello=" + ((EditText) findViewById(R.id.livello)).getText().toString();
             url += "&tipo=A";

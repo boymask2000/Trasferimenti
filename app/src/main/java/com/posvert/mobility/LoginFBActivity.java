@@ -38,6 +38,7 @@ import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
@@ -74,6 +75,7 @@ public class LoginFBActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Heap.setLoginFB(false);
 
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-6114671792914206~6584200253");
 
         //    FacebookSdk.sdkInitialize(getApplicationContext());
         FacebookSdk.sdkInitialize(getApplicationContext());
@@ -134,6 +136,7 @@ public class LoginFBActivity extends AppCompatActivity {
                 // App code Arrays.asList("public_profile")
                 //     LoginManager.getInstance().logInWithReadPermissions(LoginFBActivity.this,c);
                 Heap.setLoginFB(true);
+                Utente uu = Heap.getUserCorrente();
 
                 tok = AccessToken.getCurrentAccessToken();
                 Log.e("FACEB", tok.getUserId());
@@ -171,8 +174,9 @@ public class LoginFBActivity extends AppCompatActivity {
                     @Override
                     public void parseResponse(String response) {
                         Log.e("WWW", response);
-                        if (response.length() == 0)
+                        if (response.length() == 0){
                             initialRegistration();
+                        finish();}
 
                         else {
                             try {
@@ -259,7 +263,7 @@ public class LoginFBActivity extends AppCompatActivity {
 
     //    tok = AccessToken.getCurrentAccessToken();
         String vv = FirebaseInstanceId.getInstance().getToken();
-        Log.e("FACEB1", vv);
+
         MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);
 
     }
@@ -402,10 +406,7 @@ public class LoginFBActivity extends AppCompatActivity {
                             }
 
 
-                            Intent openPage1 = new Intent(LoginFBActivity.this, PaginaAnnunciActivity.class);
-
-
-                            startActivity(openPage1);
+                            startAll();
                         }
                         if (response == null || !response.equalsIgnoreCase("1")) {
 

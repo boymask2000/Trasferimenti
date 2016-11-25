@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
+import com.posvert.mobility.common.SnackMsg;
 import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
 
@@ -33,7 +34,7 @@ public class GestioneMessaggiOfflineActivity extends AppCompatActivity {
     private ListView lv;
     private TextView areatext;
     private MessaggioOffline messaggioSel = null;
-    private ListaAnnunciOfflineAdapter adapter=null;
+    private ListaAnnunciOfflineAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +75,20 @@ public class GestioneMessaggiOfflineActivity extends AppCompatActivity {
         });
         cancella.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-              if( messaggioSel==null)return;
+                if (messaggioSel == null) return;
 
                 URLBuilder b = new URLBuilder(GestioneMessaggiOfflineActivity.this, "deleteMessaggioById", "messages");
-                b.addParameter("id", ""+messaggioSel.getId());
+                b.addParameter("id", "" + messaggioSel.getId());
                 String url = b.getUrl();
 
                 URLHelper.invokeURL(GestioneMessaggiOfflineActivity.this, url, new ResponseHandler() {
                     @Override
                     public void parseResponse(String response) {
-                        Snackbar.make(findViewById(R.id.esci), "Messaggio cancellato",
+                        SnackMsg.showInfoMsg(findViewById(R.id.esci), "Messaggio cancellato");
+                   /*     Snackbar.make(findViewById(R.id.esci), "Messaggio cancellato",
                                 Snackbar.LENGTH_LONG)
-                                .show();
-loadData();
+                                .show();*/
+                        loadData();
                         adapter.notifyDataSetChanged();
                         areatext.setText("");
 
@@ -97,7 +99,7 @@ loadData();
         });
         rispondi.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if( messaggioSel==null)return;
+                if (messaggioSel == null) return;
 
                 Intent act = new Intent(GestioneMessaggiOfflineActivity.this, InviaMessaggioOffineActivity.class);
                 String pkg = getPackageName();
@@ -124,7 +126,7 @@ loadData();
 
 
                     }
-                     adapter = new ListaAnnunciOfflineAdapter(GestioneMessaggiOfflineActivity.this, lista);
+                    adapter = new ListaAnnunciOfflineAdapter(GestioneMessaggiOfflineActivity.this, lista);
                     lv.setAdapter(adapter);
 
 

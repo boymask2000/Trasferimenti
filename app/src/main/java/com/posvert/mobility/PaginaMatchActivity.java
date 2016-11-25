@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
 import com.posvert.mobility.common.URLHelper;
@@ -32,6 +34,11 @@ public class PaginaMatchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_match);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
         mylist = (ListView) findViewById(R.id.lista);
         Button esci = (Button) findViewById(R.id.esci);
 

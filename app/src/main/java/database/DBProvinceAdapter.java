@@ -40,6 +40,7 @@ public class DBProvinceAdapter extends CommonAdapter{
 
     public void close() {
         dbHelper.close();
+        database.close();
     }
 
     private ContentValues createContentValues(String name, String regione) {

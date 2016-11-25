@@ -58,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     public void parseResponse(String response) {
                         try {
                             JSONArray array = new JSONArray(response);
-
+                            mMap.clear();
                             for (int i = 0; i < array.length(); i++) {
 
                                 GeoLocation loc = JSONHandler.parseGeoLocationJSON(array.getJSONObject(i));

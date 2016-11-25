@@ -24,6 +24,8 @@ import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.posvert.mobility.chat.ChatRequest;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
@@ -48,7 +50,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
-
+    private GeoUtil gUtil=null;
 
     private List<ChatRequest> listaChat = new ArrayList<>();
     private ListaAnnunciAdapter listaAnnunciAdapter = null;
@@ -59,6 +61,13 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagina_annunci);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -149,10 +158,11 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     private void initGeo() {
         boolean enabled = GeoUtil.isGpsEnabled(this);
         Log.e("WW", ""+enabled);
-        if( !enabled) return;
+     //   if( !enabled) return;
 
-        GeoUtil gUtil = new GeoUtil(this);
-        gUtil.init();
+        gUtil = new GeoUtil(this);
+        gUtil.check();
+        gUtil.init(this);
 
 
     }
@@ -260,6 +270,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     protected void onDestroy() {
         Heap.setLoginFB(false);
         Log.e("WW", "onDestroy");
+        gUtil.unsetLocation();
         super.onDestroy();
     }
 

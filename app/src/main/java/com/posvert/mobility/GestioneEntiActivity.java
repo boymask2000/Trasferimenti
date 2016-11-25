@@ -9,6 +9,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -35,7 +36,7 @@ import beans.MessaggioOffline;
 import liste.adapters.ListaAnnunciAdapter;
 import liste.adapters.ListaEntiAdapter;
 
-public class GestioneEntiActivity extends AppCompatActivity {
+public class GestioneEntiActivity extends AppCompatActivity implements NuovoEnteFragment.OnFragmentInteractionListener {
     private List<Ente> lista = new ArrayList<>();
     private ListView mylist;
     private Ente enteSel = null;
@@ -138,6 +139,11 @@ public class GestioneEntiActivity extends AppCompatActivity {
         builder.addParameter("ente", query.getText().toString());
 
         return builder.getUrl();
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

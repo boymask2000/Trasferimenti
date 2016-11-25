@@ -41,6 +41,7 @@ public class DBRegioniAdapter extends CommonAdapter{
 
     public void close() {
         dbHelper.close();
+        database.close();
     }
 
     private ContentValues createContentValues(String name) {

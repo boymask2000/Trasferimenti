@@ -27,8 +27,8 @@ public class URLHelper {
     public static String buildWithPref(Context context,  String prefix,String restKey, boolean isGet) {
         if (server == null) server = Config.getServerAddress(context);
 
-        String pref = Config.getVal(context, URL_PREFIX);
-        String url = "http://" + server + pref + prefix+"/" + restKey;
+    //    String pref = Config.getVal(context, URL_PREFIX);
+        String url = "http://" + server +  prefix+"/" + restKey;
      //   if (isGet) url += "?";
 
         return url;
@@ -37,29 +37,29 @@ public class URLHelper {
     public static String build(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
 
-        if (pref == null) pref = Config.getVal(context, "url_prefix");
-        return "http://" + server + pref + restKey + "?";
+       // if (pref == null) pref = Config.getVal(context, "url_prefix");
+        return "http://" + server  + restKey + "?";
     }
 
     public static String build(Context context, String restKey, String prefix) {
         if (server == null) server = Config.getServerAddress(context);
 
-        String pref = Config.getVal(context, "url_prefix_" + prefix);
-        return "http://" + server + pref + restKey + "?";
+      //  String pref = Config.getVal(context, "url_prefix_" + prefix);
+        return "http://" + server + prefix+"/" + restKey + "?";
     }
 
     public static String buildPOST(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
 
-        if (pref == null) pref = Config.getVal(context, "url_prefix");
-        return "http://" + server + pref + restKey;
+    //    if (pref == null) pref = Config.getVal(context, "url_prefix");
+        return "http://" + server  + restKey;
     }
 
     public static String buildPOST(Context context, String restKey, String prefix) {
         if (server == null) server = Config.getServerAddress(context);
 
-        String pref = Config.getVal(context, "url_prefix_" + prefix);
-        return "http://" + server + pref + restKey;
+      //  String pref = Config.getVal(context, "url_prefix_" + prefix);
+        return "http://" + server + prefix+"/" + restKey;
     }
 
     public static String buildWSCall(Context context, String utenteAnnuncio) {

@@ -15,6 +15,7 @@ public class Heap {
     }
 
     public static void setUserCorrente(Utente userCorrente) {
+
         Heap.userCorrente = userCorrente;
     }
 

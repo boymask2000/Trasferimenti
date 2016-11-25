@@ -40,6 +40,7 @@ public class DBComuniAdapter extends CommonAdapter{
 
     public void close() {
         dbHelper.close();
+        database.close();
     }
 
     private ContentValues createContentValues(String name, String provincia) {

@@ -19,14 +19,14 @@ public class URLBuilder {
 
     public URLBuilder(Context context, String restKey, String prefix, String protocol) {
         if (server == null) server = Config.getServerAddress(context);
-        String pref;
+     //   String pref = Config.getVal(context, "url_prefix");
 
-        if (prefix == null)
+/*        if (prefix == null)
             pref = Config.getVal(context, "url_prefix");
         else
-            pref = Config.getVal(context, "url_prefix_" + prefix);
+            pref = Config.getVal(context, "url_prefix_" + prefix);*/
 
-        url= protocol+"://" + server + pref + restKey ;
+        url= protocol+"://" + server  + prefix+"/"+restKey ;
     }
     public URLBuilder(Context context, String restKey, String prefix) {
         this(context, restKey, prefix, "http");

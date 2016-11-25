@@ -27,7 +27,8 @@
 
     <string name="facebook_app_id">1906024909621141</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+   <!-- <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
 </resources>

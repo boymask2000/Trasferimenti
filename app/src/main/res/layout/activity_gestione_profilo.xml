@@ -222,7 +222,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Ente"
                 android:maxLines="1"
-                android:textColor="#FFFFFF" />
+                />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -236,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Livello"
                 android:maxLines="1"
-                android:textColor="#FFFFFF" />
+                 />
 
         </android.support.design.widget.TextInputLayout>
 

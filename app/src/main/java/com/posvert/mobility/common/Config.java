@@ -2,6 +2,9 @@ package com.posvert.mobility.common;
 
 import android.content.Context;
 
+
+import com.posvert.mobility.BuildConfig;
+
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -15,8 +18,7 @@ public class Config {
 
 
     public static String getServerAddress(Context context) {
-        if (!inited) init(context);
-        return props.getProperty("server_address");
+        return BuildConfig.HOST;
     }
     public static String getVal(Context context, String key) {
         if (!inited) init(context);

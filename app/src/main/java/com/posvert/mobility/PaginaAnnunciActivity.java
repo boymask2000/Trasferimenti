@@ -249,18 +249,11 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
 
     private String buildUrl() {
 
-/*        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");
+        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente") ;
 
-
-        try {
-            url += "username=" + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }*/
-
-        URLBuilder builder = new URLBuilder(this, "cercaAnnunciCreatiDaUtente", null);
+        URLBuilder builder = new URLBuilder(url);
         builder.addParameter("username", Heap.getUserCorrente().getUsername());
-        String url = builder.getUrl();
+         url = builder.getUrl();
 
 
         return url;
@@ -302,21 +295,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         LoginManager.getInstance().logOut();
-/*        new AlertDialog.Builder(this)
-                .setTitle("Delete entry")
-                .setMessage("Are you sure you want to delete this entry?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();*/
+
         Log.e("WW", "onStop");
         super.onStop();
     }

@@ -8,8 +8,8 @@ android {
         minSdkVersion 17
         targetSdkVersion 24
 
-        versionCode 27
-        versionName "27.0"
+        versionCode 28
+        versionName "28.0"
 
         multiDexEnabled true
 
@@ -25,9 +25,11 @@ android {
     productFlavors {
         SERVER_LOCALE {
             buildConfigField 'String', 'HOST', '"2.237.49.215:8080/Trasferimenti/trasferimenti/"'
+            buildConfigField 'String', 'HOSTWS', '"2.237.49.215:8080/Trasferimenti/chat"'
         }
         SERVER_HOST {
             buildConfigField 'String', 'HOST', '"95.110.171.18:9346/TrasferimentiPA/trasferimenti/"'
+            buildConfigField 'String', 'HOSTWS', '"95.110.171.18:9346/TrasferimentiPA/chat"'
         }
     }
 }

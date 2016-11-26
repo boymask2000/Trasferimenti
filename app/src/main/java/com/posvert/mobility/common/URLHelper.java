@@ -4,12 +4,14 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.posvert.mobility.BuildConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +22,14 @@ import java.util.Map;
 
 public class URLHelper {
     private static String server = null;
-    private static String pref = null;
-    private static String prefWS = null;
-    private static final String URL_PREFIX = "url_prefix";
+    private static String serverWS = null;
+
+
 
     public static String buildWithPref(Context context,  String prefix,String restKey, boolean isGet) {
         if (server == null) server = Config.getServerAddress(context);
 
-    //    String pref = Config.getVal(context, URL_PREFIX);
         String url = "http://" + server +  prefix+"/" + restKey;
-     //   if (isGet) url += "?";
 
         return url;
     }
@@ -37,39 +37,35 @@ public class URLHelper {
     public static String build(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
 
-       // if (pref == null) pref = Config.getVal(context, "url_prefix");
         return "http://" + server  + restKey + "?";
     }
 
     public static String build(Context context, String restKey, String prefix) {
         if (server == null) server = Config.getServerAddress(context);
 
-      //  String pref = Config.getVal(context, "url_prefix_" + prefix);
         return "http://" + server + prefix+"/" + restKey + "?";
     }
 
     public static String buildPOST(Context context, String restKey) {
         if (server == null) server = Config.getServerAddress(context);
 
-    //    if (pref == null) pref = Config.getVal(context, "url_prefix");
         return "http://" + server  + restKey;
     }
 
     public static String buildPOST(Context context, String restKey, String prefix) {
         if (server == null) server = Config.getServerAddress(context);
 
-      //  String pref = Config.getVal(context, "url_prefix_" + prefix);
         return "http://" + server + prefix+"/" + restKey;
     }
 
     public static String buildWSCall(Context context, String utenteAnnuncio) {
-        if (server == null) server = Config.getServerAddress(context);
-        if (prefWS == null) prefWS = Config.getVal(context, "webSocket_prefix");
+        if (serverWS == null) serverWS = BuildConfig.HOSTWS;
+
 
 
         String url = null;
         try {
-            url = "ws://" + server + prefWS;
+            url = "ws://" + server ;
             URLBuilder builder = new URLBuilder(url);
             builder.addParameter("name", Heap.getUserCorrente().getUsername());
             builder.addParameter("dest", utenteAnnuncio);

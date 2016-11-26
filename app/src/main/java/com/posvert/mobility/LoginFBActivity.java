@@ -33,6 +33,8 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.appevents.AppEventsLogger;
@@ -43,6 +45,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
 import com.posvert.mobility.common.SnackMsg;
+import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
 import com.posvert.mobility.helper.UtentiHelper;
 
@@ -174,10 +177,8 @@ public class LoginFBActivity extends AppCompatActivity {
                     @Override
                     public void parseResponse(String response) {
                         Log.e("WWW", response);
-                        if (response.length() == 0){
-                            initialRegistration();
-                        finish();}
-
+                        if (response.length() == 0)
+                            getFBData();
                         else {
                             try {
                                 JSONObject obj = new JSONObject(response);
@@ -247,13 +248,14 @@ public class LoginFBActivity extends AppCompatActivity {
 
     }
 
-    private void showVersion(){
+
+    private void showVersion() {
         try {
             PackageInfo packageinfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            String ss =packageinfo.versionName.toString();
+            String ss = packageinfo.versionName.toString();
 
             TextView ver = (TextView) findViewById(R.id.versione);
-            ver.setText("Ver "+ss);
+            ver.setText("Ver " + ss);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -261,7 +263,7 @@ public class LoginFBActivity extends AppCompatActivity {
 
     private void getToken() {
 
-    //    tok = AccessToken.getCurrentAccessToken();
+        //    tok = AccessToken.getCurrentAccessToken();
         String vv = FirebaseInstanceId.getInstance().getToken();
 
         MyFirebaseInstanceIDService.sendRegistrationToServer(LoginFBActivity.this, vv);
@@ -286,8 +288,28 @@ public class LoginFBActivity extends AppCompatActivity {
         return 0;
     }
 
-    private void initialRegistration() {
-        URLHelper.invokeURL(this, buildregistrUrl(), new ResponseHandler() {
+    private void getFBData() {
+        GraphRequest request = GraphRequest.newMeRequest(
+                tok,
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        Log.e("ww", object.toString());
+                        initialRegistration(object);
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,link, email");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+    private void initialRegistration(JSONObject json) {
+
+
+        URLHelper.invokeURL(this, buildregistrUrl(json), new ResponseHandler() {
             @Override
             public void parseResponse(String response) {
                 if (response.equalsIgnoreCase("ok")) {
@@ -296,31 +318,35 @@ public class LoginFBActivity extends AppCompatActivity {
 
                     Heap.setUserCorrente(u);
 
-                    Intent act = new Intent(LoginFBActivity.this, GestioneProfiloActivity.class);
-
-                    startActivityForResult(act, 44);
+                    startAll();
                 }
 
             }
         });
     }
 
-    private String buildregistrUrl() {
+    private String buildregistrUrl(JSONObject json) {
 
         String url = URLHelper.build(this, "createUser");
 
+        URLBuilder builder = new URLBuilder(url);
+        try {
+            builder.addParameter("name", fbname);
+            builder.addParameter("fbuserid", getFBUserId());
+            builder.addParameter("password", "");
+            builder.addParameter("regione", "");
+            builder.addParameter("provincia", "");
+            builder.addParameter("comune", "");
+            builder.addParameter("ente", "");
+            builder.addParameter("telefono", "");
+            builder.addParameter("email", json.getString("email"));
+            builder.addParameter("livello", "");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        url += "name=" + URLEncoder.encode(fbname);
-        url += "&password=";
-        url += "&regione=";
-        url += "&provincia=";
-        url += "&comune=";
-        url += "&ente=";
-        url += "&telefono=";
-        url += "&email=";
-        url += "&livello=";
-        url += "&fbuserid=" + getFBUserId();
-        return url;
+
+        return builder.getUrl();
     }
 
     private String buildCheckUrl() {
@@ -330,7 +356,7 @@ public class LoginFBActivity extends AppCompatActivity {
     }
 
     public static String getFBUserId() {
-        if(! Heap.isLoginFB()) return null;
+        if (!Heap.isLoginFB()) return null;
         String userId = tok.getUserId();
         return userId;
     }
@@ -413,7 +439,8 @@ public class LoginFBActivity extends AppCompatActivity {
 
                         /*    Snackbar.make(findViewById(R.id.bottone1), "Username o passowrd errata",
                                     Snackbar.LENGTH_SHORT)
-                                    .show()*/;
+                                    .show()*/
+                            ;
                             SnackMsg.showErrMsg(findViewById(R.id.bottone1), "Username o password errata");
 
                         }

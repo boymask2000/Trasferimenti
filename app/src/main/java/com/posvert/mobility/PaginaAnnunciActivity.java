@@ -156,13 +156,11 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
     /*----Method to Check GPS is enable or disable ----- */
 
     private void initGeo() {
-        boolean enabled = GeoUtil.isGpsEnabled(this);
-        Log.e("WW", ""+enabled);
-     //   if( !enabled) return;
+
 
         gUtil = new GeoUtil(this);
-        gUtil.check();
-        gUtil.init(this);
+        gUtil.check(this);
+   //     gUtil.init(this);
 
 
     }

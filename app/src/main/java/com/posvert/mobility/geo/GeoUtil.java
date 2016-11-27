@@ -27,11 +27,14 @@ import com.posvert.mobility.common.URLHelper;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import beans.Commento;
 import beans.GeoLocation;
+
+import static android.support.v4.app.ActivityCompat.requestPermissions;
 
 /**
  * Created by giovanni on 20/11/16.
@@ -41,38 +44,32 @@ public class GeoUtil {
     private final Context ctx;
     private LocationManager locationManager;
 
-    public static boolean isGpsEnabled(Context ctx) {
-        ContentResolver contentResolver = ctx
-                .getContentResolver();
-        boolean gpsStatus = Settings.Secure
-                .isLocationProviderEnabled(contentResolver,
-                        LocationManager.GPS_PROVIDER);
 
+    public boolean check(final Activity act) {
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
 
-        return gpsStatus;
-    }
-
-    public  boolean check(){
-        boolean gps_enabled=false;
-        boolean network_enabled=false;
-
-        LocationManager lm = (LocationManager)ctx.getSystemService(Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        }catch (Exception ex){}
-        try{
-            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        }catch (Exception ex){}
-        if(!gps_enabled && !network_enabled){
+
+            //        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception ex) {
+        }
+        if (!gps_enabled && !network_enabled) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-            dialog.setMessage("abilitare");
-            dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    ctx.startActivity(myIntent);
-                }
-            });
+            dialog.setTitle("Enable Location")
+                    .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " +
+                            "use this app")
+                    .setPositiveButton("Location Settings", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            ctx.startActivity(myIntent);
+
+
+                        }
+                    });
             dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
 
                 @Override
@@ -83,6 +80,8 @@ public class GeoUtil {
             });
             dialog.show();
         }
+        init(act);
+
         return true;
     }
 
@@ -95,29 +94,21 @@ public class GeoUtil {
                 ctx.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new MyLocationListener(ctx, this);
 
-        if( !checkLocationPermission()){
-            ActivityCompat.requestPermissions(act,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        if (!checkLocationPermission()) {
+            requestPermissions(act, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
+        } else {
+
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 60000, 10, locationListener);
+
+            Location location = getLastBestLocation(act);
+
+if(location==null)return;
+            setLocation(location);
         }
-       /* if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }*/
-        locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER, 60000, 10, locationListener);
-
-        Location location = getLastBestLocation(act);
-
-
-
-        setLocation(location);
     }
+
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 1: {
@@ -135,16 +126,16 @@ public class GeoUtil {
             // permissions this app might request
         }
     }
-    public boolean checkLocationPermission()
-    {
+
+    public boolean checkLocationPermission() {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = ctx.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
     }
 
     private Location getLastBestLocation(Activity act) {
-        if( !checkLocationPermission()){
-            ActivityCompat.requestPermissions(act,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        if (!checkLocationPermission()) {
+            requestPermissions(act, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         }
        /* if (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -218,6 +209,7 @@ public class GeoUtil {
             }
         });
     }
+
     public void unsetLocation() {
 
 
@@ -230,7 +222,7 @@ public class GeoUtil {
             @Override
             public String getJSONMessage() {
                 StringWriter sw = new StringWriter();
-                GeoLocation u =new GeoLocation();
+                GeoLocation u = new GeoLocation();
                 u.setUsername(Heap.getUserCorrente().getUsername());
                 Gson gson = new Gson();
                 gson.toJson(u, sw);
@@ -244,6 +236,7 @@ public class GeoUtil {
         String url = URLHelper.buildWithPref(ctx, "geo", "setGeoLocation", false);
         return url;
     }
+
     private String buildUrlUnset() {
         String url = URLHelper.buildWithPref(ctx, "geo", "removeGeoLocation", false);
         return url;
@@ -257,5 +250,6 @@ public class GeoUtil {
         u.setUsername(Heap.getUserCorrente().getUsername());
         return u;
     }
+
 
 }

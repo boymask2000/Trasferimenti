@@ -20,6 +20,7 @@ import com.posvert.mobility.chat.Messaggio;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.URLHelper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,17 +29,21 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.Annuncio;
 import beans.JSONHandler;
+import liste.adapters.ListaChatUsersAdapter;
 
 public class GlobalChatActivity extends AppCompatActivity {
 
     private WebSocketClient client = null;
 
     private ListView listViewMessages;
+    private ListView listViewUsers;
     private List<Messaggio> listMessages;
+    private List<String> utenti = new ArrayList<>();
+    private ListaChatUsersAdapter listaUsersAdapter;
     private MessagesListAdapter adapter;
     private EditText inputMsg;
-    private String utenteAnnuncio;
 
 
     @Override
@@ -46,19 +51,19 @@ public class GlobalChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_global_chat);
 
-        Bundle bundle = getIntent().getExtras();
-        String pkg = getPackageName();
-        utenteAnnuncio = bundle.getString(pkg + "USERNAME");
 
         listViewMessages = (ListView) findViewById(R.id.list_view_messages);
+        listViewUsers = (ListView) findViewById(R.id.users);
         listMessages = new ArrayList<>();
 
         Button btnSend = (Button) findViewById(R.id.btnSend);
         inputMsg = (EditText) findViewById(R.id.inputMsg);
 
         adapter = new MessagesListAdapter(this, listMessages);
-        listViewMessages.setAdapter(adapter);
+        listaUsersAdapter = new ListaChatUsersAdapter(this, utenti);
 
+        listViewMessages.setAdapter(adapter);
+        listViewUsers.setAdapter(listaUsersAdapter);
         gretingd();
 
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -66,12 +71,13 @@ public class GlobalChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Sending message to web socket server
-                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), utenteAnnuncio);
+                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), "");
+                u.setRoom("PUBLIC");
                 Gson gson = new Gson();
                 u.setTesto(inputMsg.getText().toString());
                 u.setOperation(Messaggio.SEND_MSG, inputMsg.getText().toString());
                 u.setSelf(true);
-                appendMessage(u);
+                //         appendMessage(u);
                 String msg = gson.toJson(u);
                 client.send(msg);
 
@@ -85,15 +91,15 @@ public class GlobalChatActivity extends AppCompatActivity {
             new intBasicNameValuePair("Cookie", "session=abcd")
     );*/
 
-        client = new WebSocketClient(URI.create(URLHelper.buildWSCall(this,utenteAnnuncio)), new WebSocketClient.Listener() {
+        client = new WebSocketClient(URI.create(URLHelper.buildWSCall(this, Heap.getUserCorrente().getUsername())), new WebSocketClient.Listener() {
             @Override
             public void onConnect() {
                 Log.e("WS", "Connected!");
                 Gson gson = new Gson();
-                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), utenteAnnuncio);
+                Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), "");
                 //   currOP = Messaggio.ASK_FOR_CHAT;
-                u.setOperation(Messaggio.ASK_FOR_CHAT);
-
+                u.setOperation(Messaggio.JOIN);
+                u.setRoom("PUBLIC");
                 String msg = gson.toJson(u);
 // Later…
 
@@ -113,11 +119,15 @@ public class GlobalChatActivity extends AppCompatActivity {
                     int azione = msg.getAzione();
                     //    String testo = msg.getTesto();
 
-                    if (azione == Messaggio.SEND_MSG) {
-
-
-                        appendMessage(msg);
+                    switch (azione) {
+                        case Messaggio.SEND_MSG:
+                            appendMessage(msg);
+                            break;
+                        case Messaggio.SEND_USER_LIST:
+                            fillUserList(msg.getTesto());
+                            break;
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -147,10 +157,29 @@ public class GlobalChatActivity extends AppCompatActivity {
 
         // client.send(new byte[] { 0xDE, 0xAD, 0xBE, 0xEF });
     }
-    private void gretingd(){
+
+    private void fillUserList(String json) {
+        try {
+            JSONArray array = new JSONArray(json);
+            utenti.clear();
+            for (int i = 0; i < array.length(); i++) {
+
+                String u = array.get(i).toString();
+                Log.e("UUU", u);
+                utenti.add(u);
+
+            }
+            listaUsersAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void gretingd() {
         Messaggio m = new Messaggio();
         m.setMittente("TrasferimentiPA");
-        m.setTesto("Stai chattando con "+utenteAnnuncio);
+
         appendMessage(m);
     }
 
@@ -184,14 +213,48 @@ public class GlobalChatActivity extends AppCompatActivity {
 
     @Override
     public void onStop() {
+
         super.onStop();
+
         //    client.disconnect();
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+     //   join();
+    }
+
+    @Override
     public void onDestroy() {
+        leave();
         super.onDestroy();
+
         //      client.disconnect();
+    }
+
+    private void leave() {
+        Gson gson = new Gson();
+        Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), "");
+        //   currOP = Messaggio.ASK_FOR_CHAT;
+        u.setOperation(Messaggio.LEAVE);
+        u.setRoom("PUBLIC");
+        String msg = gson.toJson(u);
+// Later…
+
+        client.send(msg);
+    }
+    private void join() {
+        if(client==null)return;
+        Gson gson = new Gson();
+        Messaggio u = new Messaggio(Heap.getUserCorrente().getUsername(), "");
+        //   currOP = Messaggio.ASK_FOR_CHAT;
+        u.setOperation(Messaggio.JOIN);
+        u.setRoom("PUBLIC");
+        String msg = gson.toJson(u);
+// Later…
+
+        client.send(msg);
     }
 
     public static Bitmap getFacebookProfilePicture(String userID) throws Exception {

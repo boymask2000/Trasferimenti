@@ -65,7 +65,7 @@ public class URLHelper {
 
         String url = null;
         try {
-            url = "ws://" + server ;
+            url = "ws://" + serverWS ;
             URLBuilder builder = new URLBuilder(url);
             builder.addParameter("name", Heap.getUserCorrente().getUsername());
             builder.addParameter("dest", utenteAnnuncio);

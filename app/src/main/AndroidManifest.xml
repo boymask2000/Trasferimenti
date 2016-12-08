@@ -115,7 +115,11 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".GlobalChatActivity"></activity>
+        <activity android:name=".GlobalChatActivity"
+
+            >
+
+        </activity>
     </application>
 
 </manifest>

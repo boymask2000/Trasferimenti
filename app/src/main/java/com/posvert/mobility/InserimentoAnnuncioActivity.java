@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.SpinnerInitializer;
+import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
 
 import java.io.UnsupportedEncodingException;
@@ -107,9 +108,28 @@ public class InserimentoAnnuncioActivity extends Activity {
 
         String url = URLHelper.build(this, "createAnnuncio");
 
+        URLBuilder builder = new URLBuilder(url);
+
         Utente user = Heap.getUserCorrente();
 
-        try {
+
+        builder.addParameter("username", user.getUsername());
+        builder.addParameter("regione",spinnerInitializer.getRegione());
+        builder.addParameter("provincia",spinnerInitializer.getProvincia());
+        builder.addParameter("comune",spinnerInitializer.getComune());
+        builder.addParameter("ente",((EditText) findViewById(R.id.ente)).getText().toString() );
+        builder.addParameter("note", nota);
+        builder.addParameter("livello", ((EditText) findViewById(R.id.livello)).getText().toString());
+        builder.addParameter("tipo", "A");
+        builder.addParameter("regione_s", user.getRegione());
+        builder.addParameter("provincia_s", user.getProvincia());
+        builder.addParameter("comune_s", user.getComune());
+        builder.addParameter("ente_s", user.getEnte());
+        builder.addParameter("livello_s", user.getLivello());
+
+        return builder.getUrl();
+
+/*        try {
             url += "username=" + URLEncoder.encode(Heap.getUserCorrente().getUsername(), "UTF-8");
 
             url += "&regione=" + spinnerInitializer.getRegione();
@@ -130,6 +150,6 @@ public class InserimentoAnnuncioActivity extends Activity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return url;
+        return url;*/
     }
 }

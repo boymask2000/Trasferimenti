@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.posvert.mobility.NuovoEnteFragment">
+
+    <TextView
+        android:id="@+id/messaggio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Inserisci nuovo ente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+
+
+    <Button
+        android:id="@+id/ok"
+        style="?android:textAppearanceSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:text="Ok" />
+
+</LinearLayout>

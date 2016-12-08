@@ -1,5 +1,7 @@
 package com.posvert.mobility;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -46,7 +49,7 @@ import beans.JSONHandler;
 import liste.adapters.ListaAnnunciAdapter;
 import liste.adapters.ListaChatAdapter;
 
-public class PaginaAnnunciActivity extends AppCompatActivity {
+public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFragment.OnFragmentInteractionListener {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
@@ -146,6 +149,16 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
 
             }
         });
+        Button    chat = (Button) findViewById(R.id.chat);
+        chat.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent act = new Intent(PaginaAnnunciActivity.this, GlobalChatActivity.class);
+
+                startActivity(act);
+
+            }
+        });
 
 
         loadData();
@@ -217,6 +230,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                         Annuncio u = JSONHandler.parseAnnuncioJSON(array.getJSONObject(i));
                         lista.add(u);
                     }
+                    if( lista.size()==0) buildFragment();
                     listaAnnunciAdapter = new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista);
                     mylist.setAdapter(listaAnnunciAdapter);
 
@@ -229,12 +243,24 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                 }
             }
         });
-        listaChatAdapter = new ListaChatAdapter(PaginaAnnunciActivity.this, listaChat);
+  /*      listaChatAdapter = new ListaChatAdapter(PaginaAnnunciActivity.this, listaChat);
         ChatRequest req = new ChatRequest("pippo");
         listaChat.add(req);
-        listaChatAdapter.notifyDataSetChanged();
+        listaChatAdapter.notifyDataSetChanged();*/
     }
+    private void buildFragment() {
+/*        FragmentManager fragmentManager = getFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        final Fragment fragment = new NuovoEnteFragment();
+        fragmentTransaction.add(R.id.container, fragment);
+        fragmentTransaction.commit();*/
 
+        final Fragment fragment =  PopupFragment.newInstance("Non hai nessun annuncio !!!! \nCreane uno col pulsante \"INSERISCI ANNUNCIO\"");
+        DialogFragment newFragment = (DialogFragment)fragment;
+
+        newFragment.show(getFragmentManager(), "dialog");
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -311,6 +337,11 @@ public class PaginaAnnunciActivity extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
 
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

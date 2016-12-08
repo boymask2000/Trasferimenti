@@ -2,21 +2,22 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pagina_annunci"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+
     android:scrollIndicators="top|bottom">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-
+        android:layout_height="0px"
+        android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
@@ -24,8 +25,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="0px"
+        android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
@@ -47,88 +48,115 @@
 
 
     </LinearLayout>
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
-    <android.support.v4.widget.NestedScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:text="I miei annunci"
+            tools:textSize="18sp" />
+
+        <ListView
+            android:id="@+id/lista"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideOverlay" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Button
+            android:id="@+id/creaannuncio"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lista"
+            android:layout_marginTop="16dp"
+            android:text="Crea annuncio"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cercamatch"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/creaannuncio"
+            android:layout_marginTop="16dp"
+
+            android:text="Cerca proposte"
+            android:textStyle="bold" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-
-                android:text="I miei annunci"
-                tools:textSize="18sp" />
-
-            <ListView
-                android:id="@+id/lista"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:scrollbarStyle="outsideOverlay" />
-
-            <Button
-                android:id="@+id/creaannuncio"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/lista"
-                android:layout_marginTop="16dp"
-                android:text="Crea annuncio"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/cercamatch"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/creaannuncio"
-                android:layout_marginTop="16dp"
-
-                android:text="Cerca proposte"
-                android:textStyle="bold" />
-
+            android:orientation="horizontal">
             <Button
                 android:id="@+id/vedimessaggi"
                 style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/lista"
                 android:layout_marginTop="16dp"
                 android:text="Messaggi"
                 android:textStyle="bold" />
-
             <Button
                 android:id="@+id/map"
                 style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/lista"
                 android:layout_marginTop="16dp"
                 android:text="Map"
                 android:textStyle="bold" />
 
-
-
+            <Button
+                android:id="@+id/chat"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lista"
+                android:layout_marginTop="16dp"
+                android:text="Chat"
+                android:textStyle="bold" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
 
+    </LinearLayout>
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="0px"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="4"
+
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
 </LinearLayout>

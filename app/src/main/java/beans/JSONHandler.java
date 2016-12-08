@@ -18,6 +18,7 @@ public class JSONHandler {
         u.setMittente(obj.getString("mittente"));
         u.setDestinatario(obj.getString("destinatario"));
         u.setTesto(obj.getString("testo"));
+        u.setRoom(obj.getString("room"));
         u.setAzione(obj.getInt("azione"));
         return u;
     }
@@ -27,18 +28,12 @@ public class JSONHandler {
         json.put("mittente", m.getMittente());
         json.put("destinatario", m.getDestinatario());
         json.put("testo", m.getTesto());
+        json.put("room", m.getRoom());
         json.put("azione", m.getAzione());
 
         return json.toString();
     }
-    public static Messaggio parseMessaggioJSON(JSONObject obj) throws JSONException {
-        Messaggio u = new Messaggio();
-        u.setMittente(obj.getString("mittente"));
-        u.setDestinatario(obj.getString("destinatario"));
-        u.setTesto(obj.getString("testo"));
-        u.setAzione(obj.getInt("azione"));
-        return u;
-    }
+
     public static GeoLocation parseGeoLocationJSON(JSONObject obj) throws JSONException {
         GeoLocation u = new GeoLocation();
         u.setUsername(obj.getString("username"));

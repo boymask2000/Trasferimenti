@@ -158,8 +158,7 @@ public class LoginFBActivity extends AppCompatActivity {
                 // App code
             }
         });
-
-
+        
         profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(

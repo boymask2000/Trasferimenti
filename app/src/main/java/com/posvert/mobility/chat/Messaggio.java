@@ -8,16 +8,17 @@ package com.posvert.mobility.chat;
 public class Messaggio {
     public static final int ASK_FOR_CHAT = 1;
     public static final int SEND_MSG = 2;
+    public static final int JOIN = 3;
+    public static final int LEAVE = 4;
+    public static final int SEND_USER_LIST = 5;
 
     private String mittente;
     private String destinatario;
     private String testo="";
-
-
-    private boolean self=false;
-
-
+    private String room="";
     private int azione;
+    private boolean self;
+
     public Messaggio(){
 
     }
@@ -75,6 +76,14 @@ public class Messaggio {
     public static int getAskForChat() {
         return ASK_FOR_CHAT;
     }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
     public boolean isSelf() {
         return self;
     }
@@ -82,4 +91,5 @@ public class Messaggio {
     public void setSelf(boolean self) {
         this.self = self;
     }
+
 }

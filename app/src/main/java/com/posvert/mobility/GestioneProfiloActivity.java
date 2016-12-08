@@ -1,5 +1,6 @@
 package com.posvert.mobility;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,8 +101,29 @@ public class GestioneProfiloActivity extends AppCompatActivity {
             }
 
         });
-    }
+        Button cercaEnte = (Button) findViewById(R.id.cercaEnte);
 
+
+        cercaEnte.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent act = new Intent(GestioneProfiloActivity.this, GestioneEntiActivity.class);
+
+                startActivityForResult(act,1);
+
+            }
+        });
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            String nome = data.getStringExtra("nome");
+            EditText t =(EditText)findViewById(R.id.ente);
+            t.setText(nome);
+
+        }
+
+    }
     private Utente getValori() {
         Utente u = Heap.getUserCorrente();
 

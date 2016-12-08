@@ -267,6 +267,14 @@
 
                 android:layout_weight="1"
                 android:text="Esci" />
+            <Button
+                android:id="@+id/cercaEnte"
+                style="?android:textAppearanceSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="cercaEnte" />
         </LinearLayout>
 
     </LinearLayout>

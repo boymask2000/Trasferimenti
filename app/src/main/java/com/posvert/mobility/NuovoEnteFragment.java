@@ -98,6 +98,7 @@ public class NuovoEnteFragment extends DialogFragment {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(ente.getText().toString().length()==0)return;
                 FragmentManager fragmentManager = getActivity().getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.remove(NuovoEnteFragment.this);

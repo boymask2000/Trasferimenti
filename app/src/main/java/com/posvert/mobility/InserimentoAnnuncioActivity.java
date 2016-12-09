@@ -1,6 +1,7 @@
 package com.posvert.mobility;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -99,8 +100,29 @@ public class InserimentoAnnuncioActivity extends Activity {
                 if( len>50)  editable.delete(50, len);
             }
         });
-    }
+        Button cercaEnte = (Button) findViewById(R.id.cercaEnte);
 
+
+        cercaEnte.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+
+                Intent act = new Intent(InserimentoAnnuncioActivity.this, GestioneEntiActivity.class);
+
+                startActivityForResult(act,1);
+
+            }
+        });
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            String nome = data.getStringExtra("nome");
+            EditText t =(EditText)findViewById(R.id.ente);
+            t.setText(nome);
+
+        }
+
+    }
     //http://localhost:8080/Trasferimenti/trasferimenti/createAnnuncio?regione=Campania&username=giovanni&tipo=A
     private String buildUrl() {
         String nota = ((EditText) findViewById(R.id.note)).getText().toString() ;

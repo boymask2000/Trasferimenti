@@ -34,7 +34,10 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gestione_profilo);
 
         setBottoni();
-
+        if (Heap.isLoginFB()) {
+            EditText pass = (EditText) findViewById(R.id.password);
+            pass.setVisibility(View.GONE);
+        }
 
         spinner_Regioni = (Spinner) findViewById(R.id.spinnerRegioni);
         spinner_Province = (Spinner) findViewById(R.id.spinnerProvince);
@@ -109,21 +112,23 @@ public class GestioneProfiloActivity extends AppCompatActivity {
 
                 Intent act = new Intent(GestioneProfiloActivity.this, GestioneEntiActivity.class);
 
-                startActivityForResult(act,1);
+                startActivityForResult(act, 1);
 
             }
         });
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (resultCode == RESULT_OK) {
             String nome = data.getStringExtra("nome");
-            EditText t =(EditText)findViewById(R.id.ente);
+            EditText t = (EditText) findViewById(R.id.ente);
             t.setText(nome);
 
         }
 
     }
+
     private Utente getValori() {
         Utente u = Heap.getUserCorrente();
 
@@ -160,7 +165,7 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         spinner_Comuni.setSelection(getIndex(spinner_Comuni, Heap.getUserCorrente().getComune()));
 
 
-  //      spinnerInitializer.setListeners();
+        //      spinnerInitializer.setListeners();
     }
 
     private int getIndex(Spinner spinner, String myString) {
@@ -168,7 +173,8 @@ public class GestioneProfiloActivity extends AppCompatActivity {
 
         for (int i = 0; i < spinner.getCount(); i++) {
             if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
-                index = i;Log.e("AAA1", ""+index);
+                index = i;
+                Log.e("AAA1", "" + index);
                 break;
             }
         }
@@ -177,11 +183,12 @@ public class GestioneProfiloActivity extends AppCompatActivity {
     }
 
     private boolean campiObbligatoriOK() {
+        if (!Heap.isLoginFB()) {
+            if (isEmpty(getVal(R.id.password))) {
+                SnackMsg.showErrMsg(findViewById(R.id.esci), "Password è obbligatorio");
 
-        if (isEmpty(getVal(R.id.password))) {
-            SnackMsg.showErrMsg(findViewById(R.id.esci), "Password è obbligatorio");
-
-            return false;
+                return false;
+            }
         }
         if (isEmpty(getVal(R.id.email))) {
             SnackMsg.showErrMsg(findViewById(R.id.esci), "Email è obbligatorio");

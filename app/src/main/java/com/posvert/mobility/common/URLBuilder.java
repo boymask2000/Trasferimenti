@@ -32,6 +32,8 @@ public class URLBuilder {
     }
 
     public void addParameter(String key, String val) {
+        if (val != null) val = val.trim();
+
         if (numParams == 0) {
             numParams++;
             if (!url.endsWith("?"))

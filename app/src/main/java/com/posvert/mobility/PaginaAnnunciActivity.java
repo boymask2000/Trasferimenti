@@ -36,7 +36,10 @@ import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
 import com.posvert.mobility.geo.GeoUtil;
 import com.posvert.mobility.geo.MyLocationListener;
+import com.posvert.mobility.helper.IExecutor;
+import com.posvert.mobility.helper.MessaggioOfflineHelper;
 import com.posvert.mobility.helper.UtentiHelper;
+import com.posvert.mobility.helper.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,14 +49,15 @@ import java.util.List;
 
 import beans.Annuncio;
 import beans.JSONHandler;
+import beans.Utente;
 import liste.adapters.ListaAnnunciAdapter;
 import liste.adapters.ListaChatAdapter;
 
-public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFragment.OnFragmentInteractionListener {
+public class PaginaAnnunciActivity extends AppCompatActivity implements PopupFragment.OnFragmentInteractionListener {
     private ListView mylist;
     private Button cercamatch = null;
     private List<Annuncio> lista = new ArrayList<>();
-    private GeoUtil gUtil=null;
+    private GeoUtil gUtil = null;
 
     private List<ChatRequest> listaChat = new ArrayList<>();
     private ListaAnnunciAdapter listaAnnunciAdapter = null;
@@ -68,7 +72,6 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
         AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
 
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -139,7 +142,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
             }
         });
 
-        Button    map = (Button) findViewById(R.id.map);
+        Button map = (Button) findViewById(R.id.map);
         map.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
@@ -149,7 +152,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
 
             }
         });
-        Button    chat = (Button) findViewById(R.id.chat);
+        Button chat = (Button) findViewById(R.id.chat);
         chat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
@@ -163,6 +166,8 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
 
         loadData();
 
+        checkProfilo();
+
         initGeo();
 
     }
@@ -173,7 +178,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
 
         gUtil = new GeoUtil(this);
         gUtil.check(this);
-   //     gUtil.init(this);
+        //     gUtil.init(this);
 
 
     }
@@ -230,7 +235,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
                         Annuncio u = JSONHandler.parseAnnuncioJSON(array.getJSONObject(i));
                         lista.add(u);
                     }
-                    if( lista.size()==0) buildFragment();
+                    if (lista.size() == 0) buildFragment();
                     listaAnnunciAdapter = new ListaAnnunciAdapter(PaginaAnnunciActivity.this, lista);
                     mylist.setAdapter(listaAnnunciAdapter);
 
@@ -248,6 +253,22 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
         listaChat.add(req);
         listaChatAdapter.notifyDataSetChanged();*/
     }
+
+    private void checkProfilo() {
+        UtentiHelper.getUtenteByUsername(this, Heap.getUserCorrente().getUsername(), new IExecutor() {
+            @Override
+            public void exec(Object obj) {
+                Utente u = (Utente) obj;
+                boolean err = Util.isEmpty(u.getComune()) ||
+                        Util.isEmpty(u.getProvincia()) ||
+                        Util.isEmpty(u.getRegione());
+                if( err){
+                    MessaggioOfflineHelper.sendMessage(getBaseContext(), "SYSTEM", Heap.getUserCorrente().getUsername(), "Il tuo profilo utente è incompleto. ");
+                }
+            }
+        });
+    }
+
     private void buildFragment() {
 /*        FragmentManager fragmentManager = getFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -255,12 +276,13 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
         fragmentTransaction.add(R.id.container, fragment);
         fragmentTransaction.commit();*/
 
-        final Fragment fragment =  PopupFragment.newInstance("Non hai nessun annuncio !!!! \nCreane uno col pulsante \"INSERISCI ANNUNCIO\"");
-        DialogFragment newFragment = (DialogFragment)fragment;
+        final Fragment fragment = PopupFragment.newInstance("Non hai nessun annuncio !!!! \nCreane uno col pulsante \"INSERISCI ANNUNCIO\"");
+        DialogFragment newFragment = (DialogFragment) fragment;
 
         newFragment.show(getFragmentManager(), "dialog");
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -273,11 +295,11 @@ public class PaginaAnnunciActivity extends AppCompatActivity  implements PopupFr
 
     private String buildUrl() {
 
-        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente") ;
+        String url = URLHelper.build(this, "cercaAnnunciCreatiDaUtente");
 
         URLBuilder builder = new URLBuilder(url);
         builder.addParameter("username", Heap.getUserCorrente().getUsername());
-         url = builder.getUrl();
+        url = builder.getUrl();
 
 
         return url;

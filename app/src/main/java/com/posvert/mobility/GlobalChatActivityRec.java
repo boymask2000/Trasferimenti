@@ -1,6 +1,5 @@
 package com.posvert.mobility;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Ringtone;
@@ -19,9 +18,9 @@ import android.widget.ListView;
 
 import com.codebutler.android_websockets.WebSocketClient;
 import com.google.gson.Gson;
-import com.posvert.mobility.chat.MessagesListAdapter;
 import com.posvert.mobility.chat.MessagesListAdapterRec;
 import com.posvert.mobility.chat.Messaggio;
+import com.posvert.mobility.chat.UserListAdapterRec;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.URLHelper;
 
@@ -33,29 +32,28 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import beans.JSONHandler;
 
+import beans.JSONHandler;
+import beans.Utente;
 import liste.adapters.ListaChatUsersAdapter;
 
-public class GlobalChatActivity extends AppCompatActivity {
-
+public class GlobalChatActivityRec extends AppCompatActivity {
     private WebSocketClient client = null;
 
     private ListView listViewMessages;
     private ListView listViewUsers;
     private List<Messaggio> listMessages = new ArrayList<>();
-    private List<String> utenti = new ArrayList<>();
-    private ListaChatUsersAdapter listaUsersAdapter;
+    private List<Utente> utenti = new ArrayList<>();
+  //  private ListaChatUsersAdapter listaUsersAdapter;
     //   private MessagesListAdapter adapter;
     private EditText inputMsg;
     private MessagesListAdapterRec mAdapter;
+    private UserListAdapterRec mListaUsersAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_global_chat);
-
+        setContentView(R.layout.activity_global_chat_rec);
 
  /*       listViewMessages = (ListView) findViewById(R.id.list_view_messages);
         adapter = new MessagesListAdapter(this, listMessages);
@@ -71,9 +69,18 @@ public class GlobalChatActivity extends AppCompatActivity {
         listViewMessages_rec.setAdapter(mAdapter);
 
 
-        listViewUsers = (ListView) findViewById(R.id.users);
+
+        RecyclerView listViewUsers_rec = (RecyclerView) findViewById(R.id.users);
+        mListaUsersAdapter = new UserListAdapterRec(utenti, this);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listViewUsers_rec.setLayoutManager(layoutManager);
+        listViewUsers_rec.setItemAnimator(new DefaultItemAnimator());
+        listViewUsers_rec.setAdapter(mListaUsersAdapter);
+
+     /*   listViewUsers = (ListView) findViewById(R.id.users);
         listaUsersAdapter = new ListaChatUsersAdapter(this, utenti);
-        listViewUsers.setAdapter(listaUsersAdapter);
+        listViewUsers.setAdapter(listaUsersAdapter);*/
 
         Button btnSend = (Button) findViewById(R.id.btnSend);
         inputMsg = (EditText) findViewById(R.id.inputMsg);
@@ -181,10 +188,13 @@ public class GlobalChatActivity extends AppCompatActivity {
 
                 String u = array.get(i).toString();
                 Log.e("UUU", u);
-                utenti.add(u);
+                Utente uu = new Utente();
+                uu.setUsername(u);
+         //       for(int j=0;j<20; j++)
+                utenti.add(uu);
 
             }
-            listaUsersAdapter.notifyDataSetChanged();
+            mListaUsersAdapter.notifyDataSetChanged();
         } catch (Exception e) {
             e.printStackTrace();
         }

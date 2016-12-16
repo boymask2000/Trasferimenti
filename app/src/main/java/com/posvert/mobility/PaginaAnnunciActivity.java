@@ -156,7 +156,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity implements PopupFra
         chat.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
-                Intent act = new Intent(PaginaAnnunciActivity.this, GlobalChatActivity.class);
+                Intent act = new Intent(PaginaAnnunciActivity.this, GlobalChatActivityRec.class);
 
                 startActivity(act);
 

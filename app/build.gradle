@@ -8,8 +8,8 @@ android {
         minSdkVersion 17
         targetSdkVersion 24
 
-        versionCode 32
-        versionName "32.0"
+        versionCode 33
+        versionName "33.0"
 
         multiDexEnabled true
 
@@ -55,6 +55,9 @@ dependencies {
     compile 'com.google.firebase:firebase-ads:9.8.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services:9.8.0'
+    compile 'com.github.nekocode:Emojix:1.2'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

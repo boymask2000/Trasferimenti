@@ -20,6 +20,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.posvert.mobility.R;
+import com.posvert.mobility.common.Config;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandlerPOST;
 import com.posvert.mobility.common.URLBuilder;
@@ -46,6 +47,8 @@ public class GeoUtil {
 
 
     public boolean check(final Activity act) {
+        if(!Config.isLocationEnabled(act))return true;
+
         boolean gps_enabled = false;
         boolean network_enabled = false;
 
@@ -90,6 +93,8 @@ public class GeoUtil {
     }
 
     public void init(Activity act) {
+        if(!Config.isLocationEnabled(act))return ;
+
         locationManager = (LocationManager)
                 ctx.getSystemService(Context.LOCATION_SERVICE);
         LocationListener locationListener = new MyLocationListener(ctx, this);
@@ -104,7 +109,7 @@ public class GeoUtil {
 
             Location location = getLastBestLocation(act);
 
-if(location==null)return;
+            if (location == null) return;
             setLocation(location);
         }
     }
@@ -128,6 +133,7 @@ if(location==null)return;
     }
 
     public boolean checkLocationPermission() {
+        if(!Config.isLocationEnabled(ctx))return true;
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = ctx.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
@@ -170,6 +176,7 @@ if(location==null)return;
     }
 
     public void getCity(Location loc) {
+        if(!Config.isLocationEnabled(ctx))return ;
         String cityName = null;
         Geocoder gcd = new Geocoder(ctx, Locale.getDefault());
         List<Address> addresses;
@@ -188,6 +195,7 @@ if(location==null)return;
     }
 
     public void setLocation(final Location loc) {
+        if(!Config.isLocationEnabled(ctx))return ;
         getCity(loc);
         double longitude = loc.getLongitude();
         double latitide = loc.getLatitude();
@@ -211,7 +219,7 @@ if(location==null)return;
     }
 
     public void unsetLocation() {
-
+        if(!Config.isLocationEnabled(ctx))return ;
 
         URLHelper.invokeURLPOST(ctx, buildUrlUnset(), new ResponseHandlerPOST() {
             @Override

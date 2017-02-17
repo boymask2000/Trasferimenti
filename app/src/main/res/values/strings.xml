@@ -29,4 +29,12 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="descrizione">Questa app vuole fare incontrare dipendenti pubblici che vogliano scambiarsi la sede di lavoro</string>
+    <string name="i_miei_annunci">Le mie destinazioni desiderate</string>
+    <string name="crea_annuncio">Inserisci Destinazione Desiderata</string>
+    <string name="messaggi">Messaggi</string>
+    <string name="invia_nmessaggio">Invia\nMessaggio</string>
+    <string name="nascondi">Nascondi</string>
+    <string name="questo_a">Questo annuncio corrisponde ai tuoi criteri. Scorri per vedere tutti i dettagli</string>
+    <string name="registrazione">Registrazione</string>
 </resources>

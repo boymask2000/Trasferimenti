@@ -5,19 +5,10 @@ package com.posvert.mobility.geo;
  */
 
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 public class MyLocationListener implements LocationListener {
     private final Context context;
@@ -31,7 +22,7 @@ public class MyLocationListener implements LocationListener {
     @Override
     public void onLocationChanged(Location loc) {
 
-
+/*
         Toast.makeText(
                 context,
                 "Location changed: Lat: " + loc.getLatitude() + " Lng: "
@@ -39,7 +30,7 @@ public class MyLocationListener implements LocationListener {
         String longitude = "Longitude: " + loc.getLongitude();
         Log.v("W", longitude);
         String latitude = "Latitude: " + loc.getLatitude();
-        Log.v("W", latitude);
+        Log.v("W", latitude);*/
 
         geoutil.setLocation(loc);
 

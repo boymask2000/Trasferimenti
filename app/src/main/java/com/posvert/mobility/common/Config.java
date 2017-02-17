@@ -20,6 +20,16 @@ public class Config {
     public static String getServerAddress(Context context) {
         return BuildConfig.HOST;
     }
+
+    public static boolean isLocationEnabled(Context context){
+        String val = getVal(context, "enable_location");
+        return val.equals("1");
+    }
+    public static boolean isChatEnabled(Context context){
+        String val =  getVal(context, "enable_chat");
+        return val.equals("1");
+    }
+
     public static String getVal(Context context, String key) {
         if (!inited) init(context);
         return props.getProperty(key);

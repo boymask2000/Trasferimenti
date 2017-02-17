@@ -2,16 +2,11 @@ package com.posvert.mobility;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,12 +25,12 @@ import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.posvert.mobility.chat.ChatRequest;
+import com.posvert.mobility.common.Config;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
 import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
 import com.posvert.mobility.geo.GeoUtil;
-import com.posvert.mobility.geo.MyLocationListener;
 import com.posvert.mobility.helper.IExecutor;
 import com.posvert.mobility.helper.MessaggioOfflineHelper;
 import com.posvert.mobility.helper.UtentiHelper;
@@ -143,26 +138,33 @@ public class PaginaAnnunciActivity extends AppCompatActivity implements PopupFra
         });
 
         Button map = (Button) findViewById(R.id.map);
-        map.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        map.setVisibility(View.GONE);
+        if (Config.isLocationEnabled(this)) {
+            map.setVisibility(View.VISIBLE);
+            map.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
 
-                Intent act = new Intent(PaginaAnnunciActivity.this, MapsActivity.class);
+                    Intent act = new Intent(PaginaAnnunciActivity.this, MapsActivity.class);
 
-                startActivity(act);
+                    startActivity(act);
 
-            }
-        });
+                }
+            });
+        }
         Button chat = (Button) findViewById(R.id.chat);
-        chat.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        chat.setVisibility(View.GONE);
+        if (Config.isChatEnabled(this)) {
+            chat.setVisibility(View.VISIBLE);
+            chat.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
 
-                Intent act = new Intent(PaginaAnnunciActivity.this, GlobalChatActivityRec.class);
+                    Intent act = new Intent(PaginaAnnunciActivity.this, GlobalChatActivityRec.class);
+                    //      Intent act = new Intent(PaginaAnnunciActivity.this, ChatTabActivity.class);
+                    startActivity(act);
 
-                startActivity(act);
-
-            }
-        });
-
+                }
+            });
+        }
 
         loadData();
 
@@ -262,7 +264,7 @@ public class PaginaAnnunciActivity extends AppCompatActivity implements PopupFra
                 boolean err = Util.isEmpty(u.getComune()) ||
                         Util.isEmpty(u.getProvincia()) ||
                         Util.isEmpty(u.getRegione());
-                if( err){
+                if (err) {
                     MessaggioOfflineHelper.sendMessage(getBaseContext(), "SYSTEM", Heap.getUserCorrente().getUsername(), "Il tuo profilo utente è incompleto. ");
                 }
             }
@@ -289,7 +291,8 @@ public class PaginaAnnunciActivity extends AppCompatActivity implements PopupFra
         // check if the request code is same as what is passed  here it is 2
         if (requestCode == 2) {
             loadData();
-            listaAnnunciAdapter.notifyDataSetChanged();
+            if (listaAnnunciAdapter != null)
+                listaAnnunciAdapter.notifyDataSetChanged();
         }
     }
 

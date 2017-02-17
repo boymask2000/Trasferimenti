@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,7 +51,6 @@ public class RegistrazioneActivity extends Activity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    private View mContentView;
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -59,6 +58,21 @@ public class RegistrazioneActivity extends Activity {
 
         }
     };
+    /**
+     * Touch listener to use for in-layout UI controls to delay hiding the
+     * system UI. This is to prevent the jarring behavior of controls going away
+     * while interacting with activity UI.
+     */
+    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (AUTO_HIDE) {
+                delayedHide(AUTO_HIDE_DELAY_MILLIS);
+            }
+            return false;
+        }
+    };
+    private View mContentView;
     private View mControlsView;
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
@@ -76,20 +90,6 @@ public class RegistrazioneActivity extends Activity {
         @Override
         public void run() {
             hide();
-        }
-    };
-    /**
-     * Touch listener to use for in-layout UI controls to delay hiding the
-     * system UI. This is to prevent the jarring behavior of controls going away
-     * while interacting with activity UI.
-     */
-    private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (AUTO_HIDE) {
-                delayedHide(AUTO_HIDE_DELAY_MILLIS);
-            }
-            return false;
         }
     };
     private Spinner spinnerProvince;
@@ -122,7 +122,7 @@ public class RegistrazioneActivity extends Activity {
 
                 Intent act = new Intent(RegistrazioneActivity.this, GestioneEntiActivity.class);
 
-                startActivityForResult(act,1);
+                startActivityForResult(act, 1);
 
             }
         });
@@ -170,16 +170,18 @@ public class RegistrazioneActivity extends Activity {
         String server = Config.getServerAddress(this);
         System.out.println(server);
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-            if (resultCode == RESULT_OK) {
-                String nome = data.getStringExtra("nome");
-                EditText t =(EditText)findViewById(R.id.ente);
-                t.setText(nome);
+        if (resultCode == RESULT_OK) {
+            String nome = data.getStringExtra("nome");
+            EditText t = (EditText) findViewById(R.id.ente);
+            t.setText(nome);
 
-            }
+        }
 
     }
+
     private boolean campiObbligatoriOK() {
         if (isEmpty(getVal(R.id.username))) {
             SnackMsg.showErrMsg(findViewById(R.id.registra), "Username è obbligatorio");
@@ -222,7 +224,7 @@ public class RegistrazioneActivity extends Activity {
         String url = URLHelper.build(this, "createUser");
 
         try {
-            url += "name=" + URLEncoder.encode(((EditText) findViewById(R.id.username)).getText().toString(),"UTF-8");
+            url += "name=" + URLEncoder.encode(((EditText) findViewById(R.id.username)).getText().toString(), "UTF-8");
             url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
             url += "&regione=" + spinnerInitializer.getRegione();
             url += "&provincia=" + spinnerInitializer.getProvincia();

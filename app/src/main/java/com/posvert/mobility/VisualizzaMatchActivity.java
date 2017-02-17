@@ -2,14 +2,15 @@ package com.posvert.mobility;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.posvert.mobility.common.Config;
 import com.posvert.mobility.common.Heap;
 import com.posvert.mobility.common.ResponseHandler;
 import com.posvert.mobility.common.URLBuilder;
@@ -40,8 +41,6 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String pkg = getPackageName();
         id = bundle.getString(pkg + "ID");
-
-
 
 
         URLHelper.invokeURL(this, buildUrl(id), new ResponseHandler() {
@@ -97,7 +96,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
     private String buildUrlUser(String username) {
         String url = URLHelper.build(this, "getUtenteByUsername");
         try {
-            url += "username="+ URLEncoder.encode(username, "UTF-8");
+            url += "username=" + URLEncoder.encode(username, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -136,16 +135,20 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
 
 //---------------------
         Button chat = (Button) findViewById(R.id.chat);
-        chat.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-             //   startActivity(new Intent(VisualizzaMatchActivity.this, ChatTabActivity.class));
-              Intent act = new Intent(VisualizzaMatchActivity.this, ChatActivity.class);
+        chat.setVisibility(View.GONE);
+        if (Config.isChatEnabled(this)) {
+            chat.setVisibility(View.VISIBLE);
+            chat.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    //   startActivity(new Intent(VisualizzaMatchActivity.this, ChatTabActivity.class));
+                    Intent act = new Intent(VisualizzaMatchActivity.this, ChatActivity.class);
 
-                String pkg = getPackageName();
-                act.putExtra(pkg + "USERNAME", utente.getUsername());
-                startActivity(act);
-            }
-        });
+                    String pkg = getPackageName();
+                    act.putExtra(pkg + "USERNAME", utente.getUsername());
+                    startActivity(act);
+                }
+            });
+        }
 //---------------------
         Button messaggio = (Button) findViewById(R.id.messaggio);
         messaggio.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +162,7 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
 
         Button nascondi = (Button) findViewById(R.id.nascondi);
 
-        nascondi.setOnClickListener(new View.OnClickListener(){
+        nascondi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaMatchActivity.this);
@@ -169,12 +172,12 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
                         .setTitle("Attenzione!");
                 builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                       URLHelper.invokeURL(VisualizzaMatchActivity.this, buildUrlNascondi(), new ResponseHandler() {
-                           @Override
-                           public void parseResponse(String response) {
+                        URLHelper.invokeURL(VisualizzaMatchActivity.this, buildUrlNascondi(), new ResponseHandler() {
+                            @Override
+                            public void parseResponse(String response) {
 
-                           }
-                       });
+                            }
+                        });
                     }
 
 
@@ -189,9 +192,10 @@ public class VisualizzaMatchActivity extends AppCompatActivity {
             }
         });
     }
+
     private String buildUrlNascondi() {
-        URLBuilder builder = new URLBuilder(VisualizzaMatchActivity.this, "inserisci","nonvedo");
-        builder.addParameter("idannuncio", ""+id);
+        URLBuilder builder = new URLBuilder(VisualizzaMatchActivity.this, "inserisci", "nonvedo");
+        builder.addParameter("idannuncio", "" + id);
         builder.addParameter("username", Heap.getUserCorrente().getUsername());
         return builder.getUrl();
     }

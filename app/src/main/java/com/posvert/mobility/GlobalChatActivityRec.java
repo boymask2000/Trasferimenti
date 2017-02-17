@@ -50,6 +50,8 @@ public class GlobalChatActivityRec extends AppCompatActivity {
     private MessagesListAdapterRec mAdapter;
     private UserListAdapterRec mListaUsersAdapter;
 
+    private RecyclerView listViewMessages_rec;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +62,11 @@ public class GlobalChatActivityRec extends AppCompatActivity {
         listViewMessages.setAdapter(adapter);*/
 
 
-        RecyclerView listViewMessages_rec = (RecyclerView) findViewById(R.id.list_view_messages_rec);
+        listViewMessages_rec = (RecyclerView) findViewById(R.id.list_view_messages_rec);
 
-        mAdapter = new MessagesListAdapterRec(listMessages);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        listViewMessages_rec.setLayoutManager(mLayoutManager);
-        listViewMessages_rec.setItemAnimator(new DefaultItemAnimator());
-        listViewMessages_rec.setAdapter(mAdapter);
+        setListaMessaggi(listMessages);
+
+
 
 
 
@@ -180,6 +180,15 @@ public class GlobalChatActivityRec extends AppCompatActivity {
         // client.send(new byte[] { 0xDE, 0xAD, 0xBE, 0xEF });
     }
 
+    private void setListaMessaggi(List<Messaggio> ll) {
+        mAdapter = new MessagesListAdapterRec(ll);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        listViewMessages_rec.setLayoutManager(mLayoutManager);
+        listViewMessages_rec.setItemAnimator(new DefaultItemAnimator());
+        listViewMessages_rec.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
     private void fillUserList(String json) {
         try {
             JSONArray array = new JSONArray(json);
@@ -190,7 +199,7 @@ public class GlobalChatActivityRec extends AppCompatActivity {
                 Log.e("UUU", u);
                 Utente uu = new Utente();
                 uu.setUsername(u);
-         //       for(int j=0;j<20; j++)
+         //      for(int j=0;j<20; j++)
                 utenti.add(uu);
 
             }

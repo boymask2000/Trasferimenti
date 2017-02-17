@@ -1,139 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:scrollIndicators="top|bottom">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Questo annuncio corrisponde ai tuoi criteri. Scorri per vedere tutti i dettagli"/>
+        android:text="@string/questo_a" />
 
-<GridLayout
+    <GridLayout
 
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_visualizza_match"
-    android:layout_width="match_parent"
-    android:layout_height="fill_parent"
-    android:columnCount="2"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_visualizza_match"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:columnCount="2"
 
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_scrollFlags="scroll"
-    tools:context="com.posvert.mobility.VisualizzaMatchActivity">
-
-
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_scrollFlags="scroll"
+        tools:context="com.posvert.mobility.VisualizzaMatchActivity">
 
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                style="?metaButtonBarStyle"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    style="?metaButtonBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Utente: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <EditText
+                        android:id="@+id/autoreannuncio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:gravity="center_horizontal"
+                        android:text="Utente"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                </LinearLayout>
+
+                <include layout="@layout/include_annuncio_s" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+
+                    android:text="Sta cercando"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+                <include layout="@layout/include_annuncio_p" />
+            </LinearLayout>
+        </ScrollView>
 
         <LinearLayout
-            style="?metaButtonBarStyle"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+
+
             android:orientation="vertical">
 
 
-        <LinearLayout
-            style="?metaButtonBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
+            <!--        <Button
+                        android:id="@+id/contatta"
+                        style="?metaButtonBarButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Contatta" />-->
+
+
+            <Button
+                android:id="@+id/chat"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Utente: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            <EditText
-                android:editable="false"
-                android:id="@+id/autoreannuncio"
-                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:text="Chat"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/messaggio"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="Utente"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:layout_gravity="center"
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="@string/invia_nmessaggio"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/nascondi"
 
-            <include layout="@layout/include_annuncio_s" />
-
-            <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:text="@string/nascondi"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
 
-                android:text="Sta cercando"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+            <Button
+                android:id="@+id/esci_vismatch"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+
+                android:text="Esci"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
 
 
-
-
-            <include layout="@layout/include_annuncio_p" />
         </LinearLayout>
-    </ScrollView>
 
-    <LinearLayout
-
-        style="?metaButtonBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-
-
-        android:orientation="vertical">
-
-
-<!--        <Button
-            android:id="@+id/contatta"
-            style="?metaButtonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Contatta" />-->
-
-
-
-        <Button
-            android:id="@+id/chat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Chat"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/messaggio"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Messaggio"/>
-        <Button
-            android:id="@+id/nascondi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Nascondi"/>
-
-        <Button
-            android:id="@+id/esci_vismatch"
-            android:layout_marginTop="150dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="Esci"
-            android:layout_gravity="bottom" />
-
-    </LinearLayout>
-
-</GridLayout>
+    </GridLayout>
 
 
 </LinearLayout>

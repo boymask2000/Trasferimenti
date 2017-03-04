@@ -2,16 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+
     android:orientation="vertical">
 
     <LinearLayout
 
-        style="?metaButtonBarStyle"
+
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:useDefaultMargins="true"
-
-        android:orientation="horizontal">
+        android:background="#ffffff"
+        android:orientation="horizontal"
+       >
 
         <LinearLayout
             android:layout_weight="1"
@@ -26,7 +28,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Regione"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:background="#ffffff" />
 
             <TextView
                 android:id="@+id/provincia"
@@ -34,14 +37,16 @@
                 android:layout_height="wrap_content"
 
                 android:text="Provincia"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:background="#ffffff" />
             <TextView
                 android:id="@+id/comune"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
 
                 android:text="Comune"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:background="#ffffff" />
         </LinearLayout>
 
         <TextView
@@ -53,7 +58,8 @@
             android:layout_height="wrap_content"
 
 
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:background="#ffffff" />
     </LinearLayout>
 
 

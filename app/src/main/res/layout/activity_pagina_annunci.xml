@@ -144,25 +144,37 @@
                 android:layout_gravity="center"
                 android:text="@string/messaggi"
                 android:textColor="#FFFFFF"/>
+
             <Button
                 android:id="@+id/map"
-                style="?android:textAppearanceSmall"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-
-                android:text="Map"
-                android:textStyle="bold" />
+                android:textAllCaps="false"
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:layout_gravity="center"
+                android:text="@string/map"
+                android:textColor="#FFFFFF"/>
 
             <Button
                 android:id="@+id/chat"
-                style="?android:textAppearanceSmall"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:background="@drawable/buttonshape"
+                android:shadowColor="#A8A8A8"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="5"
+                android:layout_gravity="center"
+                android:text="@string/chat"
+                android:textColor="#FFFFFF"/>
 
-
-                android:text="Chat"
-                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

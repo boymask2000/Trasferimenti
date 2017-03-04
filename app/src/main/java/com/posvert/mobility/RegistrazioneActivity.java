@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.posvert.mobility.common.Config;
 import com.posvert.mobility.common.SnackMsg;
 import com.posvert.mobility.common.SpinnerInitializer;
+import com.posvert.mobility.common.URLBuilder;
 import com.posvert.mobility.common.URLHelper;
 
 import java.io.UnsupportedEncodingException;
@@ -116,6 +117,8 @@ public class RegistrazioneActivity extends Activity {
 
         Button cercaEnte = (Button) findViewById(R.id.cercaEnte);
 
+        QualificaXMLHandler qualificaXML = new QualificaXMLHandler(this);
+
 
         cercaEnte.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -170,14 +173,19 @@ public class RegistrazioneActivity extends Activity {
         String server = Config.getServerAddress(this);
         System.out.println(server);
     }
-
+private String codiceQualifica="";
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (resultCode == RESULT_OK) {
             String nome = data.getStringExtra("nome");
-            EditText t = (EditText) findViewById(R.id.ente);
+             codiceQualifica = data.getStringExtra("codice");
+
+
+            EditText t = (EditText) findViewById(R.id.qualifica);
             t.setText(nome);
 
+            EditText t1 = (EditText) findViewById(R.id.codqualifica);
+            t1.setText(codiceQualifica);
         }
 
     }
@@ -222,8 +230,21 @@ public class RegistrazioneActivity extends Activity {
     private String buildUrl() {
 
         String url = URLHelper.build(this, "createUser");
+        URLBuilder builder = new URLBuilder(url);
+        builder.addParameter("name", ((EditText) findViewById(R.id.username)).getText().toString());
+        builder.addParameter("password", ((EditText) findViewById(R.id.password)).getText().toString());
+        builder.addParameter("regione", spinnerInitializer.getRegione());
+        builder.addParameter("provincia", spinnerInitializer.getProvincia());
+        builder.addParameter("comune", spinnerInitializer.getComune());
+        builder.addParameter("ente", ((EditText) findViewById(R.id.ente)).getText().toString());
+        builder.addParameter("telefono", ((EditText) findViewById(R.id.telefono)).getText().toString());
+        builder.addParameter("email", ((EditText) findViewById(R.id.email)).getText().toString());
+        builder.addParameter("livello", ((EditText) findViewById(R.id.livello)).getText().toString());
+        builder.addParameter("codQualifica", codiceQualifica);
 
-        try {
+        return builder.getUrl();
+
+ /*       try {
             url += "name=" + URLEncoder.encode(((EditText) findViewById(R.id.username)).getText().toString(), "UTF-8");
             url += "&password=" + ((EditText) findViewById(R.id.password)).getText().toString();
             url += "&regione=" + spinnerInitializer.getRegione();
@@ -236,7 +257,7 @@ public class RegistrazioneActivity extends Activity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return url;
+        return url;*/
     }
 
     @Override

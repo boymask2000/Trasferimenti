@@ -239,7 +239,7 @@
                  />
 
         </android.support.design.widget.TextInputLayout>
-
+        <include layout="@layout/qualifica"/>
 
         <LinearLayout
 

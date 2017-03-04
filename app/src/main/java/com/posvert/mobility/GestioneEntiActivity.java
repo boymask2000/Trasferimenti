@@ -89,7 +89,7 @@ public class GestioneEntiActivity extends AppCompatActivity implements NuovoEnte
         cerca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                URLHelper.invokeURL(GestioneEntiActivity.this, buuldUrlCerca(query), new ResponseHandler() {
+                URLHelper.invokeURL(GestioneEntiActivity.this, buildUrlCerca(query), new ResponseHandler() {
                     @Override
                     public void parseResponse(String response) {
                         Log.e("E", response);
@@ -132,7 +132,7 @@ public class GestioneEntiActivity extends AppCompatActivity implements NuovoEnte
 
     }
 
-    private String buuldUrlCerca(EditText query) {
+    private String buildUrlCerca(EditText query) {
         String url = URLHelper.buildWithPref(this, "enti", "cercaEnteByName", true);
 
         URLBuilder builder = new URLBuilder(url);

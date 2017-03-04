@@ -37,4 +37,11 @@
     <string name="nascondi">Nascondi</string>
     <string name="questo_a">Questo annuncio corrisponde ai tuoi criteri. Scorri per vedere tutti i dettagli</string>
     <string name="registrazione">Registrazione</string>
+    <string name="map">Map</string>
+    <string name="chat">Chat</string>
+    <string name="cercaqualifica">cercaQualifica</string>
+    <string name="cerca_ente">Cerca Ente</string>
+    <string name="registra">Registra</string>
+    <string name="qualifica">Qualifica</string>
+    <string name="registrazione_nuovo_utente">Registrazione nuovo utente</string>
 </resources>

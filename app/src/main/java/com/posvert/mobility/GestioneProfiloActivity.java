@@ -1,8 +1,8 @@
 package com.posvert.mobility;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -116,30 +116,58 @@ public class GestioneProfiloActivity extends AppCompatActivity {
 
             }
         });
+        QualificaXMLHandler qualificaXML = new QualificaXMLHandler(this);
     }
+
+    private String codiceQualifica = "";
+    private int iCodiceQualifica = 0;
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (resultCode == RESULT_OK) {
-            String nome = data.getStringExtra("nome");
-            EditText t = (EditText) findViewById(R.id.ente);
-            t.setText(nome);
+            if (requestCode != QualificaXMLHandler.ID) {
+                String nome = data.getStringExtra("nome");
+                EditText t = (EditText) findViewById(R.id.ente);
+                t.setText(nome);
+            }
 
+            if (requestCode == QualificaXMLHandler.ID && data != null) {
+                String nome = data.getStringExtra("nome");
+                Utente u = Heap.getUserCorrente();
+
+                codiceQualifica = data.getStringExtra("codice");
+                if (codiceQualifica != null) {
+                    try {
+                        iCodiceQualifica = Integer.parseInt(codiceQualifica);
+                        u.setCodQualifica(iCodiceQualifica);
+                    } catch (NumberFormatException e) {
+
+                    }
+                }
+
+                EditText t = (EditText) findViewById(R.id.qualifica);
+                t.setText(nome);
+            }
         }
-
     }
 
     private Utente getValori() {
         Utente u = Heap.getUserCorrente();
 
+        if (spinner_Province.getSelectedItem() != null)
+            u.setProvincia(spinner_Province.getSelectedItem().toString());
+        if (spinner_Comuni.getSelectedItem() != null)
+            u.setComune(spinner_Comuni.getSelectedItem().toString());
+
         u.setPassword(((EditText) findViewById(R.id.password)).getText().toString());
         u.setRegione(spinner_Regioni.getSelectedItem().toString());
-        u.setProvincia(spinner_Province.getSelectedItem().toString());
-        u.setComune(spinner_Comuni.getSelectedItem().toString());
+
+
         u.setEnte(((EditText) findViewById(R.id.ente)).getText().toString());
         u.setTelefono(((EditText) findViewById(R.id.telefono)).getText().toString());
         u.setEmail(((EditText) findViewById(R.id.email)).getText().toString());
         u.setLivello(((EditText) findViewById(R.id.livello)).getText().toString());
+        u.setCodQualifica(iCodiceQualifica);
         return u;
     }
 
@@ -155,6 +183,8 @@ public class GestioneProfiloActivity extends AppCompatActivity {
         ((EditText) findViewById(R.id.telefono)).setText(Heap.getUserCorrente().getTelefono());
         ((EditText) findViewById(R.id.ente)).setText(Heap.getUserCorrente().getEnte());
         ((EditText) findViewById(R.id.livello)).setText(Heap.getUserCorrente().getLivello());
+
+        ((EditText) findViewById(R.id.qualifica)).setText(Heap.getUserCorrente().getDescQualifica());
 
         spinner_Regioni.setSelection(getIndex(spinner_Regioni, Heap.getUserCorrente().getRegione()));
 

@@ -14,6 +14,26 @@ public class Utente {
     private String password;
     private String fbUserid;
 
+    private int codQualifica;
+    private String descQualifica;
+
+
+    public String getDescQualifica() {
+        return descQualifica;
+    }
+
+    public void setDescQualifica(String descQualifica) {
+        this.descQualifica = descQualifica;
+    }
+
+
+    public int getCodQualifica() {
+        return codQualifica;
+    }
+
+    public void setCodQualifica(int codQualifica) {
+        this.codQualifica = codQualifica;
+    }
 
     public String getFbUserid() {
         return fbUserid;

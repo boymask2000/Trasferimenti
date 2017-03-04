@@ -43,6 +43,15 @@ public class JSONHandler {
         return u;
     }
 
+    public static Qualifica parseQualificaJSON(JSONObject obj) throws JSONException {
+        Qualifica u = new Qualifica();
+        u.setCodice(obj.getInt("codice"));
+        u.setDescrizione(obj.getString("descrizione"));
+        u.setId(obj.getInt("id"));
+        u.setLingua(obj.getInt("lingua"));
+        return u;
+    }
+
     public static Ente parseEnteJSON(JSONObject obj) throws JSONException {
         Ente u = new Ente();
         u.setNome(obj.getString("nome"));
@@ -51,6 +60,7 @@ public class JSONHandler {
         u.setComune(obj.getString("comune"));
         return u;
     }
+
     public static Utente parseUtenteJSON(JSONObject obj) throws JSONException {
         Utente u = new Utente();
         u.setEmail(obj.getString("email"));
@@ -63,7 +73,8 @@ public class JSONHandler {
         u.setPassword(obj.getString("password"));
         u.setUserid(obj.getInt("userid"));
         u.setFbUserid(obj.getString("fbUserid"));
-
+        u.setCodQualifica(obj.getInt("codQualifica"));
+        u.setDescQualifica(obj.getString("descQualifica"));
         return u;
 
     }
@@ -93,6 +104,7 @@ public class JSONHandler {
         return u;
 
     }
+
     public static MessaggioOffline parseMessaggioOffline(JSONObject obj) throws JSONException {
         MessaggioOffline u = new MessaggioOffline();
         u.setTesto(obj.getString("testo"));
@@ -102,24 +114,24 @@ public class JSONHandler {
         u.setId(obj.getInt("id"));
 
 
-      // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-      //  java.util.Date parsed = null;
+        // SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        //  java.util.Date parsed = null;
         try {
             Long ld = Long.parseLong(obj.getString("data"));
             java.sql.Date sqlDate = new java.sql.Date(ld);
             u.setData(sqlDate);
-        //    parsed = format.parse(obj.getString("data"));
+            //    parsed = format.parse(obj.getString("data"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-      //  java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
-       // u.setData(sqlDate);
+        //  java.sql.Date sqlDate = new java.sql.Date(parsed.getTime());
+        // u.setData(sqlDate);
         return u;
 
     }
 
     private static String clean(String s) {
-        if (s == null || s.equals("null")){
+        if (s == null || s.equals("null")) {
 
             return null;
         }
